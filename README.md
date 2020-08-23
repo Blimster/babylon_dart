@@ -1,2 +1,3 @@
 # babylon_dart
-Dart bindings for the babylon.js library.
+
+Bindings for the BabylonJS 4.1 web rendering engine.
