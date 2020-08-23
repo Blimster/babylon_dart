@@ -14,6 +14,6 @@ class Texture extends BaseTexture {
 
 @JS()
 class RenderTargetTexture extends Texture {
-  external set renderList(List<Mesh> v);
-  external List<Mesh> get renderList;
+  external set renderList(List<AbstractMesh> v);
+  external List<AbstractMesh> get renderList;
 }
