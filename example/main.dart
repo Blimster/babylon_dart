@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import 'package:babylon/babylon.dart';
+import 'package:js/js.dart';
 
 void main() {
   final canvas = querySelector('#render-canvas') as CanvasElement;
@@ -54,9 +55,9 @@ void main() {
 
   canvas.focus();
 
-  engine.runRenderLoopAllowInterop(() {
+  engine.runRenderLoop(allowInterop(() {
     scene.render();
-  });
+  }));
 
   window.onResize.listen((event) {
     engine.resize();

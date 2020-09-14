@@ -12,7 +12,3 @@ class Engine {
   external void exitPointerlock();
   external bool get isPointerLock;
 }
-
-extension EngineExtension on Engine {
-  void runRenderLoopAllowInterop(void Function() f) => runRenderLoop(allowInterop(f));
-}
