@@ -1,11 +1,79 @@
 part of babylon;
 
 @JS()
-class Camera {}
-
-@JS()
-class ArcRotateCamera extends Camera {
-  external ArcRotateCamera(String name, num alpha, num beta, num radius, Vector3 target, Scene scene);
-  external void attachControl(HtmlElement element, bool noPreventDefault);
-  external set lockedTarget(dynamic v);
+class Camera extends Node {
+  num PERSPECTIVE_CAMERA;
+  num ORTHOGRAPHIC_CAMERA;
+  num FOVMODE_VERTICAL_FIXED;
+  num FOVMODE_HORIZONTAL_FIXED;
+  num RIG_MODE_NONE;
+  num RIG_MODE_STEREOSCOPIC_ANAGLYPH;
+  num RIG_MODE_STEREOSCOPIC_SIDEBYSIDE_PARALLEL;
+  num RIG_MODE_STEREOSCOPIC_SIDEBYSIDE_CROSSEYED;
+  num RIG_MODE_STEREOSCOPIC_OVERUNDER;
+  num RIG_MODE_STEREOSCOPIC_INTERLACED;
+  num RIG_MODE_VR;
+  num RIG_MODE_WEBVR;
+  num RIG_MODE_CUSTOM;
+  bool ForceAttachControlToAlwaysPreventDefault;
+  Vector3 upVector;
+  num orthoLeft;
+  num orthoRight;
+  num orthoBottom;
+  num orthoTop;
+  num fov;
+  num minZ;
+  num maxZ;
+  num inertia;
+  num mode;
+  bool isIntermediate;
+  Viewport viewport;
+  num layerMask;
+  num fovMode;
+  num cameraRigMode;
+  num interaxialDistance;
+  bool isStereoscopicSideBySide;
+  List<RenderTargetTexture> customRenderTargets;
+  RenderTargetTexture outputRenderTarget;
+  bool isRigCamera;
+  Camera rigParent;
+  external Vector3 get position;
+  external Vector3 get globalPosition;
+  external List<Camera> get rigCameras;
+  external PostProcess get rigPostProcess;
+  external bool get isLeftCamera;
+  external bool get isRightCamera;
+  external FreeCamera get leftCamera;
+  external FreeCamera get rightCamera;
+  external Quaternion get absoluteRotation;
+  external set position(Vector3 newPosition);
+  external Camera storeState();
+  external bool restoreState();
+  external String getClassName();
+  external bool isActiveMesh(Mesh mesh);
+  external bool isReady(bool completeCheck);
+  external void detachControl(HtmlElement element);
+  external void update();
+  external num attachPostProcess(PostProcess postProcess, num insertAt);
+  external void detachPostProcess(PostProcess postProcess);
+  external Matrix getWorldMatrix();
+  external Matrix getViewMatrix(bool force);
+  external void freezeProjectionMatrix(Matrix projection);
+  external void unfreezeProjectionMatrix();
+  external Matrix getProjectionMatrix(bool force);
+  external Matrix getTransformationMatrix();
+  external Ray getForwardRay(num length, Matrix transform, Vector3 origin);
+  external Vector3 getLeftTarget();
+  external Vector3 getRightTarget();
+  external void setCameraRigMode(num mode, dynamic rigParams);
+  external void setCameraRigParameter(String name, dynamic value);
+  external Camera createRigCamera(String name, num cameraIndex);
+  external dynamic serialize();
+  external Camera clone(String name);
+  external Vector3 getDirection(Vector3 localAxis);
+  external void getDirectionToRef(Vector3 localAxis, Vector3 result);
+  external static Camera Function() GetConstructorFromName(String type, String name, Scene scene, num interaxial_distance, bool isStereoscopicSideBySide);
+  external Matrix computeWorldMatrix();
+  external static Camera Parse(dynamic parsedCamera, Scene scene);
 }
+

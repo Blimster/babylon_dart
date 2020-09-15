@@ -4,7 +4,7 @@ part of babylon;
 class Node {
   external String get name;
   external set name(String v);
-  external bool isReady([bool completeCheck]);
+  external bool isReady(bool completeCheck);
   external set onReady(void Function(Node) v);
 }
 

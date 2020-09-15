@@ -50,8 +50,8 @@ void main() {
   final shadowGenerator = ShadowGenerator(512, pointLight);
   shadowGenerator.getShadowMap().renderList.add(sphere);
 
-  final camera = ArcRotateCamera('camera', 1, 1, 20, Vector3(0, 0, 0), scene);
-  camera.attachControl(canvas, false);
+  final camera = ArcRotateCamera('camera', 1, 1, 20, Vector3(0, 0, 0), scene, true);
+  camera.attachControl(canvas, false, null, null);
 
   canvas.focus();
 

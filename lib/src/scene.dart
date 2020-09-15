@@ -1,13 +1,6 @@
 part of babylon;
 
 @JS()
-class AbstractScene {
-  external List<Light> get lights;
-  external List<Camera> get cameras;
-  external List<AbstractMesh> get meshes;
-}
-
-@JS()
 class Scene extends AbstractScene {
   external static int get FOGMODE_NONE;
   external static int get FOGMODE_LINEAR;
@@ -32,10 +25,4 @@ class Scene extends AbstractScene {
   external set onPointerMove(void Function(Event event, PickingInfo pickingInfo, int type) v);
   external set onPointerDown(void Function(PointerEvent event, PickingInfo pickingInfo, int type) v);
   external set onPointerUp(void Function(PointerEvent event, PickingInfo pickingInfo, int type) v);
-}
-
-@JS()
-class PickingInfo {
-  external Mesh get pickedMesh;
-  external Vector3 get pickedPoint;
 }
