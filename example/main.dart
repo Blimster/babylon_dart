@@ -1,6 +1,6 @@
 import 'dart:html';
 
-import 'package:babylon/babylon.dart';
+import 'package:babylon_dart/babylon_dart.dart';
 import 'package:js/js.dart';
 
 void main() {
