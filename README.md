@@ -16,7 +16,7 @@ Currently, no docs are generated in the bindings. For help look at the official 
 
 ## Example
 
-In your `index.html` at links to the BabylonJS implementation:
+In your `index.html` add links to the BabylonJS implementation:
 
 ```html
 <script src="/packages/babylon/assets/babylon.js"></script>
@@ -24,7 +24,7 @@ In your `index.html` at links to the BabylonJS implementation:
 <script src="/packages/babylon/assets/cannon.js"></script>
 ```
 
-Here is a little example renering 2 meshes with a little physics in it:
+Here is a little example rendering 2 meshes with a little physics in it:
 
 ```dart
 import 'dart:html';
