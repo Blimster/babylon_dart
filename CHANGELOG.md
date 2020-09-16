@@ -7,3 +7,7 @@
 ## v0.1.1
 
 -   added ShadowLight
+
+## v0.1.1+1
+
+-   Fixed spelling in README.md
