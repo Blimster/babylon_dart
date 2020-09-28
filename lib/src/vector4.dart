@@ -11,7 +11,7 @@ class Vector4 {
   external String getClassName();
   external num getHashCode();
   external List<num> asArray();
-  external Vector4 toArray(Float32List array, num index);
+  external Vector4 toArray(Float32List array, [num index]);
   external Vector4 addInPlace(Vector4 otherVector);
   external Vector4 add(Vector4 otherVector);
   external Vector4 addToRef(Vector4 otherVector, Vector4 result);
@@ -28,7 +28,7 @@ class Vector4 {
   external Vector4 scaleToRef(num scale, Vector4 result);
   external Vector4 scaleAndAddToRef(num scale, Vector4 result);
   external bool equals(Vector4 otherVector);
-  external bool equalsWithEpsilon(Vector4 otherVector, num epsilon);
+  external bool equalsWithEpsilon(Vector4 otherVector, [num epsilon]);
   external bool equalsToFloats(num x, num y, num z, num w);
   external Vector4 multiplyInPlace(Vector4 otherVector);
   external Vector4 multiply(Vector4 otherVector);
@@ -50,7 +50,7 @@ class Vector4 {
   external Vector4 copyFromFloats(num x, num y, num z, num w);
   external Vector4 set(num x, num y, num z, num w);
   external Vector4 setAll(num v);
-  external static Vector4 FromArray(List<num> array, num offset);
+  external static Vector4 FromArray(List<num> array, [num offset]);
   external static void FromArrayToRef(List<num> array, num offset, Vector4 result);
   external static void FromFloatArrayToRef(Float32List array, num offset, Vector4 result);
   external static void FromFloatsToRef(num x, num y, num z, num w, Vector4 result);
@@ -66,6 +66,6 @@ class Vector4 {
   external static Vector4 TransformNormal(Vector4 vector, Matrix transformation);
   external static void TransformNormalToRef(Vector4 vector, Matrix transformation, Vector4 result);
   external static void TransformNormalFromFloatsToRef(num x, num y, num z, num w, Matrix transformation, Vector4 result);
-  external static Vector4 FromVector3(Vector3 source, num w);
+  external static Vector4 FromVector3(Vector3 source, [num w]);
 }
 

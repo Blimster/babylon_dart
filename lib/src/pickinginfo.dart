@@ -14,7 +14,7 @@ class PickingInfo {
   Sprite pickedSprite;
   AbstractMesh originMesh;
   Ray ray;
-  external Vector3 getNormal(bool useWorldCoordinates, bool useVerticesNormals);
+  external Vector3 getNormal([bool useWorldCoordinates, bool useVerticesNormals]);
   external Vector2 getTextureCoordinates();
 }
 

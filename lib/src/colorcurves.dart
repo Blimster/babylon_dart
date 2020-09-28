@@ -39,7 +39,7 @@ class ColorCurves {
   external set shadowsSaturation(num value);
   external set shadowsExposure(num value);
   external String getClassName();
-  external static void Bind(ColorCurves colorCurves, Effect effect, String positiveUniform, String neutralUniform, String negativeUniform);
+  external static void Bind(ColorCurves colorCurves, Effect effect, [String positiveUniform, String neutralUniform, String negativeUniform]);
   external static void PrepareUniforms(List<String> uniformsList);
   external ColorCurves clone();
   external dynamic serialize();

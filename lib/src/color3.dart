@@ -2,7 +2,7 @@ part of babylon;
 
 @JS()
 class Color3 {
-  external Color3(num r, num g, num b);
+  external Color3([num r, num g, num b]);
   num r;
   num g;
   num b;
@@ -10,8 +10,8 @@ class Color3 {
   external String toString();
   external String getClassName();
   external num getHashCode();
-  external Color3 toArray(Float32List array, num index);
-  external Color4 toColor4(num alpha);
+  external Color3 toArray(Float32List array, [num index]);
+  external Color4 toColor4([num alpha]);
   external List<num> asArray();
   external num toLuminance();
   external Color3 multiply(Color3 otherColor);
@@ -38,7 +38,7 @@ class Color3 {
   external Color3 toGammaSpaceToRef(Color3 convertedColor);
   external static void HSVtoRGBToRef(num hue, num saturation, num value, Color3 result);
   external static Color3 FromHexString(String hex);
-  external static Color3 FromArray(List<num> array, num offset);
+  external static Color3 FromArray(List<num> array, [num offset]);
   external static Color3 FromInts(num r, num g, num b);
   external static Color3 Lerp(Color3 start, Color3 end, num amount);
   external static void LerpToRef(Color3 left, Color3 right, num amount, Color3 result);

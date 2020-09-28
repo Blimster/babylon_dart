@@ -10,7 +10,7 @@ class PointLight extends ShadowLight {
   external String getClassName();
   external num getTypeID();
   external bool needCube();
-  external Vector3 getShadowDirection(num faceIndex);
+  external Vector3 getShadowDirection([num faceIndex]);
   external PointLight transferToEffect(Effect effect, String lightIndex);
   external PointLight transferToNodeMaterialEffect(Effect effect, String lightDataUniformName);
   external void prepareLightSpecificDefines(dynamic defines, num lightIndex);

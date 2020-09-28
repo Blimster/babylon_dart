@@ -1,13 +1,17 @@
 # Changelog
 
-## v0.1.0
+## v0.2.0
 
--   Initial version
+-   Added support for optional parameters
+
+## v0.1.1+1
+
+-   Fixed spelling in README.md
 
 ## v0.1.1
 
 -   added ShadowLight
 
-## v0.1.1+1
+## v0.1.0
 
--   Fixed spelling in README.md
+-   Initial version

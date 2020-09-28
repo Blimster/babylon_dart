@@ -2,7 +2,7 @@ part of babylon;
 
 @JS()
 class BoundingSphere {
-  external BoundingSphere(Vector3 min, Vector3 max, Matrix worldMatrix);
+  external BoundingSphere(Vector3 min, Vector3 max, [Matrix worldMatrix]);
   Vector3 center;
   num radius;
   Vector3 centerWorld;
@@ -10,7 +10,7 @@ class BoundingSphere {
   Vector3 minimum;
   Vector3 maximum;
   dynamic TmpVector3;
-  external void reConstruct(Vector3 min, Vector3 max, Matrix worldMatrix);
+  external void reConstruct(Vector3 min, Vector3 max, [Matrix worldMatrix]);
   external BoundingSphere scale(num factor);
   external Matrix getWorldMatrix();
   external bool isInFrustum(List<Plane> frustumPlanes);

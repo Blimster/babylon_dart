@@ -15,14 +15,14 @@ class ShadowLight extends Light {
   external set shadowMaxZ(num value);
   external bool computeTransformedInformation();
   external num getDepthScale();
-  external Vector3 getShadowDirection(num faceIndex);
+  external Vector3 getShadowDirection([num faceIndex]);
   external Vector3 getAbsolutePosition();
   external Vector3 setDirectionToTarget(Vector3 target);
   external Vector3 getRotation();
   external bool needCube();
   external bool needProjectionMatrixCompute();
   external void forceProjectionMatrixCompute();
-  external Matrix computeWorldMatrix(bool force);
+  external Matrix computeWorldMatrix([bool force]);
   external num getDepthMinZ(Camera activeCamera);
   external num getDepthMaxZ(Camera activeCamera);
 }

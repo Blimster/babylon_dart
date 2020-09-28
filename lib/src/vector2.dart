@@ -2,13 +2,13 @@ part of babylon;
 
 @JS()
 class Vector2 {
-  external Vector2(num x, num y);
+  external Vector2([num x, num y]);
   num x;
   num y;
   external String toString();
   external String getClassName();
   external num getHashCode();
-  external Vector2 toArray(Float32List array, num index);
+  external Vector2 toArray(Float32List array, [num index]);
   external List<num> asArray();
   external Vector2 copyFrom(Vector2 source);
   external Vector2 copyFromFloats(num x, num y);
@@ -35,7 +35,7 @@ class Vector2 {
   external Vector2 scaleToRef(num scale, Vector2 result);
   external Vector2 scaleAndAddToRef(num scale, Vector2 result);
   external bool equals(Vector2 otherVector);
-  external bool equalsWithEpsilon(Vector2 otherVector, num epsilon);
+  external bool equalsWithEpsilon(Vector2 otherVector, [num epsilon]);
   external Vector2 floor();
   external Vector2 fract();
   external num length();
@@ -44,7 +44,7 @@ class Vector2 {
   external Vector2 clone();
   external static Vector2 Zero();
   external static Vector2 One();
-  external static Vector2 FromArray(List<num> array, num offset);
+  external static Vector2 FromArray(List<num> array, [num offset]);
   external static void FromArrayToRef(List<num> array, num offset, Vector2 result);
   external static Vector2 CatmullRom(Vector2 value1, Vector2 value2, Vector2 value3, Vector2 value4, num amount);
   external static Vector2 Clamp(Vector2 value, Vector2 min, Vector2 max);

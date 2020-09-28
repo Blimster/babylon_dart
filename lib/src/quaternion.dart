@@ -2,7 +2,7 @@ part of babylon;
 
 @JS()
 class Quaternion {
-  external Quaternion(num x, num y, num z, num w);
+  external Quaternion([num x, num y, num z, num w]);
   external num get x;
   external num get y;
   external num get z;
@@ -16,7 +16,7 @@ class Quaternion {
   external num getHashCode();
   external List<num> asArray();
   external bool equals(Quaternion otherQuaternion);
-  external bool equalsWithEpsilon(Quaternion otherQuaternion, num epsilon);
+  external bool equalsWithEpsilon(Quaternion otherQuaternion, [num epsilon]);
   external Quaternion clone();
   external Quaternion copyFrom(Quaternion other);
   external Quaternion copyFromFloats(num x, num y, num z, num w);
@@ -36,7 +36,7 @@ class Quaternion {
   external Quaternion conjugate();
   external num length();
   external Quaternion normalize();
-  external Vector3 toEulerAngles(String order);
+  external Vector3 toEulerAngles([String order]);
   external Quaternion toEulerAnglesToRef(Vector3 result);
   external Quaternion toRotationMatrix(Matrix result);
   external Quaternion fromRotationMatrix(Matrix matrix);
@@ -51,7 +51,7 @@ class Quaternion {
   external static bool IsIdentity(Quaternion quaternion);
   external static Quaternion RotationAxis(Vector3 axis, num angle);
   external static Quaternion RotationAxisToRef(Vector3 axis, num angle, Quaternion result);
-  external static Quaternion FromArray(List<num> array, num offset);
+  external static Quaternion FromArray(List<num> array, [num offset]);
   external static void FromArrayToRef(List<num> array, num offset, Quaternion result);
   external static Quaternion FromEulerAngles(num x, num y, num z);
   external static Quaternion FromEulerAnglesToRef(num x, num y, num z, Quaternion result);

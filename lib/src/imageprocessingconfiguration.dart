@@ -41,7 +41,7 @@ class ImageProcessingConfiguration {
   external set isEnabled(bool value);
   external String getClassName();
   external bool isReady();
-  external void bind(Effect effect, num overrideAspectRatio);
+  external void bind(Effect effect, [num overrideAspectRatio]);
   external ImageProcessingConfiguration clone();
   external dynamic serialize();
   external static ImageProcessingConfiguration Parse(dynamic source);

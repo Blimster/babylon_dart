@@ -51,18 +51,18 @@ class Camera extends Node {
   external bool restoreState();
   external String getClassName();
   external bool isActiveMesh(Mesh mesh);
-  external bool isReady(bool completeCheck);
+  external bool isReady([bool completeCheck]);
   external void detachControl(HtmlElement element);
   external void update();
-  external num attachPostProcess(PostProcess postProcess, num insertAt);
+  external num attachPostProcess(PostProcess postProcess, [num insertAt]);
   external void detachPostProcess(PostProcess postProcess);
   external Matrix getWorldMatrix();
-  external Matrix getViewMatrix(bool force);
-  external void freezeProjectionMatrix(Matrix projection);
+  external Matrix getViewMatrix([bool force]);
+  external void freezeProjectionMatrix([Matrix projection]);
   external void unfreezeProjectionMatrix();
-  external Matrix getProjectionMatrix(bool force);
+  external Matrix getProjectionMatrix([bool force]);
   external Matrix getTransformationMatrix();
-  external Ray getForwardRay(num length, Matrix transform, Vector3 origin);
+  external Ray getForwardRay([num length, Matrix transform, Vector3 origin]);
   external Vector3 getLeftTarget();
   external Vector3 getRightTarget();
   external void setCameraRigMode(num mode, dynamic rigParams);
@@ -72,7 +72,7 @@ class Camera extends Node {
   external Camera clone(String name);
   external Vector3 getDirection(Vector3 localAxis);
   external void getDirectionToRef(Vector3 localAxis, Vector3 result);
-  external static Camera Function() GetConstructorFromName(String type, String name, Scene scene, num interaxial_distance, bool isStereoscopicSideBySide);
+  external static Camera Function() GetConstructorFromName(String type, String name, Scene scene, [num interaxial_distance, bool isStereoscopicSideBySide]);
   external Matrix computeWorldMatrix();
   external static Camera Parse(dynamic parsedCamera, Scene scene);
 }

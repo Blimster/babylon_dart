@@ -47,10 +47,10 @@ class Light extends Node {
   external Vector3 getAbsolutePosition();
   external bool canAffectMesh(AbstractMesh mesh);
   external static num CompareLightsPriority(Light a, Light b);
-  external void dispose(bool doNotRecurse, bool disposeMaterialAndTextures);
+  external void dispose([bool doNotRecurse, bool disposeMaterialAndTextures]);
   external num getTypeID();
   external num getScaledIntensity();
-  external Light clone(String name, Node newParent);
+  external Light clone(String name, [Node newParent]);
   external dynamic serialize();
   external static Light Parse(dynamic parsedLight, Scene scene);
 }

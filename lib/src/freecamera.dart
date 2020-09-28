@@ -2,7 +2,7 @@ part of babylon;
 
 @JS()
 class FreeCamera extends TargetCamera {
-  external FreeCamera(String name, Vector3 position, Scene scene, bool setActiveOnSceneIfNoneActive);
+  external FreeCamera(String name, Vector3 position, Scene scene, [bool setActiveOnSceneIfNoneActive]);
   Vector3 ellipsoid;
   Vector3 ellipsoidOffset;
   bool checkCollisions;
@@ -24,7 +24,7 @@ class FreeCamera extends TargetCamera {
   external set keysLeft(List<num> value);
   external set keysRight(List<num> value);
   external set collisionMask(num mask);
-  external void attachControl(HtmlElement element, bool noPreventDefault);
+  external void attachControl(HtmlElement element, [bool noPreventDefault]);
   external void detachControl(HtmlElement element);
   external void dispose();
   external String getClassName();

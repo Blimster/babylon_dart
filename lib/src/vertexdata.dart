@@ -299,15 +299,15 @@ class VertexData {
   Float32List matricesWeightsExtra;
   Int32List indices;
   external void set(Float32List data, String kind);
-  external VertexData applyToMesh(Mesh mesh, bool updatable);
-  external VertexData applyToGeometry(Geometry geometry, bool updatable);
+  external VertexData applyToMesh(Mesh mesh, [bool updatable]);
+  external VertexData applyToGeometry(Geometry geometry, [bool updatable]);
   external VertexData updateMesh(Mesh mesh);
   external VertexData updateGeometry(Geometry geometry);
   external VertexData transform(Matrix matrix);
-  external VertexData merge(VertexData other, bool use32BitsIndices);
+  external VertexData merge(VertexData other, [bool use32BitsIndices]);
   external dynamic serialize();
-  external static VertexData ExtractFromMesh(Mesh mesh, bool copyWhenShared, bool forceCopy);
-  external static VertexData ExtractFromGeometry(Geometry geometry, bool copyWhenShared, bool forceCopy);
+  external static VertexData ExtractFromMesh(Mesh mesh, [bool copyWhenShared, bool forceCopy]);
+  external static VertexData ExtractFromGeometry(Geometry geometry, [bool copyWhenShared, bool forceCopy]);
   external static VertexData CreateRibbon(VertexDataCreateRibbonOptions options);
   external static VertexData CreateBox(VertexDataCreateBoxOptions options);
   external static VertexData CreateTiledBox(VertexDataCreateTiledBoxOptions options);
@@ -322,11 +322,11 @@ class VertexData {
   external static VertexData CreateGroundFromHeightMap(VertexDataCreateGroundFromHeightMapOptions options);
   external static VertexData CreatePlane(VertexDataCreatePlaneOptions options);
   external static VertexData CreateDisc(VertexDataCreateDiscOptions options);
-  external static VertexData CreatePolygon(Mesh polygon, num sideOrientation, List<Vector4> fUV, List<Color4> fColors, Vector4 frontUVs, Vector4 backUVs, bool wrap);
+  external static VertexData CreatePolygon(Mesh polygon, num sideOrientation, [List<Vector4> fUV, List<Color4> fColors, Vector4 frontUVs, Vector4 backUVs, bool wrap]);
   external static VertexData CreateIcoSphere(VertexDataCreateIcoSphereOptions options);
   external static VertexData CreatePolyhedron(VertexDataCreatePolyhedronOptions options);
   external static VertexData CreateTorusKnot(VertexDataCreateTorusKnotOptions options);
-  external static void ComputeNormals(dynamic positions, dynamic indices, dynamic normals, VertexDataComputeNormalsOptions options);
+  external static void ComputeNormals(dynamic positions, dynamic indices, dynamic normals, [VertexDataComputeNormalsOptions options]);
   external static void ImportVertexData(dynamic parsedVertexData, Geometry geometry);
 }
 

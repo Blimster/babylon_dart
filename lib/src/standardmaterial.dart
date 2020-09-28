@@ -92,13 +92,13 @@ class StandardMaterial extends PushMaterial {
   external bool needAlphaBlending();
   external bool needAlphaTesting();
   external BaseTexture getAlphaTestTexture();
-  external bool isReadyForSubMesh(AbstractMesh mesh, SubMesh subMesh, bool useInstances);
+  external bool isReadyForSubMesh(AbstractMesh mesh, SubMesh subMesh, [bool useInstances]);
   external void buildUniformLayout();
   external void unbind();
   external void bindForSubMesh(Matrix world, Mesh mesh, SubMesh subMesh);
   external List<BaseTexture> getActiveTextures();
   external bool hasTexture(BaseTexture texture);
-  external void dispose(bool forceDisposeEffect, bool forceDisposeTextures);
+  external void dispose([bool forceDisposeEffect, bool forceDisposeTextures]);
   external StandardMaterial clone(String name);
   external dynamic serialize();
   external static StandardMaterial Parse(dynamic source, Scene scene, String rootUrl);

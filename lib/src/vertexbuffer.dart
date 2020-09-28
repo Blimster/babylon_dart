@@ -38,9 +38,9 @@ class VertexBuffer {
   external num getSize();
   external bool getIsInstanced();
   external num getInstanceDivisor();
-  external void create(ByteBuffer data);
+  external void create([ByteBuffer data]);
   external void update(ByteBuffer data);
-  external void updateDirectly(ByteBuffer data, num offset, bool useBytes);
+  external void updateDirectly(ByteBuffer data, num offset, [bool useBytes]);
   external void dispose();
   external void forEach(num count, void Function(num value,num index) callback);
   external static num DeduceStride(String kind);

@@ -2,7 +2,7 @@ part of babylon;
 
 @JS()
 class BoundingBox {
-  external BoundingBox(Vector3 min, Vector3 max, Matrix worldMatrix);
+  external BoundingBox(Vector3 min, Vector3 max, [Matrix worldMatrix]);
   List<Vector3> vectors;
   Vector3 center;
   Vector3 centerWorld;
@@ -15,7 +15,7 @@ class BoundingBox {
   Vector3 minimum;
   Vector3 maximum;
   dynamic TmpVector3;
-  external void reConstruct(Vector3 min, Vector3 max, Matrix worldMatrix);
+  external void reConstruct(Vector3 min, Vector3 max, [Matrix worldMatrix]);
   external BoundingBox scale(num factor);
   external Matrix getWorldMatrix();
   external bool isInFrustum(List<Plane> frustumPlanes);

@@ -2,7 +2,7 @@ part of babylon;
 
 @JS()
 class Vector3 {
-  external Vector3(num x, num y, num z);
+  external Vector3([num x, num y, num z]);
   external num get x;
   external num get y;
   external num get z;
@@ -16,7 +16,7 @@ class Vector3 {
   external String getClassName();
   external num getHashCode();
   external List<num> asArray();
-  external Vector3 toArray(Float32List array, num index);
+  external Vector3 toArray(Float32List array, [num index]);
   external Quaternion toQuaternion();
   external Vector3 addInPlace(Vector3 otherVector);
   external Vector3 addInPlaceFromFloats(num x, num y, num z);
@@ -37,7 +37,7 @@ class Vector3 {
   external Vector3 projectOnPlane(Plane plane, Vector3 origin);
   external void projectOnPlaneToRef(Plane plane, Vector3 origin, Vector3 result);
   external bool equals(Vector3 otherVector);
-  external bool equalsWithEpsilon(Vector3 otherVector, num epsilon);
+  external bool equalsWithEpsilon(Vector3 otherVector, [num epsilon]);
   external bool equalsToFloats(num x, num y, num z);
   external Vector3 multiplyInPlace(Vector3 otherVector);
   external Vector3 multiply(Vector3 otherVector);
@@ -70,8 +70,8 @@ class Vector3 {
   external Vector3 setAll(num v);
   external static num GetClipFactor(Vector3 vector0, Vector3 vector1, Vector3 axis, num size);
   external static num GetAngleBetweenVectors(Vector3 vector0, Vector3 vector1, Vector3 normal);
-  external static Vector3 FromArray(List<num> array, num offset);
-  external static Vector3 FromFloatArray(Float32List array, num offset);
+  external static Vector3 FromArray(List<num> array, [num offset]);
+  external static Vector3 FromFloatArray(Float32List array, [num offset]);
   external static void FromArrayToRef(List<num> array, num offset, Vector3 result);
   external static void FromFloatArrayToRef(Float32List array, num offset, Vector3 result);
   external static void FromFloatsToRef(num x, num y, num z, Vector3 result);
@@ -79,8 +79,8 @@ class Vector3 {
   external static Vector3 One();
   external static Vector3 Up();
   external static Vector3 Down();
-  external static Vector3 Forward(bool rightHandedSystem);
-  external static Vector3 Backward(bool rightHandedSystem);
+  external static Vector3 Forward([bool rightHandedSystem]);
+  external static Vector3 Backward([bool rightHandedSystem]);
   external static Vector3 Right();
   external static Vector3 Left();
   external static Vector3 TransformCoordinates(Vector3 vector, Matrix transformation);

@@ -2,7 +2,7 @@ part of babylon;
 
 @JS()
 class ArcRotateCamera extends TargetCamera {
-  external ArcRotateCamera(String name, num alpha, num beta, num radius, Vector3 target, Scene scene, bool setActiveOnSceneIfNoneActive);
+  external ArcRotateCamera(String name, num alpha, num beta, num radius, Vector3 target, Scene scene, [bool setActiveOnSceneIfNoneActive]);
   num alpha;
   num beta;
   num radius;
@@ -70,11 +70,11 @@ class ArcRotateCamera extends TargetCamera {
   external set useAutoRotationBehavior(bool value);
   external void setMatUp();
   external Camera storeState();
-  external void attachControl(HtmlElement element, bool noPreventDefault, bool useCtrlForPanning, num panningMouseButton);
+  external void attachControl(HtmlElement element, [bool noPreventDefault, bool useCtrlForPanning, num panningMouseButton]);
   external void detachControl(HtmlElement element);
   external void rebuildAnglesAndRadius();
   external void setPosition(Vector3 position);
-  external void zoomOn(List<AbstractMesh> meshes, bool doNotUpdateMaxZ);
+  external void zoomOn([List<AbstractMesh> meshes, bool doNotUpdateMaxZ]);
   external Camera createRigCamera(String name, num cameraIndex);
   external void dispose();
   external String getClassName();
