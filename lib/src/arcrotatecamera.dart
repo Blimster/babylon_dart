@@ -26,6 +26,7 @@ class ArcRotateCamera extends TargetCamera {
   bool allowUpsideDown;
   bool useInputToRestoreState;
   Vector3 panningAxis;
+  Observable<AbstractMesh> onMeshTargetChangedObservable;
   void Function(AbstractMesh collidedMesh) onCollide;
   bool checkCollisions;
   Vector3 collisionRadius;

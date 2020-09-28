@@ -35,6 +35,10 @@ class Camera extends Node {
   bool isStereoscopicSideBySide;
   List<RenderTargetTexture> customRenderTargets;
   RenderTargetTexture outputRenderTarget;
+  Observable<Camera> onViewMatrixChangedObservable;
+  Observable<Camera> onProjectionMatrixChangedObservable;
+  Observable<Camera> onAfterCheckInputsObservable;
+  Observable<Camera> onRestoreStateObservable;
   bool isRigCamera;
   Camera rigParent;
   external Vector3 get position;
@@ -50,8 +54,10 @@ class Camera extends Node {
   external Camera storeState();
   external bool restoreState();
   external String getClassName();
+  external String toString([bool fullDetails]);
   external bool isActiveMesh(Mesh mesh);
   external bool isReady([bool completeCheck]);
+  external void attachControl(HtmlElement element, [bool noPreventDefault]);
   external void detachControl(HtmlElement element);
   external void update();
   external num attachPostProcess(PostProcess postProcess, [num insertAt]);

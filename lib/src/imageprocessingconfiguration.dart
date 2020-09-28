@@ -11,6 +11,7 @@ class ImageProcessingConfiguration {
   num vignetteWeight;
   Color4 vignetteColor;
   num vignetteCameraFov;
+  Observable<ImageProcessingConfiguration> onUpdateParameters;
   external bool get colorCurvesEnabled;
   external BaseTexture get colorGradingTexture;
   external bool get colorGradingEnabled;

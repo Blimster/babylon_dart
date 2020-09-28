@@ -7,7 +7,7 @@ class Geometry {
   num uniqueId;
   num delayLoadState;
   String delayLoadingFile;
-  void Function(Geometry geometry,String kind) onGeometryUpdated;
+  void Function(Geometry geometry, String kind) onGeometryUpdated;
   bool useBoundingInfoFromGeometry;
   dynamic notifyUpdate;
   dynamic toNumberArray;

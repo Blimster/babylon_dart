@@ -3,6 +3,8 @@
 ## v0.2.0
 
 -   Added support for optional parameters
+-   Added support for type parameters on classes
+-   Added `Promise` type
 
 ## v0.1.1+1
 

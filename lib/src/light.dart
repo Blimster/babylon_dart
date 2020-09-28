@@ -43,6 +43,7 @@ class Light extends Node {
   external set lightmapMode(num value);
   external Light transferTexturesToEffect(Effect effect, String lightIndex);
   external String getClassName();
+  external String toString([bool fullDetails]);
   external void setEnabled(bool value);
   external Vector3 getAbsolutePosition();
   external bool canAffectMesh(AbstractMesh mesh);

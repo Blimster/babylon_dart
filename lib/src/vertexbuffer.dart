@@ -42,9 +42,9 @@ class VertexBuffer {
   external void update(ByteBuffer data);
   external void updateDirectly(ByteBuffer data, num offset, [bool useBytes]);
   external void dispose();
-  external void forEach(num count, void Function(num value,num index) callback);
+  external void forEach(num count, void Function(num value, num index) callback);
   external static num DeduceStride(String kind);
   external static num GetTypeByteLength(num type);
-  external static void ForEach(ByteBuffer data, num byteOffset, num byteStride, num componentCount, num componentType, num count, bool normalized, void Function(num value,num index) callback);
+  external static void ForEach(ByteBuffer data, num byteOffset, num byteStride, num componentCount, num componentType, num count, bool normalized, void Function(num value, num index) callback);
 }
 
