@@ -1,7 +1,7 @@
 part of babylon;
 
 @JS()
-class Light extends Node {
+abstract class Light extends Node {
   num FALLOFF_DEFAULT;
   num FALLOFF_PHYSICAL;
   num FALLOFF_GLTF;
@@ -41,7 +41,9 @@ class Light extends Node {
   external set excludeWithLayerMask(num value);
   external set includeOnlyWithLayerMask(num value);
   external set lightmapMode(num value);
+  external Light transferToEffect(Effect effect, String lightIndex);
   external Light transferTexturesToEffect(Effect effect, String lightIndex);
+  external Light transferToNodeMaterialEffect(Effect effect, String lightDataUniformName);
   external String getClassName();
   external String toString([bool fullDetails]);
   external void setEnabled(bool value);
@@ -54,5 +56,6 @@ class Light extends Node {
   external Light clone(String name, [Node newParent]);
   external dynamic serialize();
   external static Light Parse(dynamic parsedLight, Scene scene);
+  external void prepareLightSpecificDefines(dynamic defines, num lightIndex);
 }
 

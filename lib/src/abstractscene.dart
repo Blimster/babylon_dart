@@ -1,7 +1,7 @@
 part of babylon;
 
 @JS()
-class AbstractScene {
+abstract class AbstractScene {
   List<Node> rootNodes;
   List<Camera> cameras;
   List<Light> lights;

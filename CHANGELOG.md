@@ -5,6 +5,7 @@
 -   Added support for optional parameters
 -   Added support for type parameters on classes
 -   Added `Promise` type
+-   Added support for abstract classes and methods
 
 ## v0.1.1+1
 

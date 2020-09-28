@@ -1,7 +1,7 @@
 part of babylon;
 
 @JS()
-class ShadowLight extends Light {
+abstract class ShadowLight extends Light {
   void Function(Matrix viewMatrix, List<AbstractMesh> renderList, Matrix result) customProjectionMatrixBuilder;
   Vector3 transformedPosition;
   Vector3 transformedDirection;
