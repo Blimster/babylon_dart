@@ -84,4 +84,3 @@ class Camera extends Node {
   external Matrix computeWorldMatrix();
   external static Camera Parse(dynamic parsedCamera, Scene scene);
 }
-

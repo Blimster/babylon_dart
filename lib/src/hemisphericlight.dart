@@ -14,4 +14,3 @@ class HemisphericLight extends Light {
   external num getTypeID();
   external void prepareLightSpecificDefines(dynamic defines, num lightIndex);
 }
-

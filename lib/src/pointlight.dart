@@ -15,4 +15,3 @@ class PointLight extends ShadowLight {
   external PointLight transferToNodeMaterialEffect(Effect effect, String lightDataUniformName);
   external void prepareLightSpecificDefines(dynamic defines, num lightIndex);
 }
-

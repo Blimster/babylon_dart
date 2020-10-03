@@ -20,4 +20,3 @@ class Plane {
   external static Plane FromPositionAndNormal(Vector3 origin, Vector3 normal);
   external static num SignedDistanceToPlaneFromPositionAndNormal(Vector3 origin, Vector3 normal, Vector3 point);
 }
-

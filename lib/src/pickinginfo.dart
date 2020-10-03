@@ -17,4 +17,3 @@ class PickingInfo {
   external Vector3 getNormal([bool useWorldCoordinates, bool useVerticesNormals]);
   external Vector2 getTextureCoordinates();
 }
-

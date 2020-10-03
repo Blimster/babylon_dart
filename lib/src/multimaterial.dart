@@ -12,4 +12,3 @@ class MultiMaterial extends Material {
   external void dispose([bool forceDisposeEffect, bool forceDisposeTextures, bool forceDisposeChildren]);
   external static MultiMaterial ParseMultiMaterial(dynamic parsedMultiMaterial, Scene scene);
 }
-

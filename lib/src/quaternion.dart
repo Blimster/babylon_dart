@@ -67,4 +67,3 @@ class Quaternion {
   external static void SlerpToRef(Quaternion left, Quaternion right, num amount, Quaternion result);
   external static Quaternion Hermite(Quaternion value1, Quaternion tangent1, Quaternion value2, Quaternion tangent2, num amount);
 }
-

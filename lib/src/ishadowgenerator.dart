@@ -11,4 +11,3 @@ abstract class IShadowGenerator {
   external dynamic serialize();
   external void dispose();
 }
-

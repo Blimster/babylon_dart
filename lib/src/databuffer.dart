@@ -7,4 +7,3 @@ class DataBuffer {
   bool is32Bits;
   external dynamic get underlyingResource;
 }
-

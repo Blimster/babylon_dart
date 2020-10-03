@@ -114,4 +114,3 @@ class Vector3 {
   external static Vector3 RotationFromAxis(Vector3 axis1, Vector3 axis2, Vector3 axis3);
   external static void RotationFromAxisToRef(Vector3 axis1, Vector3 axis2, Vector3 axis3, Vector3 ref);
 }
-

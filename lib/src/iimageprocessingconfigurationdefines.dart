@@ -17,4 +17,3 @@ abstract class IImageProcessingConfigurationDefines {
   bool SAMPLER3DBGRMAP;
   bool IMAGEPROCESSINGPOSTPROCESS;
 }
-

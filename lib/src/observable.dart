@@ -18,4 +18,3 @@ class Observable<T> {
   external Observable<T> clone();
   external bool hasSpecificMask([num mask]);
 }
-

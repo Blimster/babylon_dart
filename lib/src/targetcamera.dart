@@ -20,4 +20,3 @@ class TargetCamera extends Camera {
   external Camera createRigCamera(String name, num cameraIndex);
   external String getClassName();
 }
-

@@ -39,4 +39,3 @@ class Color4 {
   external static Color4 FromInts(num r, num g, num b, num a);
   external static List<num> CheckColors4(List<num> colors, num count);
 }
-

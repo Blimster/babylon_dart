@@ -8,4 +8,3 @@ class Observer<T> {
   dynamic scope;
   bool unregisterOnNextCall;
 }
-

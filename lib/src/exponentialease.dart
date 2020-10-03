@@ -6,4 +6,3 @@ class ExponentialEase extends EasingFunction {
   num exponent;
   external num easeInCore(num gradient);
 }
-

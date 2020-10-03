@@ -116,4 +116,3 @@ class Matrix {
   external static void FromXYZAxesToRef(Vector3 xaxis, Vector3 yaxis, Vector3 zaxis, Matrix result);
   external static void FromQuaternionToRef(Quaternion quat, Matrix result);
 }
-

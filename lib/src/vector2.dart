@@ -62,4 +62,3 @@ class Vector2 {
   external static Vector2 Center(Vector2 value1, Vector2 value2);
   external static num DistanceOfPointFromSegment(Vector2 p, Vector2 segA, Vector2 segB);
 }
-

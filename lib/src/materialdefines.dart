@@ -18,4 +18,3 @@ class MaterialDefines {
   external void reset();
   external String toString();
 }
-

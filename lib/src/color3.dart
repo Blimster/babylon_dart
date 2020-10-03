@@ -54,4 +54,3 @@ class Color3 {
   external static Color3 Teal();
   external static Color3 Random();
 }
-

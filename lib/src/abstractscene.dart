@@ -19,4 +19,3 @@ abstract class AbstractScene {
   external static void Parse(dynamic jsonData, Scene scene, AssetContainer container, String rootUrl);
   external List<Node> getNodes();
 }
-

@@ -10,4 +10,3 @@ class EasingFunction {
   external num easeInCore(num gradient);
   external num ease(num gradient);
 }
-

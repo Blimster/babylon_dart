@@ -26,4 +26,3 @@ abstract class ShadowLight extends Light {
   external num getDepthMinZ(Camera activeCamera);
   external num getDepthMaxZ(Camera activeCamera);
 }
-

@@ -28,4 +28,3 @@ class BoundingBox {
   external static bool IsCompletelyInFrustum(List<Vector3> boundingVectors, List<Plane> frustumPlanes);
   external static bool IsInFrustum(List<Vector3> boundingVectors, List<Plane> frustumPlanes);
 }
-

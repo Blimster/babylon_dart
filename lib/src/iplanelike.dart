@@ -6,4 +6,3 @@ abstract class IPlaneLike {
   num d;
   external void normalize();
 }
-

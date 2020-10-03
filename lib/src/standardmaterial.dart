@@ -103,4 +103,3 @@ class StandardMaterial extends PushMaterial {
   external dynamic serialize();
   external static StandardMaterial Parse(dynamic source, Scene scene, String rootUrl);
 }
-

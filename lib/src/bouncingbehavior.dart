@@ -15,4 +15,3 @@ class BouncingBehavior {
   external void detach();
   external void stopAllAnimations();
 }
-

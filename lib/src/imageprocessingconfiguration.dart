@@ -50,4 +50,3 @@ class ImageProcessingConfiguration {
   external dynamic serialize();
   external static ImageProcessingConfiguration Parse(dynamic source);
 }
-

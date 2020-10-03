@@ -8,4 +8,3 @@ class PushMaterial extends Material {
   external void bindOnlyNormalMatrix(Matrix normalMatrix);
   external void bind(Matrix world, [Mesh mesh]);
 }
-

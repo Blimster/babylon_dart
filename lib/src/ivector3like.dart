@@ -6,4 +6,3 @@ abstract class IVector3Like {
   num y;
   num z;
 }
-

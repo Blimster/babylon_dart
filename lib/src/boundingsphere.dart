@@ -18,4 +18,3 @@ class BoundingSphere {
   external bool intersectsPoint(Vector3 point);
   external static bool Intersects(BoundingSphere sphere0, BoundingSphere sphere1);
 }
-

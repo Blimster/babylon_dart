@@ -45,4 +45,3 @@ class ColorCurves {
   external dynamic serialize();
   external static ColorCurves Parse(dynamic source);
 }
-

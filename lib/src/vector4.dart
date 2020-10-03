@@ -68,4 +68,3 @@ class Vector4 {
   external static void TransformNormalFromFloatsToRef(num x, num y, num z, num w, Matrix transformation, Vector4 result);
   external static Vector4 FromVector3(Vector3 source, [num w]);
 }
-

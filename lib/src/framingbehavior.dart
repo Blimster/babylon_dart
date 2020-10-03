@@ -30,4 +30,3 @@ class FramingBehavior {
   external void detach();
   external void stopAllAnimations();
 }
-

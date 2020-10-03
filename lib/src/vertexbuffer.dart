@@ -47,4 +47,3 @@ class VertexBuffer {
   external static num GetTypeByteLength(num type);
   external static void ForEach(ByteBuffer data, num byteOffset, num byteStride, num componentCount, num componentType, num count, bool normalized, void Function(num value, num index) callback);
 }
-

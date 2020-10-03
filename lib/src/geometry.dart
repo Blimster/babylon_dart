@@ -49,4 +49,3 @@ class Geometry {
   external static String RandomId();
   external static Geometry Parse(dynamic parsedVertexData, Scene scene, String rootUrl);
 }
-

@@ -58,4 +58,3 @@ abstract class Light extends Node {
   external static Light Parse(dynamic parsedLight, Scene scene);
   external void prepareLightSpecificDefines(dynamic defines, num lightIndex);
 }
-

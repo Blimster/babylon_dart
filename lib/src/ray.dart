@@ -26,4 +26,3 @@ class Ray {
   external static void TransformToRef(Ray ray, Matrix matrix, Ray result);
   external void unprojectRayToRef(num sourceX, num sourceY, num viewportWidth, num viewportHeight, Matrix world, Matrix view, Matrix projection);
 }
-

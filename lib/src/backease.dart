@@ -6,4 +6,3 @@ class BackEase extends EasingFunction {
   num amplitude;
   external num easeInCore(num gradient);
 }
-

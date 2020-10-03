@@ -11,4 +11,3 @@ class Viewport {
   external Viewport toGlobalToRef(num renderWidth, num renderHeight, Viewport ref);
   external Viewport clone();
 }
-

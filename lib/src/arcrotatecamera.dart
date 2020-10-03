@@ -80,4 +80,3 @@ class ArcRotateCamera extends TargetCamera {
   external void dispose();
   external String getClassName();
 }
-

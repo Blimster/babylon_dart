@@ -16,4 +16,3 @@ class AutoRotationBehavior {
   external void attach(ArcRotateCamera camera);
   external void detach();
 }
-

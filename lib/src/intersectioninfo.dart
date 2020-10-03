@@ -9,4 +9,3 @@ class IntersectionInfo {
   num faceId;
   num subMeshId;
 }
-

@@ -10,4 +10,3 @@ class EventState {
   dynamic lastReturnValue;
   external EventState initalize(num mask, [bool skipNextObservers, dynamic target, dynamic currentTarget]);
 }
-

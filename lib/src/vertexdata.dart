@@ -329,4 +329,3 @@ class VertexData {
   external static void ComputeNormals(dynamic positions, dynamic indices, dynamic normals, [VertexDataComputeNormalsOptions options]);
   external static void ImportVertexData(dynamic parsedVertexData, Geometry geometry);
 }
-
