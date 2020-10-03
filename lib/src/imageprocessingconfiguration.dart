@@ -41,6 +41,9 @@ class ImageProcessingConfiguration {
   external set applyByPostProcess(bool value);
   external set isEnabled(bool value);
   external String getClassName();
+  external static void PrepareUniforms(List<String> uniforms, IImageProcessingConfigurationDefines defines);
+  external static void PrepareSamplers(List<String> samplersList, IImageProcessingConfigurationDefines defines);
+  external void prepareDefines(IImageProcessingConfigurationDefines defines, [bool forPostProcess]);
   external bool isReady();
   external void bind(Effect effect, [num overrideAspectRatio]);
   external ImageProcessingConfiguration clone();

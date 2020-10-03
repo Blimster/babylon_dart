@@ -7,6 +7,7 @@ class HemisphericLight extends Light {
   Vector3 direction;
   external String getClassName();
   external Vector3 setDirectionToTarget(Vector3 target);
+  external IShadowGenerator getShadowGenerator();
   external HemisphericLight transferToEffect(Effect effect, String lightIndex);
   external HemisphericLight transferToNodeMaterialEffect(Effect effect, String lightDataUniformName);
   external Matrix computeWorldMatrix();

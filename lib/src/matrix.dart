@@ -111,6 +111,8 @@ class Matrix {
   external static Float32List GetAsMatrix3x3(Matrix matrix);
   external static Matrix Transpose(Matrix matrix);
   external static void TransposeToRef(Matrix matrix, Matrix result);
+  external static Matrix Reflection(IPlaneLike plane);
+  external static void ReflectionToRef(IPlaneLike plane, Matrix result);
   external static void FromXYZAxesToRef(Vector3 xaxis, Vector3 yaxis, Vector3 zaxis, Matrix result);
   external static void FromQuaternionToRef(Quaternion quat, Matrix result);
 }

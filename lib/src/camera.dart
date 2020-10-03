@@ -68,6 +68,8 @@ class Camera extends Node {
   external void unfreezeProjectionMatrix();
   external Matrix getProjectionMatrix([bool force]);
   external Matrix getTransformationMatrix();
+  external bool isInFrustum(ICullable target, [bool checkRigCameras]);
+  external bool isCompletelyInFrustum(ICullable target);
   external Ray getForwardRay([num length, Matrix transform, Vector3 origin]);
   external Vector3 getLeftTarget();
   external Vector3 getRightTarget();
