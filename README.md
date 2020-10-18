@@ -29,7 +29,7 @@ Here is a little example rendering 2 meshes with a little physics in it:
 ```dart
 import 'dart:html';
 
-import 'package:babylon/babylon.dart';
+import 'package:babylon_dart/babylon_dart.dart';
 import 'package:js/js.dart';
 
 void main() {
@@ -53,34 +53,34 @@ void main() {
   final sphereMaterial = StandardMaterial("sphereMat", scene);
   sphereMaterial.diffuseColor = Color3.Blue();
 
-  final sphere = MeshBuilder.CreateSphere('sphere', SphereOptions(segments: 16), scene);
+  final sphere = MeshBuilder.CreateSphere('sphere', MeshBuilderCreateSphereOptions(segments: 16), scene);
   sphere.material = sphereMaterial;
   sphere.position = Vector3(0, 5, 0);
   sphere.physicsImpostor = PhysicsImpostor(
-    sphere,
+    sphere as IPhysicsEnabledObject,
     PhysicsImpostor.SphereImpostor,
-    PhysicsImpostorOptions(mass: 1),
+    PhysicsImpostorParameters(mass: 1),
     scene,
   );
 
   final groundMaterial = StandardMaterial("groundMat", scene);
   groundMaterial.diffuseColor = Color3.Red();
 
-  final ground = MeshBuilder.CreateGround('ground', GroundOptions(height: 10, width: 10), scene);
+  final ground = MeshBuilder.CreateGround('ground', MeshBuilderCreateGroundOptions(height: 10, width: 10), scene);
   ground.material = groundMaterial;
   ground.receiveShadows = true;
   ground.physicsImpostor = PhysicsImpostor(
-    ground,
+    ground as IPhysicsEnabledObject,
     PhysicsImpostor.HeightmapImpostor,
-    PhysicsImpostorOptions(restitution: 4),
+    PhysicsImpostorParameters(restitution: 4),
     scene,
   );
 
   final shadowGenerator = ShadowGenerator(512, pointLight);
   shadowGenerator.getShadowMap().renderList.add(sphere);
 
-  final camera = ArcRotateCamera('camera', 1, 1, 20, Vector3(0, 0, 0), scene, true);
-  camera.attachControl(canvas, false, null, null);
+  final camera = ArcRotateCamera('camera', 1, 1, 20, Vector3(0, 0, 0), scene);
+  camera.attachControl(canvas);
 
   canvas.focus();
 

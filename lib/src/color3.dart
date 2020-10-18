@@ -1,12 +1,16 @@
 part of babylon;
 
+/// class Color3
 @JS()
 class Color3 {
   external Color3([num r, num g, num b]);
-  num r;
-  num g;
-  num b;
   external Color3 get BlackReadOnly;
+  external num get r;
+  external num get g;
+  external num get b;
+  external set r(num r);
+  external set g(num g);
+  external set b(num b);
   external String toString();
   external String getClassName();
   external num getHashCode();

@@ -1,10 +1,11 @@
 part of babylon;
 
+/// class EasingFunction
 @JS()
-class EasingFunction {
-  num EASINGMODE_EASEIN;
-  num EASINGMODE_EASEOUT;
-  num EASINGMODE_EASEINOUT;
+class EasingFunction implements IEasingFunction {
+  external static num get EASINGMODE_EASEIN;
+  external static num get EASINGMODE_EASEOUT;
+  external static num get EASINGMODE_EASEINOUT;
   external void setEasingMode(num easingMode);
   external num getEasingMode();
   external num easeInCore(num gradient);

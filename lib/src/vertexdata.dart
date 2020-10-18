@@ -277,27 +277,43 @@ class VertexDataComputeNormalsOptions {
   external dynamic get depthSortedFacets;
 }
 
+/// class VertexData
 @JS()
 class VertexData {
-  num FRONTSIDE;
-  num BACKSIDE;
-  num DOUBLESIDE;
-  num DEFAULTSIDE;
-  Float32List positions;
-  Float32List normals;
-  Float32List tangents;
-  Float32List uvs;
-  Float32List uvs2;
-  Float32List uvs3;
-  Float32List uvs4;
-  Float32List uvs5;
-  Float32List uvs6;
-  Float32List colors;
-  Float32List matricesIndices;
-  Float32List matricesWeights;
-  Float32List matricesIndicesExtra;
-  Float32List matricesWeightsExtra;
-  Int32List indices;
+  external static num get FRONTSIDE;
+  external static num get BACKSIDE;
+  external static num get DOUBLESIDE;
+  external static num get DEFAULTSIDE;
+  external Float32List get positions;
+  external Float32List get normals;
+  external Float32List get tangents;
+  external Float32List get uvs;
+  external Float32List get uvs2;
+  external Float32List get uvs3;
+  external Float32List get uvs4;
+  external Float32List get uvs5;
+  external Float32List get uvs6;
+  external Float32List get colors;
+  external Float32List get matricesIndices;
+  external Float32List get matricesWeights;
+  external Float32List get matricesIndicesExtra;
+  external Float32List get matricesWeightsExtra;
+  external Int32List get indices;
+  external set positions(Float32List positions);
+  external set normals(Float32List normals);
+  external set tangents(Float32List tangents);
+  external set uvs(Float32List uvs);
+  external set uvs2(Float32List uvs2);
+  external set uvs3(Float32List uvs3);
+  external set uvs4(Float32List uvs4);
+  external set uvs5(Float32List uvs5);
+  external set uvs6(Float32List uvs6);
+  external set colors(Float32List colors);
+  external set matricesIndices(Float32List matricesIndices);
+  external set matricesWeights(Float32List matricesWeights);
+  external set matricesIndicesExtra(Float32List matricesIndicesExtra);
+  external set matricesWeightsExtra(Float32List matricesWeightsExtra);
+  external set indices(Int32List indices);
   external void set(Float32List data, String kind);
   external VertexData applyToMesh(Mesh mesh, [bool updatable]);
   external VertexData applyToGeometry(Geometry geometry, [bool updatable]);
@@ -322,7 +338,7 @@ class VertexData {
   external static VertexData CreateGroundFromHeightMap(VertexDataCreateGroundFromHeightMapOptions options);
   external static VertexData CreatePlane(VertexDataCreatePlaneOptions options);
   external static VertexData CreateDisc(VertexDataCreateDiscOptions options);
-  external static VertexData CreatePolygon(Mesh polygon, num sideOrientation, [List<Vector4> fUV, List<Color4> fColors, Vector4 frontUVs, Vector4 backUVs, bool wrap]);
+  external static VertexData CreatePolygon(Mesh polygon, num sideOrientation, [List<Vector4> fUV, List<Color4> fColors, Vector4 frontUVs, Vector4 backUVs]);
   external static VertexData CreateIcoSphere(VertexDataCreateIcoSphereOptions options);
   external static VertexData CreatePolyhedron(VertexDataCreatePolyhedronOptions options);
   external static VertexData CreateTorusKnot(VertexDataCreateTorusKnotOptions options);

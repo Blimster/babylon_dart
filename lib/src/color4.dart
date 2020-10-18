@@ -1,12 +1,17 @@
 part of babylon;
 
+/// class Color4
 @JS()
 class Color4 {
   external Color4([num r, num g, num b, num a]);
-  num r;
-  num g;
-  num b;
-  num a;
+  external num get r;
+  external num get g;
+  external num get b;
+  external num get a;
+  external set r(num r);
+  external set g(num g);
+  external set b(num b);
+  external set a(num a);
   external Color4 addInPlace(Color4 right);
   external List<num> asArray();
   external Color4 toArray(List<num> array, [num index]);
@@ -26,7 +31,7 @@ class Color4 {
   external Color4 copyFrom(Color4 source);
   external Color4 copyFromFloats(num r, num g, num b, num a);
   external Color4 set(num r, num g, num b, num a);
-  external String toHexString([bool returnAsColor3]);
+  external String toHexString();
   external Color4 toLinearSpace();
   external Color4 toLinearSpaceToRef(Color4 convertedColor);
   external Color4 toGammaSpace();

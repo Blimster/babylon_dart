@@ -1,15 +1,18 @@
 part of babylon;
 
+/// class BoundingSphere
 @JS()
 class BoundingSphere {
   external BoundingSphere(Vector3 min, Vector3 max, [Matrix worldMatrix]);
-  Vector3 center;
-  num radius;
-  Vector3 centerWorld;
-  num radiusWorld;
-  Vector3 minimum;
-  Vector3 maximum;
-  dynamic TmpVector3;
+  external Vector3 get center;
+  external num get radius;
+  external Vector3 get centerWorld;
+  external num get radiusWorld;
+  external Vector3 get minimum;
+  external Vector3 get maximum;
+  external static dynamic get TmpVector3;
+  external set radius(num radius);
+  external set radiusWorld(num radiusWorld);
   external void reConstruct(Vector3 min, Vector3 max, [Matrix worldMatrix]);
   external BoundingSphere scale(num factor);
   external Matrix getWorldMatrix();

@@ -1,17 +1,18 @@
 part of babylon;
 
+/// class Vector3
 @JS()
 class Vector3 {
   external Vector3([num x, num y, num z]);
-  external num get x;
-  external num get y;
-  external num get z;
   external bool get isNonUniform;
   external Vector3 get UpReadOnly;
   external Vector3 get ZeroReadOnly;
-  external set x(num value);
-  external set y(num value);
-  external set z(num value);
+  external num get x;
+  external num get y;
+  external num get z;
+  external set x(num x);
+  external set y(num y);
+  external set z(num z);
   external String toString();
   external String getClassName();
   external num getHashCode();
@@ -34,8 +35,6 @@ class Vector3 {
   external Vector3 scale(num scale);
   external Vector3 scaleToRef(num scale, Vector3 result);
   external Vector3 scaleAndAddToRef(num scale, Vector3 result);
-  external Vector3 projectOnPlane(Plane plane, Vector3 origin);
-  external void projectOnPlaneToRef(Plane plane, Vector3 origin, Vector3 result);
   external bool equals(Vector3 otherVector);
   external bool equalsWithEpsilon(Vector3 otherVector, [num epsilon]);
   external bool equalsToFloats(num x, num y, num z);
@@ -79,8 +78,8 @@ class Vector3 {
   external static Vector3 One();
   external static Vector3 Up();
   external static Vector3 Down();
-  external static Vector3 Forward([bool rightHandedSystem]);
-  external static Vector3 Backward([bool rightHandedSystem]);
+  external static Vector3 Forward();
+  external static Vector3 Backward();
   external static Vector3 Right();
   external static Vector3 Left();
   external static Vector3 TransformCoordinates(Vector3 vector, Matrix transformation);

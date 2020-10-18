@@ -1,14 +1,20 @@
 part of babylon;
 
+/// class Ray
 @JS()
 class Ray {
   external Ray(Vector3 origin, Vector3 direction, [num length]);
-  Vector3 origin;
-  Vector3 direction;
-  num length;
-  dynamic TmpVector3;
-  dynamic smallnum;
-  dynamic rayl;
+  external Vector3 get origin;
+  external Vector3 get direction;
+  external num get length;
+  external static dynamic get TmpVector3;
+  external static dynamic get smallnum;
+  external static dynamic get rayl;
+  external set origin(Vector3 origin);
+  external set direction(Vector3 direction);
+  external set length(num length);
+  external static set smallnum(dynamic smallnum);
+  external static set rayl(dynamic rayl);
   external bool intersectsBoxMinMax(Vector3 minimum, Vector3 maximum, [num intersectionTreshold]);
   external bool intersectsBox(BoundingBox box, [num intersectionTreshold]);
   external bool intersectsSphere(BoundingSphere sphere, [num intersectionTreshold]);

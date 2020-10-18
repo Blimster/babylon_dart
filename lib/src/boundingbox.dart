@@ -1,20 +1,21 @@
 part of babylon;
 
+/// class BoundingBox
 @JS()
-class BoundingBox {
+class BoundingBox implements ICullable {
   external BoundingBox(Vector3 min, Vector3 max, [Matrix worldMatrix]);
-  List<Vector3> vectors;
-  Vector3 center;
-  Vector3 centerWorld;
-  Vector3 extendSize;
-  Vector3 extendSizeWorld;
-  List<Vector3> directions;
-  List<Vector3> vectorsWorld;
-  Vector3 minimumWorld;
-  Vector3 maximumWorld;
-  Vector3 minimum;
-  Vector3 maximum;
-  dynamic TmpVector3;
+  external List<Vector3> get vectors;
+  external Vector3 get center;
+  external Vector3 get centerWorld;
+  external Vector3 get extendSize;
+  external Vector3 get extendSizeWorld;
+  external List<Vector3> get directions;
+  external List<Vector3> get vectorsWorld;
+  external Vector3 get minimumWorld;
+  external Vector3 get maximumWorld;
+  external Vector3 get minimum;
+  external Vector3 get maximum;
+  external static dynamic get TmpVector3;
   external void reConstruct(Vector3 min, Vector3 max, [Matrix worldMatrix]);
   external BoundingBox scale(num factor);
   external Matrix getWorldMatrix();

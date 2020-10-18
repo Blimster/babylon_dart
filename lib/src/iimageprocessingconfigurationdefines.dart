@@ -1,5 +1,6 @@
 part of babylon;
 
+/// interface IImageProcessingConfigurationDefines
 @JS()
 abstract class IImageProcessingConfigurationDefines {
   bool IMAGEPROCESSING;

@@ -1,17 +1,8 @@
 part of babylon;
 
+/// class ImageProcessingConfiguration
 @JS()
 class ImageProcessingConfiguration {
-  num TONEMAPPING_STANDARD;
-  num TONEMAPPING_ACES;
-  ColorCurves colorCurves;
-  num vignetteStretch;
-  num vignetteCentreX;
-  num vignetteCentreY;
-  num vignetteWeight;
-  Color4 vignetteColor;
-  num vignetteCameraFov;
-  Observable<ImageProcessingConfiguration> onUpdateParameters;
   external bool get colorCurvesEnabled;
   external BaseTexture get colorGradingTexture;
   external bool get colorGradingEnabled;
@@ -27,6 +18,16 @@ class ImageProcessingConfiguration {
   external bool get isEnabled;
   external num get VIGNETTEMODE_MULTIPLY;
   external num get VIGNETTEMODE_OPAQUE;
+  external static num get TONEMAPPING_STANDARD;
+  external static num get TONEMAPPING_ACES;
+  external ColorCurves get colorCurves;
+  external num get vignetteStretch;
+  external num get vignetteCentreX;
+  external num get vignetteCentreY;
+  external num get vignetteWeight;
+  external Color4 get vignetteColor;
+  external num get vignetteCameraFov;
+  external Observable<ImageProcessingConfiguration> get onUpdateParameters;
   external set colorCurvesEnabled(bool value);
   external set colorGradingTexture(BaseTexture value);
   external set colorGradingEnabled(bool value);
@@ -40,6 +41,14 @@ class ImageProcessingConfiguration {
   external set vignetteEnabled(bool value);
   external set applyByPostProcess(bool value);
   external set isEnabled(bool value);
+  external set colorCurves(ColorCurves colorCurves);
+  external set vignetteStretch(num vignetteStretch);
+  external set vignetteCentreX(num vignetteCentreX);
+  external set vignetteCentreY(num vignetteCentreY);
+  external set vignetteWeight(num vignetteWeight);
+  external set vignetteColor(Color4 vignetteColor);
+  external set vignetteCameraFov(num vignetteCameraFov);
+  external set onUpdateParameters(Observable<ImageProcessingConfiguration> onUpdateParameters);
   external String getClassName();
   external static void PrepareUniforms(List<String> uniforms, IImageProcessingConfigurationDefines defines);
   external static void PrepareSamplers(List<String> samplersList, IImageProcessingConfigurationDefines defines);

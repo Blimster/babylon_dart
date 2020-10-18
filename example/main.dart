@@ -24,26 +24,26 @@ void main() {
   final sphereMaterial = StandardMaterial("sphereMat", scene);
   sphereMaterial.diffuseColor = Color3.Blue();
 
-  final sphere = MeshBuilder.CreateSphere('sphere', SphereOptions(segments: 16), scene);
+  final sphere = MeshBuilder.CreateSphere('sphere', MeshBuilderCreateSphereOptions(segments: 16), scene);
   sphere.material = sphereMaterial;
   sphere.position = Vector3(0, 5, 0);
   sphere.physicsImpostor = PhysicsImpostor(
-    sphere,
+    sphere as IPhysicsEnabledObject,
     PhysicsImpostor.SphereImpostor,
-    PhysicsImpostorOptions(mass: 1),
+    PhysicsImpostorParameters(mass: 1),
     scene,
   );
 
   final groundMaterial = StandardMaterial("groundMat", scene);
   groundMaterial.diffuseColor = Color3.Red();
 
-  final ground = MeshBuilder.CreateGround('ground', GroundOptions(height: 10, width: 10), scene);
+  final ground = MeshBuilder.CreateGround('ground', MeshBuilderCreateGroundOptions(height: 10, width: 10), scene);
   ground.material = groundMaterial;
   ground.receiveShadows = true;
   ground.physicsImpostor = PhysicsImpostor(
-    ground,
+    ground as IPhysicsEnabledObject,
     PhysicsImpostor.HeightmapImpostor,
-    PhysicsImpostorOptions(restitution: 4),
+    PhysicsImpostorParameters(restitution: 4),
     scene,
   );
 

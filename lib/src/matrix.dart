@@ -10,12 +10,14 @@ class MatrixPerspectiveFovWebVRToRefFov {
   external num get rightDegrees;
 }
 
+/// class Matrix
 @JS()
 class Matrix {
   external Matrix();
-  num updateFlag;
   external Float32List get m;
   external Matrix get IdentityReadOnly;
+  external num get updateFlag;
+  external set updateFlag(num updateFlag);
   external bool isIdentity();
   external bool isIdentityAs3x2();
   external num determinant();

@@ -1,5 +1,6 @@
 part of babylon;
 
+/// class Observable
 @JS()
 class Observable<T> {
   external Observable([void Function(Observer<T> observer) onObserverAdded]);

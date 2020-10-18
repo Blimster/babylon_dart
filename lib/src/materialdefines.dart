@@ -1,5 +1,6 @@
 part of babylon;
 
+/// class MaterialDefines
 @JS()
 class MaterialDefines {
   external bool get isDirty;

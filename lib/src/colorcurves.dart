@@ -1,11 +1,8 @@
 part of babylon;
 
+/// class ColorCurves
 @JS()
 class ColorCurves {
-  dynamic getColorGradingDataToRef;
-  dynamic applyColorGradingSliderNonlinear;
-  dynamic fromHSBToRef;
-  dynamic clamp;
   external num get globalHue;
   external num get globalDensity;
   external num get globalSaturation;
@@ -22,6 +19,10 @@ class ColorCurves {
   external num get shadowsDensity;
   external num get shadowsSaturation;
   external num get shadowsExposure;
+  external dynamic get getColorGradingDataToRef;
+  external static dynamic get applyColorGradingSliderNonlinear;
+  external static dynamic get fromHSBToRef;
+  external static dynamic get clamp;
   external set globalHue(num value);
   external set globalDensity(num value);
   external set globalSaturation(num value);
@@ -38,6 +39,10 @@ class ColorCurves {
   external set shadowsDensity(num value);
   external set shadowsSaturation(num value);
   external set shadowsExposure(num value);
+  external set getColorGradingDataToRef(dynamic getColorGradingDataToRef);
+  external static set applyColorGradingSliderNonlinear(dynamic applyColorGradingSliderNonlinear);
+  external static set fromHSBToRef(dynamic fromHSBToRef);
+  external static set clamp(dynamic clamp);
   external String getClassName();
   external static void Bind(ColorCurves colorCurves, Effect effect, [String positiveUniform, String neutralUniform, String negativeUniform]);
   external static void PrepareUniforms(List<String> uniformsList);

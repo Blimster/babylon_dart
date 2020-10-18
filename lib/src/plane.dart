@@ -1,10 +1,13 @@
 part of babylon;
 
+/// class Plane
 @JS()
 class Plane {
   external Plane(num a, num b, num c, num d);
-  Vector3 normal;
-  num d;
+  external Vector3 get normal;
+  external num get d;
+  external set normal(Vector3 normal);
+  external set d(num d);
   external List<num> asArray();
   external Plane clone();
   external String getClassName();

@@ -1,12 +1,17 @@
 part of babylon;
 
+/// class Vector4
 @JS()
 class Vector4 {
   external Vector4(num x, num y, num z, num w);
-  num x;
-  num y;
-  num z;
-  num w;
+  external num get x;
+  external num get y;
+  external num get z;
+  external num get w;
+  external set x(num x);
+  external set y(num y);
+  external set z(num z);
+  external set w(num w);
   external String toString();
   external String getClassName();
   external num getHashCode();

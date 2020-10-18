@@ -1,5 +1,6 @@
 part of babylon;
 
+/// class PointLight
 @JS()
 class PointLight extends ShadowLight {
   external PointLight(String name, Vector3 position, Scene scene);

@@ -1,5 +1,6 @@
 part of babylon;
 
+/// class Quaternion
 @JS()
 class Quaternion {
   external Quaternion([num x, num y, num z, num w]);
@@ -7,10 +8,10 @@ class Quaternion {
   external num get y;
   external num get z;
   external num get w;
-  external set x(num value);
-  external set y(num value);
-  external set z(num value);
-  external set w(num value);
+  external set x(num x);
+  external set y(num y);
+  external set z(num z);
+  external set w(num w);
   external String toString();
   external String getClassName();
   external num getHashCode();
@@ -52,7 +53,6 @@ class Quaternion {
   external static Quaternion RotationAxis(Vector3 axis, num angle);
   external static Quaternion RotationAxisToRef(Vector3 axis, num angle, Quaternion result);
   external static Quaternion FromArray(List<num> array, [num offset]);
-  external static void FromArrayToRef(List<num> array, num offset, Quaternion result);
   external static Quaternion FromEulerAngles(num x, num y, num z);
   external static Quaternion FromEulerAnglesToRef(num x, num y, num z, Quaternion result);
   external static Quaternion FromEulerVector(Vector3 vec);

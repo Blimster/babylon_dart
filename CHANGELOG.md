@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.0
+
+- Much more bindings
+- All bindings are generated now
+- Bugifxes
+- BREAKING CHANGES: because all code is generated now and bugs were fixed, there are breaking changes in the API.
+
 ## v0.2.0
 
 -   Added support for optional parameters
