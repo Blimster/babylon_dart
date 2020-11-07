@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.4.0
+
+- Much more bindings
+- BREAKING CHANGE: 2.10.0 as minimum SDK constaint
+
 ## v0.3.0
 
 - Much more bindings
