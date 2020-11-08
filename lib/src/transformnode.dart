@@ -90,4 +90,5 @@ class TransformNode extends Node {
   external static TransformNode Parse(dynamic parsedTransformNode, Scene scene, String rootUrl);
   external List<TransformNode> getChildTransformNodes([bool directDescendantsOnly, bool Function(Node node) predicate]);
   external void dispose([bool doNotRecurse, bool disposeMaterialAndTextures]);
+  external TransformNode normalizeToUnitCube([bool includeDescendants, bool ignoreRotation, bool Function(AbstractMesh node) predicate]);
 }

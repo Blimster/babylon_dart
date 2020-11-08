@@ -23,6 +23,7 @@ class PhysicsImpostor {
   external num get segments;
   external void Function() get beforeStep;
   external void Function() get afterStep;
+  external void Function(PhysicsImpostor collider, PhysicsImpostor collidedWith) get onCollideEvent;
   external static num get NoImpostor;
   external static num get SphereImpostor;
   external static num get BoxImpostor;
@@ -55,6 +56,7 @@ class PhysicsImpostor {
   external set segments(num segments);
   external set beforeStep(void Function() beforeStep);
   external set afterStep(void Function() afterStep);
+  external set onCollideEvent(void Function(PhysicsImpostor collider, PhysicsImpostor collidedWith) onCollideEvent);
   external static set NoImpostor(num NoImpostor);
   external static set SphereImpostor(num SphereImpostor);
   external static set BoxImpostor(num BoxImpostor);

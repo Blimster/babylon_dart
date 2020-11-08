@@ -171,6 +171,8 @@ class Scene extends AbstractScene implements IAnimatable {
   external set forcePointsCloud(bool value);
   external set animationPropertiesOverride(AnimationPropertiesOverride value);
   external set onDispose(void Function() callback);
+  external set beforeRender(void Function() callback);
+  external set afterRender(void Function() callback);
   external set beforeCameraRender(void Function() callback);
   external set afterCameraRender(void Function() callback);
   external set DragMovementThreshold(num value);
@@ -438,6 +440,7 @@ class Scene extends AbstractScene implements IAnimatable {
   external List<Camera> getCamerasByTags(String tagsQuery, [void Function(Camera camera) forEach]);
   external List<Light> getLightsByTags(String tagsQuery, [void Function(Light light) forEach]);
   external List<Material> getMaterialByTags(String tagsQuery, [void Function(Material material) forEach]);
+  external void setRenderingOrder(num renderingGroupId, [num Function(SubMesh a, SubMesh b) opaqueSortCompareFn, num Function(SubMesh a, SubMesh b) alphaTestSortCompareFn, num Function(SubMesh a, SubMesh b) transparentSortCompareFn]);
   external void setRenderingAutoClearDepthStencil(num renderingGroupId, bool autoClearDepthStencil, [bool depth, bool stencil]);
   external IRenderingManagerAutoClearSetup getAutoClearDepthStencilSetup(num index);
   external void markAllMaterialsAsDirty(num flag, [bool Function(Material mat) predicate]);
@@ -463,6 +466,7 @@ class Scene extends AbstractScene implements IAnimatable {
   List<SoundTrack> soundTracks;
   bool audioEnabled;
   bool headphone;
+  Vector3 Function() audioListenerPositionProvider;
   num audioPositioningRefreshRate;
   external Sound getSoundByName(String name);
   GamepadManager gamepadManager;

@@ -75,4 +75,6 @@ class Texture extends BaseTexture {
   external String getClassName();
   external void dispose();
   external static BaseTexture Parse(dynamic parsedTexture, Scene scene, String rootUrl);
+  external static Texture CreateFromBase64String(String data, String name, Scene scene, [bool noMipmap, bool invertY, num samplingMode, void Function() onLoad, void Function() onError, num format]);
+  external static Texture LoadFromDataString(String name, dynamic buffer, Scene scene, [bool deleteBuffer, bool noMipmap, bool invertY, num samplingMode, void Function() onLoad, void Function(String message, dynamic exception) onError, num format]);
 }

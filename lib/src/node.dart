@@ -22,6 +22,7 @@ class Node implements IBehaviorAware<Node> {
   external dynamic get metadata;
   external dynamic get reservedDataStore;
   external List<Animation> get animations;
+  external void Function(Node node) get onReady;
   external Observable<Node> get onDisposeObservable;
   external set doNotSerialize(bool value);
   external set parent(Node parent);
@@ -33,7 +34,9 @@ class Node implements IBehaviorAware<Node> {
   external set metadata(dynamic metadata);
   external set reservedDataStore(dynamic reservedDataStore);
   external set animations(List<Animation> animations);
+  external set onReady(void Function(Node node) onReady);
   external set onDisposeObservable(Observable<Node> onDisposeObservable);
+  external static Node Function() Construct(String type, String name, Scene scene, [dynamic options]);
   external bool isDisposed();
   external String getClassName();
   external Scene getScene();

@@ -35,5 +35,9 @@ class FramingBehavior implements Behavior<ArcRotateCamera> {
   external void init();
   external void attach(ArcRotateCamera target);
   external void detach();
+  external void zoomOnMesh(AbstractMesh mesh, [bool focusOnOriginXZ, void Function() onAnimationEnd]);
+  external void zoomOnMeshHierarchy(AbstractMesh mesh, [bool focusOnOriginXZ, void Function() onAnimationEnd]);
+  external void zoomOnMeshesHierarchy(List<AbstractMesh> meshes, [bool focusOnOriginXZ, void Function() onAnimationEnd]);
+  external void zoomOnBoundingInfo(Vector3 minimumWorld, Vector3 maximumWorld, [bool focusOnOriginXZ, void Function() onAnimationEnd]);
   external void stopAllAnimations();
 }

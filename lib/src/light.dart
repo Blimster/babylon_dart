@@ -62,6 +62,7 @@ abstract class Light extends Node {
   external num getScaledIntensity();
   external Light clone(String name);
   external dynamic serialize();
+  external static Light Function() GetConstructorFromName(num type, String name, Scene scene);
   external static Light Parse(dynamic parsedLight, Scene scene);
   external void prepareLightSpecificDefines(dynamic defines, num lightIndex);
 }

@@ -136,6 +136,7 @@ class AbstractMesh extends TransformNode implements IDisposable, ICullable, IGet
   external AbstractMesh setIndices(Int32List indices, num totalVertices, [bool updatable]);
   external bool isVerticesDataPresent(String kind);
   external BoundingInfo getBoundingInfo();
+  external AbstractMesh normalizeToUnitCube([bool includeDescendants, bool ignoreRotation, bool Function(AbstractMesh node) predicate]);
   external AbstractMesh setBoundingInfo(BoundingInfo boundingInfo);
   external Matrix getWorldMatrix();
   external AbstractMesh movePOV(num amountRight, num amountUp, num amountForward);

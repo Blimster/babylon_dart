@@ -41,6 +41,9 @@ class Material implements IAnimatable {
   external bool get checkReadyOnlyOnce;
   external String get state;
   external num get sideOrientation;
+  external void Function(Effect effect) get onCompiled;
+  external void Function(Effect effect, String errors) get onError;
+  external SmartArray<RenderTargetTexture> Function() get getRenderTargetTextures;
   external bool get doNotSerialize;
   external List<Animation> get animations;
   external Observable<Material> get onDisposeObservable;
@@ -70,6 +73,9 @@ class Material implements IAnimatable {
   external set checkReadyOnlyOnce(bool checkReadyOnlyOnce);
   external set state(String state);
   external set sideOrientation(num sideOrientation);
+  external set onCompiled(void Function(Effect effect) onCompiled);
+  external set onError(void Function(Effect effect, String errors) onError);
+  external set getRenderTargetTextures(SmartArray<RenderTargetTexture> Function() getRenderTargetTextures);
   external set doNotSerialize(bool doNotSerialize);
   external set animations(List<Animation> animations);
   external set onDisposeObservable(Observable<Material> onDisposeObservable);

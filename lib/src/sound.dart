@@ -3,6 +3,7 @@ part of babylon;
 /// class Sound
 @JS()
 class Sound {
+  external Sound(String name, dynamic urlOrArrayBuffer, Scene scene, [void Function() readyToPlayCallback, ISoundOptions options]);
   external num get directionalConeInnerAngle;
   external num get directionalConeOuterAngle;
   external String get name;

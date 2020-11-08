@@ -70,6 +70,7 @@ class RenderTargetTexture extends Texture {
   external Matrix getReflectionTextureMatrix();
   external void resize(dynamic size);
   external void render([bool useCameraPostProcess, bool dumpForDebug]);
+  external void setRenderingOrder(num renderingGroupId, [num Function(SubMesh a, SubMesh b) opaqueSortCompareFn, num Function(SubMesh a, SubMesh b) alphaTestSortCompareFn, num Function(SubMesh a, SubMesh b) transparentSortCompareFn]);
   external void setRenderingAutoClearDepthStencil(num renderingGroupId, bool autoClearDepthStencil);
   external RenderTargetTexture clone();
   external dynamic serialize();
