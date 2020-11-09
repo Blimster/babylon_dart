@@ -3,6 +3,8 @@ part of babylon;
 /// class BaseTexture
 @JS()
 class BaseTexture implements IAnimatable {
+  external BaseTexture();
+  external BaseTexture.args(Scene scene);
   external bool get hasAlpha;
   external num get coordinatesMode;
   external bool get isCube;

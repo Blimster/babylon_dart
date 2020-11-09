@@ -11,6 +11,8 @@ class NodeGetHierarchyBoundingVectorsResult {
 /// class Node
 @JS()
 class Node implements IBehaviorAware<Node> {
+  external Node();
+  external Node.args(String name, [Scene scene]);
   external bool get doNotSerialize;
   external Node get parent;
   external List<Behavior<Node>> get behaviors;

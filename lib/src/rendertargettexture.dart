@@ -3,6 +3,8 @@ part of babylon;
 /// class RenderTargetTexture
 @JS()
 class RenderTargetTexture extends Texture {
+  external RenderTargetTexture();
+  external RenderTargetTexture.args(String name, dynamic size, Scene scene, [bool generateMipMaps, bool doNotChangeAspectRatio, num type, bool isCube, num samplingMode, bool generateDepthBuffer, bool generateStencilBuffer, bool isMulti, num format, bool delayAllocation]);
   external List<AbstractMesh> get renderList;
   external RenderTargetCreationOptions get renderTargetOptions;
   external Vector3 get boundingBoxSize;

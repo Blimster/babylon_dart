@@ -71,6 +71,8 @@ class MeshMinMaxResult {
 /// class Mesh
 @JS()
 class Mesh extends AbstractMesh implements IGetSetVerticesData {
+  external Mesh();
+  external Mesh.args(String name, [Scene scene, Node parent, Mesh source, bool doNotCloneChildren, bool clonePhysicsImpostor]);
   external Observable<Mesh> get onBeforeRenderObservable;
   external Observable<Mesh> get onBeforeBindObservable;
   external Observable<Mesh> get onAfterRenderObservable;

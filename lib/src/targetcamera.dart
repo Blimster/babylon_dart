@@ -3,6 +3,8 @@ part of babylon;
 /// class TargetCamera
 @JS()
 class TargetCamera extends Camera {
+  external TargetCamera();
+  external TargetCamera.args(String name, Vector3 position, Scene scene, [bool setActiveOnSceneIfNoneActive]);
   external Vector3 get cameraDirection;
   external Vector2 get cameraRotation;
   external bool get updateUpVectorFromRotation;

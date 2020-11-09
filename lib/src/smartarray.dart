@@ -3,6 +3,8 @@ part of babylon;
 /// class SmartArray
 @JS()
 class SmartArray<T> implements ISmartArrayLike<T> {
+  external SmartArray();
+  external SmartArray.args(num capacity);
   external List<T> get data;
   external num get length;
   external set data(List<T> data);

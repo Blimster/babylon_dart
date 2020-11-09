@@ -22,7 +22,7 @@ void main() {
   pointLight.diffuse = Color3(0.5, 0.5, 0.5);
 
   final sphereMaterial = StandardMaterial("sphereMat", scene);
-  sphereMaterial.diffuseColor = Color3.Blue();
+  sphereMaterial.diffuseColor = Color3.Red();
 
   final sphere = MeshBuilder.CreateSphere('sphere', MeshBuilderCreateSphereOptions(segments: 16), scene);
   sphere.material = sphereMaterial;
@@ -34,8 +34,13 @@ void main() {
     scene,
   );
 
+  final groundTexture = Texture.args('dart-logo.jpeg', scene, true, false, 1);
+  groundTexture.uScale = 1;
+  groundTexture.vScale = 1;
+
   final groundMaterial = StandardMaterial("groundMat", scene);
-  groundMaterial.diffuseColor = Color3.Red();
+  groundMaterial.diffuseColor = Color3.White();
+  groundMaterial.diffuseTexture = groundTexture;
 
   final ground = MeshBuilder.CreateGround('ground', MeshBuilderCreateGroundOptions(height: 10, width: 10), scene);
   ground.material = groundMaterial;

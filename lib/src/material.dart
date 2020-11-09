@@ -3,6 +3,8 @@ part of babylon;
 /// class Material
 @JS()
 class Material implements IAnimatable {
+  external Material();
+  external Material.args(String name, Scene scene, [bool doNotAdd]);
   external num get alpha;
   external bool get backFaceCulling;
   external bool get hasRenderTargetTextures;

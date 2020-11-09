@@ -3,6 +3,8 @@ part of babylon;
 /// class Camera
 @JS()
 class Camera extends Node {
+  external Camera();
+  external Camera.args(String name, Vector3 position, Scene scene, [bool setActiveOnSceneIfNoneActive]);
   external Vector3 get position;
   external Vector3 get globalPosition;
   external List<Camera> get rigCameras;

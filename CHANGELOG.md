@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.5.0
+
+- More bindings (including classes for TypeScript enums)
+- BREAKING CHANGE: Enusure a no arg contructor for extended classes. If such a class have already a constructor with args, it will be named 'args'.
+
 ## v0.4.0
 
 - Much more bindings

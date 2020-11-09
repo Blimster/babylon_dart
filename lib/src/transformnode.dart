@@ -10,6 +10,8 @@ class TransformNodeInstantiateHierarchyOptions {
 /// class TransformNode
 @JS()
 class TransformNode extends Node {
+  external TransformNode();
+  external TransformNode.args(String name, [Scene scene, bool isPure]);
   external num get billboardMode;
   external bool get preserveParentRotationForBillboard;
   external bool get infiniteDistance;
@@ -67,9 +69,11 @@ class TransformNode extends Node {
   external TransformNode setPositionWithLocalVector(Vector3 vector3);
   external Vector3 getPositionExpressedInLocalSpace();
   external TransformNode locallyTranslate(Vector3 vector3);
+  external TransformNode lookAt(Vector3 targetPoint, [num yawCor, num pitchCor, num rollCor, Space space]);
   external Vector3 getDirection(Vector3 localAxis);
   external TransformNode getDirectionToRef(Vector3 localAxis, Vector3 result);
   external TransformNode setDirection(Vector3 localAxis, [num yawCor, num pitchCor, num rollCor]);
+  external TransformNode setPivotPoint(Vector3 point, [Space space]);
   external Vector3 getPivotPoint();
   external TransformNode getPivotPointToRef(Vector3 result);
   external Vector3 getAbsolutePivotPoint();
@@ -77,7 +81,9 @@ class TransformNode extends Node {
   external TransformNode setParent(Node node);
   external TransformNode attachToBone(Bone bone, TransformNode affectedTransformNode);
   external TransformNode detachFromBone();
+  external TransformNode rotate(Vector3 axis, num amount, [Space space]);
   external TransformNode rotateAround(Vector3 point, Vector3 axis, num amount);
+  external TransformNode translate(Vector3 axis, num distance, [Space space]);
   external TransformNode addRotation(num x, num y, num z);
   external Matrix computeWorldMatrix([bool force]);
   external void resetLocalMatrix([bool independentOfChildren]);

@@ -3,6 +3,8 @@ part of babylon;
 /// class Texture
 @JS()
 class Texture extends BaseTexture {
+  external Texture();
+  external Texture.args(String url, dynamic sceneOrEngine, [bool noMipmap, bool invertY, num samplingMode, void Function() onLoad, void Function(String message, dynamic exception) onError, dynamic buffer, bool deleteBuffer, num format, String mimeType]);
   external bool get noMipmap;
   external bool get isBlocking;
   external num get samplingMode;

@@ -13,4 +13,5 @@ abstract class IInspectorOptions {
   bool enableClose;
   List<IExplorerExtensibilityGroup> explorerExtensibility;
   String inspectorURL;
+  DebugLayerTab initialTab;
 }

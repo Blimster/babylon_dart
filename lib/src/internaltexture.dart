@@ -3,6 +3,8 @@ part of babylon;
 /// class InternalTexture
 @JS()
 class InternalTexture {
+  external InternalTexture(ThinEngine engine, InternalTextureSource source, [bool delayAllocation]);
+  external InternalTextureSource get source;
   external bool get isReady;
   external bool get isCube;
   external bool get is3D;

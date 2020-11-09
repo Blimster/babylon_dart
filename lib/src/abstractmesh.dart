@@ -3,6 +3,8 @@ part of babylon;
 /// class AbstractMesh
 @JS()
 class AbstractMesh extends TransformNode implements IDisposable, ICullable, IGetSetVerticesData {
+  external AbstractMesh();
+  external AbstractMesh.args(String name, [Scene scene]);
   external num get BILLBOARDMODE_NONE;
   external num get BILLBOARDMODE_X;
   external num get BILLBOARDMODE_Y;
