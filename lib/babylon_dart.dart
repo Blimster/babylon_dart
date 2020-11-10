@@ -38,6 +38,7 @@ part 'src/debuglayer.dart';
 part 'src/debuglayertab.dart';
 part 'src/depthrenderer.dart';
 part 'src/detailmapconfiguration.dart';
+part 'src/directionallight.dart';
 part 'src/easingfunction.dart';
 part 'src/effect.dart';
 part 'src/effectlayer.dart';

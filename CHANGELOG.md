@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.5.1
+
+- Added binding for DirectionalLight
+
 ## v0.5.0
 
 - More bindings (including classes for TypeScript enums)
