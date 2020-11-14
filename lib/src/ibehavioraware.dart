@@ -3,7 +3,7 @@ part of babylon;
 /// interface IBehaviorAware
 @JS()
 abstract class IBehaviorAware<T> {
-  external T addBehavior(Behavior<T> behavior);
-  external T removeBehavior(Behavior<T> behavior);
-  external Behavior<T> getBehaviorByName(String name);
+  T addBehavior(Behavior<T> behavior);
+  T removeBehavior(Behavior<T> behavior);
+  Behavior<T> getBehaviorByName(String name);
 }

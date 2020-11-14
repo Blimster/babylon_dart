@@ -2,12 +2,15 @@ part of babylon;
 
 /// class StandardMaterialDefines
 @JS()
-class StandardMaterialDefines extends MaterialDefines implements IImageProcessingConfigurationDefines {
+class StandardMaterialDefines extends MaterialDefines implements IImageProcessingConfigurationDefines, IMaterialDetailMapDefines {
   external StandardMaterialDefines();
   external bool get MAINUV1;
   external bool get MAINUV2;
   external bool get DIFFUSE;
   external num get DIFFUSEDIRECTUV;
+  external bool get DETAIL;
+  external num get DETAILDIRECTUV;
+  external num get DETAIL_NORMALBLENDMETHOD;
   external bool get AMBIENT;
   external num get AMBIENTDIRECTUV;
   external bool get OPACITY;
@@ -49,7 +52,9 @@ class StandardMaterialDefines extends MaterialDefines implements IImageProcessin
   external num get NUM_BONE_INFLUENCERS;
   external num get BonesPerMesh;
   external bool get BONETEXTURE;
+  external bool get BONES_VELOCITY_ENABLED;
   external bool get INSTANCES;
+  external bool get THIN_INSTANCES;
   external bool get GLOSSINESS;
   external bool get ROUGHNESS;
   external bool get EMISSIVEASILLUMINATION;
@@ -84,6 +89,25 @@ class StandardMaterialDefines extends MaterialDefines implements IImageProcessin
   external num get NUM_MORPH_INFLUENCERS;
   external bool get NONUNIFORMSCALING;
   external bool get PREMULTIPLYALPHA;
+  external bool get ALPHATEST_AFTERALLALPHACOMPUTATIONS;
+  external bool get ALPHABLEND;
+  external bool get PREPASS;
+  external bool get PREPASS_IRRADIANCE;
+  external num get PREPASS_IRRADIANCE_INDEX;
+  external bool get PREPASS_ALBEDO;
+  external num get PREPASS_ALBEDO_INDEX;
+  external bool get PREPASS_DEPTHNORMAL;
+  external num get PREPASS_DEPTHNORMAL_INDEX;
+  external bool get PREPASS_POSITION;
+  external num get PREPASS_POSITION_INDEX;
+  external bool get PREPASS_VELOCITY;
+  external num get PREPASS_VELOCITY_INDEX;
+  external bool get PREPASS_REFLECTIVITY;
+  external num get PREPASS_REFLECTIVITY_INDEX;
+  external num get SCENE_MRT_COUNT;
+  external bool get RGBDLIGHTMAP;
+  external bool get RGBDREFLECTION;
+  external bool get RGBDREFRACTION;
   external bool get IMAGEPROCESSING;
   external bool get VIGNETTE;
   external bool get VIGNETTEBLENDMODEMULTIPLY;
@@ -105,6 +129,9 @@ class StandardMaterialDefines extends MaterialDefines implements IImageProcessin
   external set MAINUV2(bool MAINUV2);
   external set DIFFUSE(bool DIFFUSE);
   external set DIFFUSEDIRECTUV(num DIFFUSEDIRECTUV);
+  external set DETAIL(bool DETAIL);
+  external set DETAILDIRECTUV(num DETAILDIRECTUV);
+  external set DETAIL_NORMALBLENDMETHOD(num DETAIL_NORMALBLENDMETHOD);
   external set AMBIENT(bool AMBIENT);
   external set AMBIENTDIRECTUV(num AMBIENTDIRECTUV);
   external set OPACITY(bool OPACITY);
@@ -146,7 +173,9 @@ class StandardMaterialDefines extends MaterialDefines implements IImageProcessin
   external set NUM_BONE_INFLUENCERS(num NUM_BONE_INFLUENCERS);
   external set BonesPerMesh(num BonesPerMesh);
   external set BONETEXTURE(bool BONETEXTURE);
+  external set BONES_VELOCITY_ENABLED(bool BONES_VELOCITY_ENABLED);
   external set INSTANCES(bool INSTANCES);
+  external set THIN_INSTANCES(bool THIN_INSTANCES);
   external set GLOSSINESS(bool GLOSSINESS);
   external set ROUGHNESS(bool ROUGHNESS);
   external set EMISSIVEASILLUMINATION(bool EMISSIVEASILLUMINATION);
@@ -181,6 +210,25 @@ class StandardMaterialDefines extends MaterialDefines implements IImageProcessin
   external set NUM_MORPH_INFLUENCERS(num NUM_MORPH_INFLUENCERS);
   external set NONUNIFORMSCALING(bool NONUNIFORMSCALING);
   external set PREMULTIPLYALPHA(bool PREMULTIPLYALPHA);
+  external set ALPHATEST_AFTERALLALPHACOMPUTATIONS(bool ALPHATEST_AFTERALLALPHACOMPUTATIONS);
+  external set ALPHABLEND(bool ALPHABLEND);
+  external set PREPASS(bool PREPASS);
+  external set PREPASS_IRRADIANCE(bool PREPASS_IRRADIANCE);
+  external set PREPASS_IRRADIANCE_INDEX(num PREPASS_IRRADIANCE_INDEX);
+  external set PREPASS_ALBEDO(bool PREPASS_ALBEDO);
+  external set PREPASS_ALBEDO_INDEX(num PREPASS_ALBEDO_INDEX);
+  external set PREPASS_DEPTHNORMAL(bool PREPASS_DEPTHNORMAL);
+  external set PREPASS_DEPTHNORMAL_INDEX(num PREPASS_DEPTHNORMAL_INDEX);
+  external set PREPASS_POSITION(bool PREPASS_POSITION);
+  external set PREPASS_POSITION_INDEX(num PREPASS_POSITION_INDEX);
+  external set PREPASS_VELOCITY(bool PREPASS_VELOCITY);
+  external set PREPASS_VELOCITY_INDEX(num PREPASS_VELOCITY_INDEX);
+  external set PREPASS_REFLECTIVITY(bool PREPASS_REFLECTIVITY);
+  external set PREPASS_REFLECTIVITY_INDEX(num PREPASS_REFLECTIVITY_INDEX);
+  external set SCENE_MRT_COUNT(num SCENE_MRT_COUNT);
+  external set RGBDLIGHTMAP(bool RGBDLIGHTMAP);
+  external set RGBDREFLECTION(bool RGBDREFLECTION);
+  external set RGBDREFRACTION(bool RGBDREFRACTION);
   external set IMAGEPROCESSING(bool IMAGEPROCESSING);
   external set VIGNETTE(bool VIGNETTE);
   external set VIGNETTEBLENDMODEMULTIPLY(bool VIGNETTEBLENDMODEMULTIPLY);

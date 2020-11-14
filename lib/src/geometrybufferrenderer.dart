@@ -4,6 +4,7 @@ part of babylon;
 @JS()
 class GeometryBufferRenderer {
   external GeometryBufferRenderer(Scene scene, [num ratio]);
+  external List<AbstractMesh> get renderList;
   external bool get isSupported;
   external bool get enablePosition;
   external bool get enableVelocity;
@@ -11,12 +12,13 @@ class GeometryBufferRenderer {
   external Scene get scene;
   external num get ratio;
   external num get samples;
+  external static num get DEPTHNORMAL_TEXTURE_TYPE;
   external static num get POSITION_TEXTURE_TYPE;
   external static num get VELOCITY_TEXTURE_TYPE;
   external static num get REFLECTIVITY_TEXTURE_TYPE;
   external List<AbstractMesh> get excludedSkinnedMeshesFromVelocity;
   external bool get renderTransparentMeshes;
-  external set renderList(List<Mesh> meshes);
+  external set renderList(List<AbstractMesh> meshes);
   external set enablePosition(bool enable);
   external set enableVelocity(bool enable);
   external set enableReflectivity(bool enable);

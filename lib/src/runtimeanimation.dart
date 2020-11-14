@@ -9,6 +9,7 @@ class RuntimeAnimation {
   external dynamic get currentValue;
   external String get targetPath;
   external dynamic get target;
+  external bool get isAdditive;
   external Animation get animation;
   external void reset([bool restoreOriginal]);
   external bool isStopped();

@@ -99,8 +99,6 @@ class ArcRotateCamera extends TargetCamera {
   external set collisionRadius(Vector3 collisionRadius);
   external void setMatUp();
   external Camera storeState();
-  external void attachControl(HtmlElement element, [bool noPreventDefault]);
-  external void detachControl(HtmlElement element);
   external void rebuildAnglesAndRadius();
   external void setPosition(Vector3 position);
   external void zoomOn([List<AbstractMesh> meshes, bool doNotUpdateMaxZ]);

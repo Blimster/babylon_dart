@@ -4,6 +4,6 @@ part of babylon;
 @JS()
 abstract class IMotorEnabledJoint {
   dynamic physicsJoint;
-  external void setMotor([num force, num maxForce, num motorIndex]);
-  external void setLimit(num upperLimit, [num lowerLimit, num motorIndex]);
+  void setMotor([num force, num maxForce, num motorIndex]);
+  void setLimit(num upperLimit, [num lowerLimit, num motorIndex]);
 }

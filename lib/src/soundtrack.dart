@@ -9,8 +9,8 @@ class SoundTrack {
   external set id(num id);
   external set soundCollection(List<Sound> soundCollection);
   external void dispose();
-  external void AddSound(Sound sound);
-  external void RemoveSound(Sound sound);
+  external void addSound(Sound sound);
+  external void removeSound(Sound sound);
   external void setVolume(num newVolume);
   external void switchPanningModelToHRTF();
   external void switchPanningModelToEqualPower();

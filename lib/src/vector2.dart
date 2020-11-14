@@ -12,6 +12,7 @@ class Vector2 {
   external String getClassName();
   external num getHashCode();
   external Vector2 toArray(Float32List array, [num index]);
+  external Vector2 fromArray(Float32List array, [num index]);
   external List<num> asArray();
   external Vector2 copyFrom(Vector2 source);
   external Vector2 copyFromFloats(num x, num y);

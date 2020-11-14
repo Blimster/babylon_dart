@@ -17,6 +17,7 @@ class Vector4 {
   external num getHashCode();
   external List<num> asArray();
   external Vector4 toArray(Float32List array, [num index]);
+  external Vector4 fromArray(Float32List array, [num index]);
   external Vector4 addInPlace(Vector4 otherVector);
   external Vector4 add(Vector4 otherVector);
   external Vector4 addToRef(Vector4 otherVector, Vector4 result);

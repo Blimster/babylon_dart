@@ -4,7 +4,7 @@ part of babylon;
 @JS()
 abstract class Behavior<T> {
   String name;
-  external void init();
-  external void attach(T target);
-  external void detach();
+  void init();
+  void attach(T target);
+  void detach();
 }

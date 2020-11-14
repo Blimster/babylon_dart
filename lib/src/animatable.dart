@@ -3,7 +3,7 @@ part of babylon;
 /// class Animatable
 @JS()
 class Animatable {
-  external Animatable(Scene scene, dynamic target, [num fromFrame, num toFrame, bool loopAnimation, num speedRatio, dynamic onAnimationEnd, List<Animation> animations, dynamic onAnimationLoop]);
+  external Animatable(Scene scene, dynamic target, [num fromFrame, num toFrame, bool loopAnimation, num speedRatio, dynamic onAnimationEnd, List<Animation> animations, dynamic onAnimationLoop, bool isAdditive]);
   external Animatable get syncRoot;
   external num get masterFrame;
   external num get weight;
@@ -14,6 +14,7 @@ class Animatable {
   external bool get loopAnimation;
   external dynamic get onAnimationEnd;
   external dynamic get onAnimationLoop;
+  external bool get isAdditive;
   external bool get disposeOnEnd;
   external bool get animationStarted;
   external Observable<Animatable> get onAnimationEndObservable;
@@ -26,6 +27,7 @@ class Animatable {
   external set loopAnimation(bool loopAnimation);
   external set onAnimationEnd(dynamic onAnimationEnd);
   external set onAnimationLoop(dynamic onAnimationLoop);
+  external set isAdditive(bool isAdditive);
   external set disposeOnEnd(bool disposeOnEnd);
   external set animationStarted(bool animationStarted);
   external set onAnimationEndObservable(Observable<Animatable> onAnimationEndObservable);

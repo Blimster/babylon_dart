@@ -5,5 +5,5 @@ part of babylon;
 abstract class IPlaneLike {
   IVector3Like normal;
   num d;
-  external void normalize();
+  void normalize();
 }

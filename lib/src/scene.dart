@@ -10,7 +10,7 @@ class SceneGetWorldExtendsResult {
 
 /// class Scene
 @JS()
-class Scene extends AbstractScene implements IAnimatable {
+class Scene extends AbstractScene implements IAnimatable, IClipPlanesHolder {
   external Scene(Engine engine, [SceneOptions options]);
   external BaseTexture get environmentTexture;
   external num get environmentIntensity;
@@ -107,7 +107,9 @@ class Scene extends AbstractScene implements IAnimatable {
   external Observable<Skeleton> get onNewSkeletonAddedObservable;
   external Observable<Skeleton> get onSkeletonRemovedObservable;
   external Observable<Material> get onNewMaterialAddedObservable;
+  external Observable<MultiMaterial> get onNewMultiMaterialAddedObservable;
   external Observable<Material> get onMaterialRemovedObservable;
+  external Observable<MultiMaterial> get onMultiMaterialRemovedObservable;
   external Observable<BaseTexture> get onNewTextureAddedObservable;
   external Observable<BaseTexture> get onTextureRemovedObservable;
   external Observable<Scene> get onBeforeRenderTargetsRenderObservable;
@@ -135,14 +137,15 @@ class Scene extends AbstractScene implements IAnimatable {
   external num get fogDensity;
   external num get fogStart;
   external num get fogEnd;
+  external bool get prePass;
   external List<Camera> get activeCameras;
+  external bool get physicsEnabled;
   external bool get particlesEnabled;
   external bool get spritesEnabled;
   external bool get lensFlaresEnabled;
   external bool get collisionsEnabled;
   external Vector3 get gravity;
   external bool get postProcessesEnabled;
-  external List<PostProcess> get postProcesses;
   external PostProcessManager get postProcessManager;
   external bool get renderTargetsEnabled;
   external bool get dumpNextRenderTargets;
@@ -247,7 +250,9 @@ class Scene extends AbstractScene implements IAnimatable {
   external set onNewSkeletonAddedObservable(Observable<Skeleton> onNewSkeletonAddedObservable);
   external set onSkeletonRemovedObservable(Observable<Skeleton> onSkeletonRemovedObservable);
   external set onNewMaterialAddedObservable(Observable<Material> onNewMaterialAddedObservable);
+  external set onNewMultiMaterialAddedObservable(Observable<MultiMaterial> onNewMultiMaterialAddedObservable);
   external set onMaterialRemovedObservable(Observable<Material> onMaterialRemovedObservable);
+  external set onMultiMaterialRemovedObservable(Observable<MultiMaterial> onMultiMaterialRemovedObservable);
   external set onNewTextureAddedObservable(Observable<BaseTexture> onNewTextureAddedObservable);
   external set onTextureRemovedObservable(Observable<BaseTexture> onTextureRemovedObservable);
   external set onBeforeRenderTargetsRenderObservable(Observable<Scene> onBeforeRenderTargetsRenderObservable);
@@ -275,14 +280,15 @@ class Scene extends AbstractScene implements IAnimatable {
   external set fogDensity(num fogDensity);
   external set fogStart(num fogStart);
   external set fogEnd(num fogEnd);
+  external set prePass(bool prePass);
   external set activeCameras(List<Camera> activeCameras);
+  external set physicsEnabled(bool physicsEnabled);
   external set particlesEnabled(bool particlesEnabled);
   external set spritesEnabled(bool spritesEnabled);
   external set lensFlaresEnabled(bool lensFlaresEnabled);
   external set collisionsEnabled(bool collisionsEnabled);
   external set gravity(Vector3 gravity);
   external set postProcessesEnabled(bool postProcessesEnabled);
-  external set postProcesses(List<PostProcess> postProcesses);
   external set postProcessManager(PostProcessManager postProcessManager);
   external set renderTargetsEnabled(bool renderTargetsEnabled);
   external set dumpNextRenderTargets(bool dumpNextRenderTargets);
@@ -415,12 +421,14 @@ class Scene extends AbstractScene implements IAnimatable {
   external Skeleton getSkeletonByName(String name);
   external MorphTargetManager getMorphTargetManagerById(num id);
   external MorphTarget getMorphTargetById(String id);
+  external MorphTarget getMorphTargetByName(String name);
+  external PostProcess getPostProcessByName(String name);
   external bool isActiveMesh(AbstractMesh mesh);
   external bool removeExternalData(String key);
   external void freeProcessedMaterials();
   external void freeActiveMeshes();
   external void freeRenderingGroups();
-  external Scene freezeActiveMeshes([bool skipEvaluateActiveMeshes]);
+  external Scene freezeActiveMeshes([bool skipEvaluateActiveMeshes, void Function() onSuccess, void Function(String message) onError]);
   external Scene unfreezeActiveMeshes();
   external void updateTransformMatrix([bool force]);
   external void animate();
@@ -434,12 +442,14 @@ class Scene extends AbstractScene implements IAnimatable {
   external Scene createPickingRayToRef(num x, num y, Matrix world, Ray result, Camera camera, [bool cameraViewSpace]);
   external Ray createPickingRayInCameraSpace(num x, num y, [Camera camera]);
   external Scene createPickingRayInCameraSpaceToRef(num x, num y, Ray result, [Camera camera]);
-  external void setPointerOverMesh(AbstractMesh mesh);
+  external PickingInfo pickWithBoundingInfo(num x, num y, [bool Function(AbstractMesh mesh) predicate, bool fastCheck, Camera camera]);
+  external void setPointerOverMesh(AbstractMesh mesh, [num pointerId]);
   external AbstractMesh getPointerOverMesh();
   external List<Mesh> getMeshesByTags(String tagsQuery, [void Function(AbstractMesh mesh) forEach]);
   external List<Camera> getCamerasByTags(String tagsQuery, [void Function(Camera camera) forEach]);
   external List<Light> getLightsByTags(String tagsQuery, [void Function(Light light) forEach]);
   external List<Material> getMaterialByTags(String tagsQuery, [void Function(Material material) forEach]);
+  external List<TransformNode> getTransformNodesByTags(String tagsQuery, [void Function(TransformNode transform) forEach]);
   external void setRenderingOrder(num renderingGroupId, [num Function(SubMesh a, SubMesh b) opaqueSortCompareFn, num Function(SubMesh a, SubMesh b) alphaTestSortCompareFn, num Function(SubMesh a, SubMesh b) transparentSortCompareFn]);
   external void setRenderingAutoClearDepthStencil(num renderingGroupId, bool autoClearDepthStencil, [bool depth, bool stencil]);
   external IRenderingManagerAutoClearSetup getAutoClearDepthStencilSetup(num index);
@@ -454,11 +464,11 @@ class Scene extends AbstractScene implements IAnimatable {
   external void setPointerOverSprite(Sprite sprite);
   external Sprite getPointerOverSprite();
   num deltaTime;
-  external Animatable beginWeightedAnimation(dynamic target, num from, num to, num weight, [bool loop, num speedRatio, void Function() onAnimationEnd, Animatable animatable, bool Function(dynamic target) targetMask, void Function() onAnimationLoop]);
-  external Animatable beginAnimation(dynamic target, num from, num to, [bool loop, num speedRatio, void Function() onAnimationEnd, Animatable animatable, bool stopCurrent, bool Function(dynamic target) targetMask, void Function() onAnimationLoop]);
-  external List<Animatable> beginHierarchyAnimation(dynamic target, bool directDescendantsOnly, num from, num to, [bool loop, num speedRatio, void Function() onAnimationEnd, Animatable animatable, bool stopCurrent, bool Function(dynamic target) targetMask, void Function() onAnimationLoop]);
-  external Animatable beginDirectAnimation(dynamic target, List<Animation> animations, num from, num to, [bool loop, num speedRatio, void Function() onAnimationEnd, void Function() onAnimationLoop]);
-  external List<Animatable> beginDirectHierarchyAnimation(Node target, bool directDescendantsOnly, List<Animation> animations, num from, num to, [bool loop, num speedRatio, void Function() onAnimationEnd, void Function() onAnimationLoop]);
+  external Animatable beginWeightedAnimation(dynamic target, num from, num to, num weight, [bool loop, num speedRatio, void Function() onAnimationEnd, Animatable animatable, bool Function(dynamic target) targetMask, void Function() onAnimationLoop, bool isAdditive]);
+  external Animatable beginAnimation(dynamic target, num from, num to, [bool loop, num speedRatio, void Function() onAnimationEnd, Animatable animatable, bool stopCurrent, bool Function(dynamic target) targetMask, void Function() onAnimationLoop, bool isAdditive]);
+  external List<Animatable> beginHierarchyAnimation(dynamic target, bool directDescendantsOnly, num from, num to, [bool loop, num speedRatio, void Function() onAnimationEnd, Animatable animatable, bool stopCurrent, bool Function(dynamic target) targetMask, void Function() onAnimationLoop, bool isAdditive]);
+  external Animatable beginDirectAnimation(dynamic target, List<Animation> animations, num from, num to, [bool loop, num speedRatio, void Function() onAnimationEnd, void Function() onAnimationLoop, bool isAdditive]);
+  external List<Animatable> beginDirectHierarchyAnimation(Node target, bool directDescendantsOnly, List<Animation> animations, num from, num to, [bool loop, num speedRatio, void Function() onAnimationEnd, void Function() onAnimationLoop, bool isAdditive]);
   external Animatable getAnimatableByTarget(dynamic target);
   external List<Animatable> getAllAnimatablesByTarget(dynamic target);
   external void stopAllAnimations();
@@ -494,7 +504,7 @@ class Scene extends AbstractScene implements IAnimatable {
   PostProcessRenderPipelineManager postProcessRenderPipelineManager;
   bool forceShowBoundingBoxes;
   external BoundingBoxRenderer getBoundingBoxRenderer();
-  external DepthRenderer enableDepthRenderer([Camera camera, bool storeNonLinearDepth]);
+  external DepthRenderer enableDepthRenderer([Camera camera, bool storeNonLinearDepth, bool force32bitsFloat]);
   external void disableDepthRenderer([Camera camera]);
   external OutlineRenderer getOutlineRenderer();
 }

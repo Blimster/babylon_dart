@@ -338,9 +338,10 @@ class VertexData {
   external static VertexData CreateGroundFromHeightMap(VertexDataCreateGroundFromHeightMapOptions options);
   external static VertexData CreatePlane(VertexDataCreatePlaneOptions options);
   external static VertexData CreateDisc(VertexDataCreateDiscOptions options);
-  external static VertexData CreatePolygon(Mesh polygon, num sideOrientation, [List<Vector4> fUV, List<Color4> fColors, Vector4 frontUVs, Vector4 backUVs]);
+  external static VertexData CreatePolygon(Mesh polygon, num sideOrientation, [List<Vector4> fUV, List<Color4> fColors, Vector4 frontUVs, Vector4 backUVs, bool wrap]);
   external static VertexData CreateIcoSphere(VertexDataCreateIcoSphereOptions options);
   external static VertexData CreatePolyhedron(VertexDataCreatePolyhedronOptions options);
+  external static VertexData CreateCapsule([ICreateCapsuleOptions options]);
   external static VertexData CreateTorusKnot(VertexDataCreateTorusKnotOptions options);
   external static void ComputeNormals(dynamic positions, dynamic indices, dynamic normals, [VertexDataComputeNormalsOptions options]);
   external static void ImportVertexData(dynamic parsedVertexData, Geometry geometry);

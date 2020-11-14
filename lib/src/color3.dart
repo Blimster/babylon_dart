@@ -15,6 +15,7 @@ class Color3 {
   external String getClassName();
   external num getHashCode();
   external Color3 toArray(Float32List array, [num index]);
+  external Color3 fromArray(List<num> array, [num offset]);
   external Color4 toColor4([num alpha]);
   external List<num> asArray();
   external num toLuminance();
@@ -43,6 +44,7 @@ class Color3 {
   external static void HSVtoRGBToRef(num hue, num saturation, num value, Color3 result);
   external static Color3 FromHexString(String hex);
   external static Color3 FromArray(List<num> array, [num offset]);
+  external static void FromArrayToRef(List<num> array, dynamic offset, Color3 result);
   external static Color3 FromInts(num r, num g, num b);
   external static Color3 Lerp(Color3 start, Color3 end, num amount);
   external static void LerpToRef(Color3 left, Color3 right, num amount, Color3 result);

@@ -4,20 +4,21 @@ part of babylon;
 @JS()
 class Vector3 {
   external Vector3([num x, num y, num z]);
-  external bool get isNonUniform;
-  external Vector3 get UpReadOnly;
-  external Vector3 get ZeroReadOnly;
   external num get x;
   external num get y;
   external num get z;
-  external set x(num x);
-  external set y(num y);
-  external set z(num z);
+  external bool get isNonUniform;
+  external Vector3 get UpReadOnly;
+  external Vector3 get ZeroReadOnly;
+  external set x(num value);
+  external set y(num value);
+  external set z(num value);
   external String toString();
   external String getClassName();
   external num getHashCode();
   external List<num> asArray();
   external Vector3 toArray(Float32List array, [num index]);
+  external Vector3 fromArray(Float32List array, [num index]);
   external Quaternion toQuaternion();
   external Vector3 addInPlace(Vector3 otherVector);
   external Vector3 addInPlaceFromFloats(num x, num y, num z);
@@ -35,6 +36,8 @@ class Vector3 {
   external Vector3 scale(num scale);
   external Vector3 scaleToRef(num scale, Vector3 result);
   external Vector3 scaleAndAddToRef(num scale, Vector3 result);
+  external Vector3 projectOnPlane(Plane plane, Vector3 origin);
+  external void projectOnPlaneToRef(Plane plane, Vector3 origin, Vector3 result);
   external bool equals(Vector3 otherVector);
   external bool equalsWithEpsilon(Vector3 otherVector, [num epsilon]);
   external bool equalsToFloats(num x, num y, num z);
@@ -78,8 +81,8 @@ class Vector3 {
   external static Vector3 One();
   external static Vector3 Up();
   external static Vector3 Down();
-  external static Vector3 Forward();
-  external static Vector3 Backward();
+  external static Vector3 Forward([bool rightHandedSystem]);
+  external static Vector3 Backward([bool rightHandedSystem]);
   external static Vector3 Right();
   external static Vector3 Left();
   external static Vector3 TransformCoordinates(Vector3 vector, Matrix transformation);
@@ -101,6 +104,7 @@ class Vector3 {
   external static Vector3 Normalize(Vector3 vector);
   external static void NormalizeToRef(Vector3 vector, Vector3 result);
   external static Vector3 Project(Vector3 vector, Matrix world, Matrix transform, Viewport viewport);
+  external static Vector3 ProjectToRef(Vector3 vector, Matrix world, Matrix transform, Viewport viewport, Vector3 result);
   external static Vector3 UnprojectFromTransform(Vector3 source, num viewportWidth, num viewportHeight, Matrix world, Matrix transform);
   external static Vector3 Unproject(Vector3 source, num viewportWidth, num viewportHeight, Matrix world, Matrix view, Matrix projection);
   external static void UnprojectToRef(Vector3 source, num viewportWidth, num viewportHeight, Matrix world, Matrix view, Matrix projection, Vector3 result);

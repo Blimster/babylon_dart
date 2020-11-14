@@ -73,11 +73,13 @@ class MeshMinMaxResult {
 class Mesh extends AbstractMesh implements IGetSetVerticesData {
   external Mesh();
   external Mesh.args(String name, [Scene scene, Node parent, Mesh source, bool doNotCloneChildren, bool clonePhysicsImpostor]);
+  external bool get computeBonesUsingShaders;
   external Observable<Mesh> get onBeforeRenderObservable;
   external Observable<Mesh> get onBeforeBindObservable;
   external Observable<Mesh> get onAfterRenderObservable;
   external Observable<Mesh> get onBeforeDrawObservable;
   external bool get hasInstances;
+  external bool get hasThinInstances;
   external Mesh get source;
   external bool get isUnIndexed;
   external Float32List get worldMatrixInstancedBuffer;
@@ -113,6 +115,7 @@ class Mesh extends AbstractMesh implements IGetSetVerticesData {
   external num get overrideMaterialSideOrientation;
   external dynamic get normalizeSkinFourWeights;
   external dynamic get normalizeSkinWeightsAndExtra;
+  external set computeBonesUsingShaders(bool value);
   external set onBeforeDraw(void Function() callback);
   external set isUnIndexed(bool value);
   external set manualUpdateOfWorldMatrixInstancedBuffer(bool value);
@@ -201,13 +204,27 @@ class Mesh extends AbstractMesh implements IGetSetVerticesData {
   external static Mesh CreatePolyhedron(String name, MeshCreatePolyhedronOptions options, Scene scene);
   external static Mesh CreateIcoSphere(String name, MeshCreateIcoSphereOptions options, Scene scene);
   external static Mesh CreateDecal(String name, AbstractMesh sourceMesh, Vector3 position, Vector3 normal, Vector3 size, num angle);
+  external static Mesh CreateCapsule(String name, ICreateCapsuleOptions options, Scene scene);
   external Float32List setPositionsForCPUSkinning();
   external Float32List setNormalsForCPUSkinning();
   external Mesh applySkeleton(Skeleton skeleton);
   external static Mesh MergeMeshes(List<Mesh> meshes, [bool disposeSource, bool allow32BitsIndices, Mesh meshSubclass, bool subdivideWithSubMeshes, bool multiMultiMaterials]);
   external void addInstance(InstancedMesh instance);
   external void removeInstance(InstancedMesh instance);
+  bool edgesShareWithInstances;
   external void registerInstancedBuffer(String kind, num stride);
+  bool thinInstanceEnablePicking;
+  num thinInstanceCount;
+  external num thinInstanceAdd(dynamic matrix, bool refresh);
+  external num thinInstanceAddSelf(bool refresh);
+  external void thinInstanceRegisterAttribute(String kind, num stride);
+  external void thinInstanceSetMatrixAt(num index, Matrix matrix, bool refresh);
+  external void thinInstanceSetAttributeAt(String kind, num index, List<num> value, bool refresh);
+  external void thinInstanceSetBuffer(String kind, Float32List buffer, num stride, bool staticBuffer);
+  external List<Matrix> thinInstanceGetWorldMatrices();
+  external void thinInstanceBufferUpdated(String kind);
+  external void thinInstancePartialBufferUpdate(String kind, Float32List data, num offset);
+  external void thinInstanceRefreshBoundingInfo(bool forceRefreshParentInfo);
   external List<IParticleSystem> getEmittedParticleSystems();
   external List<IParticleSystem> getHierarchyEmittedParticleSystems();
 }

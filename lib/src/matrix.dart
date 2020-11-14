@@ -14,15 +14,16 @@ class MatrixPerspectiveFovWebVRToRefFov {
 @JS()
 class Matrix {
   external Matrix();
-  external Float32List get m;
+  external bool get Use64Bits;
+  external dynamic get m;
   external Matrix get IdentityReadOnly;
   external num get updateFlag;
   external set updateFlag(num updateFlag);
   external bool isIdentity();
   external bool isIdentityAs3x2();
   external num determinant();
-  external Float32List toArray();
-  external Float32List asArray();
+  external dynamic toArray();
+  external dynamic asArray();
   external Matrix invert();
   external Matrix reset();
   external Matrix add(Matrix other);
@@ -39,9 +40,9 @@ class Matrix {
   external Matrix removeRotationAndScaling();
   external Matrix multiply(Matrix other);
   external Matrix copyFrom(Matrix other);
-  external Matrix copyToArray(Float32List array, [num offset]);
+  external Matrix copyToArray(dynamic array, [num offset]);
   external Matrix multiplyToRef(Matrix other, Matrix result);
-  external Matrix multiplyToArray(Matrix other, Float32List result, num offset);
+  external Matrix multiplyToArray(Matrix other, dynamic result, num offset);
   external bool equals(Matrix value);
   external Matrix clone();
   external String getClassName();
@@ -62,7 +63,7 @@ class Matrix {
   external void toggleProjectionMatrixHandInPlace();
   external static Matrix FromArray(List<num> array, [num offset]);
   external static void FromArrayToRef(List<num> array, num offset, Matrix result);
-  external static void FromFloat32ArrayToRefScaled(Float32List array, num offset, num scale, Matrix result);
+  external static void FromFloat32ArrayToRefScaled(dynamic array, num offset, num scale, Matrix result);
   external static void FromValuesToRef(num initialM11, num initialM12, num initialM13, num initialM14, num initialM21, num initialM22, num initialM23, num initialM24, num initialM31, num initialM32, num initialM33, num initialM34, num initialM41, num initialM42, num initialM43, num initialM44, Matrix result);
   external static Matrix FromValues(num initialM11, num initialM12, num initialM13, num initialM14, num initialM21, num initialM22, num initialM23, num initialM24, num initialM31, num initialM32, num initialM33, num initialM34, num initialM41, num initialM42, num initialM43, num initialM44);
   external static Matrix Compose(Vector3 scale, Quaternion rotation, Vector3 translation);
@@ -109,8 +110,8 @@ class Matrix {
   external static void PerspectiveFovReverseRHToRef(num fov, num aspect, num znear, num zfar, Matrix result, [bool isVerticalFovFixed]);
   external static void PerspectiveFovWebVRToRef(MatrixPerspectiveFovWebVRToRefFov fov, num znear, num zfar, Matrix result, [bool rightHanded]);
   external static Matrix GetFinalMatrix(Viewport viewport, Matrix world, Matrix view, Matrix projection, num zmin, num zmax);
-  external static Float32List GetAsMatrix2x2(Matrix matrix);
-  external static Float32List GetAsMatrix3x3(Matrix matrix);
+  external static dynamic GetAsMatrix2x2(Matrix matrix);
+  external static dynamic GetAsMatrix3x3(Matrix matrix);
   external static Matrix Transpose(Matrix matrix);
   external static void TransposeToRef(Matrix matrix, Matrix result);
   external static Matrix Reflection(IPlaneLike plane);

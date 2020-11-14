@@ -11,8 +11,8 @@ class Observable<T> {
   external bool removeCallback(void Function(T eventData, EventState eventState) callback, [dynamic scope]);
   external void makeObserverTopPriority(Observer<T> observer);
   external void makeObserverBottomPriority(Observer<T> observer);
-  external bool notifyObservers(T eventData, [num mask, dynamic target, dynamic currentTarget]);
-  external Promise<T> notifyObserversWithPromise(T eventData, [num mask, dynamic target, dynamic currentTarget]);
+  external bool notifyObservers(T eventData, [num mask, dynamic target, dynamic currentTarget, dynamic userInfo]);
+  external Promise<T> notifyObserversWithPromise(T eventData, [num mask, dynamic target, dynamic currentTarget, dynamic userInfo]);
   external void notifyObserver(Observer<T> observer, T eventData, [num mask]);
   external bool hasObservers();
   external void clear();

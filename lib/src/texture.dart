@@ -4,12 +4,14 @@ part of babylon;
 @JS()
 class Texture extends BaseTexture {
   external Texture();
-  external Texture.args(String url, dynamic sceneOrEngine, [bool noMipmap, bool invertY, num samplingMode, void Function() onLoad, void Function(String message, dynamic exception) onError, dynamic buffer, bool deleteBuffer, num format, String mimeType]);
+  external Texture.args(String url, dynamic sceneOrEngine, [bool noMipmap, bool invertY, num samplingMode, void Function() onLoad, void Function(String message, dynamic exception) onError, dynamic buffer, bool deleteBuffer, num format, String mimeType, dynamic loaderOptions]);
   external bool get noMipmap;
+  external dynamic get mimeType;
   external bool get isBlocking;
   external num get samplingMode;
   external bool get invertY;
   external static bool get SerializeBuffers;
+  external static bool get ForceSerializeBuffers;
   external static num get NEAREST_SAMPLINGMODE;
   external static num get NEAREST_NEAREST_MIPLINEAR;
   external static num get BILINEAR_SAMPLINGMODE;
@@ -50,10 +52,12 @@ class Texture extends BaseTexture {
   external num get uRotationCenter;
   external num get vRotationCenter;
   external num get wRotationCenter;
+  external bool get homogeneousRotationInUVTransform;
   external List<IInspectable> get inspectableCustomProperties;
   external Observable<Texture> get onLoadObservable;
   external set isBlocking(bool value);
   external static set SerializeBuffers(bool SerializeBuffers);
+  external static set ForceSerializeBuffers(bool ForceSerializeBuffers);
   external static set UseSerializedUrlIfAny(bool UseSerializedUrlIfAny);
   external set url(String url);
   external set uOffset(num uOffset);
@@ -66,10 +70,12 @@ class Texture extends BaseTexture {
   external set uRotationCenter(num uRotationCenter);
   external set vRotationCenter(num vRotationCenter);
   external set wRotationCenter(num wRotationCenter);
+  external set homogeneousRotationInUVTransform(bool homogeneousRotationInUVTransform);
   external set inspectableCustomProperties(List<IInspectable> inspectableCustomProperties);
   external set onLoadObservable(Observable<Texture> onLoadObservable);
   external void updateURL(String url, [dynamic buffer, void Function() onLoad]);
   external void delayLoad();
+  external bool checkTransformsAreIdentical(BaseTexture texture);
   external Matrix getTextureMatrix();
   external Matrix getReflectionTextureMatrix();
   external Texture clone();

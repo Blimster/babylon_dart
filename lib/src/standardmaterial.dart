@@ -12,9 +12,11 @@ class StandardMaterial extends PushMaterial {
   external num get cameraContrast;
   external BaseTexture get cameraColorGradingTexture;
   external ColorCurves get cameraColorCurves;
+  external bool get canRenderToMRT;
   external bool get hasRenderTargetTextures;
   external bool get useLogarithmicDepth;
   external bool get DiffuseTextureEnabled;
+  external bool get DetailTextureEnabled;
   external bool get AmbientTextureEnabled;
   external bool get OpacityTextureEnabled;
   external bool get ReflectionTextureEnabled;
@@ -65,7 +67,8 @@ class StandardMaterial extends PushMaterial {
   external bool get invertNormalMapX;
   external bool get invertNormalMapY;
   external bool get twoSidedLighting;
-  external String Function(String shaderName, List<String> uniforms, List<String> uniformBuffers, List<String> samplers, StandardMaterialDefines defines) get customShaderNameResolve;
+  external PrePassConfiguration get prePassConfiguration;
+  external DetailMapConfiguration get detailMap;
   external set imageProcessingConfiguration(ImageProcessingConfiguration value);
   external set cameraColorCurvesEnabled(bool value);
   external set cameraColorGradingEnabled(bool value);
@@ -76,6 +79,7 @@ class StandardMaterial extends PushMaterial {
   external set cameraColorCurves(ColorCurves value);
   external set useLogarithmicDepth(bool value);
   external set DiffuseTextureEnabled(bool value);
+  external set DetailTextureEnabled(bool value);
   external set AmbientTextureEnabled(bool value);
   external set OpacityTextureEnabled(bool value);
   external set ReflectionTextureEnabled(bool value);
@@ -126,12 +130,11 @@ class StandardMaterial extends PushMaterial {
   external set invertNormalMapX(bool invertNormalMapX);
   external set invertNormalMapY(bool invertNormalMapY);
   external set twoSidedLighting(bool twoSidedLighting);
-  external set customShaderNameResolve(String Function(String shaderName, List<String> uniforms, List<String> uniformBuffers, List<String> samplers, StandardMaterialDefines defines) customShaderNameResolve);
   external String getClassName();
   external bool needAlphaBlending();
   external bool needAlphaTesting();
   external BaseTexture getAlphaTestTexture();
-  external bool isReadyForSubMesh(AbstractMesh mesh, BaseSubMesh subMesh, [bool useInstances]);
+  external bool isReadyForSubMesh(AbstractMesh mesh, SubMesh subMesh, [bool useInstances]);
   external void buildUniformLayout();
   external void unbind();
   external void bindForSubMesh(Matrix world, Mesh mesh, SubMesh subMesh);

@@ -3,6 +3,7 @@ part of babylon;
 /// class AbstractScene
 @JS()
 abstract class AbstractScene {
+  external BaseTexture get environmentTexture;
   external List<Node> get rootNodes;
   external List<Camera> get cameras;
   external List<Light> get lights;
@@ -16,7 +17,8 @@ abstract class AbstractScene {
   external List<Geometry> get geometries;
   external List<TransformNode> get transformNodes;
   external List<BaseTexture> get textures;
-  external BaseTexture get environmentTexture;
+  external List<PostProcess> get postProcesses;
+  external set environmentTexture(BaseTexture value);
   external set rootNodes(List<Node> rootNodes);
   external set cameras(List<Camera> cameras);
   external set lights(List<Light> lights);
@@ -30,7 +32,7 @@ abstract class AbstractScene {
   external set geometries(List<Geometry> geometries);
   external set transformNodes(List<TransformNode> transformNodes);
   external set textures(List<BaseTexture> textures);
-  external set environmentTexture(BaseTexture environmentTexture);
+  external set postProcesses(List<PostProcess> postProcesses);
   external static void Parse(dynamic jsonData, Scene scene, AssetContainer container, String rootUrl);
   external List<Node> getNodes();
   List<EffectLayer> effectLayers;
@@ -47,4 +49,10 @@ abstract class AbstractScene {
   List<ReflectionProbe> reflectionProbes;
   external num removeReflectionProbe(ReflectionProbe toRemove);
   external void addReflectionProbe(ReflectionProbe newReflectionProbe);
+  PrePassRenderer prePassRenderer;
+  external PrePassRenderer enablePrePassRenderer();
+  external void disablePrePassRenderer();
+  SubSurfaceConfiguration subSurfaceConfiguration;
+  external SubSurfaceConfiguration enableSubSurfaceForPrePass();
+  external void disableSubSurfaceForPrePass();
 }

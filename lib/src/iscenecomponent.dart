@@ -5,7 +5,7 @@ part of babylon;
 abstract class ISceneComponent {
   String name;
   Scene scene;
-  external void register();
-  external void rebuild();
-  external void dispose();
+  void register();
+  void rebuild();
+  void dispose();
 }

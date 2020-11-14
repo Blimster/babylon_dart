@@ -3,7 +3,7 @@ part of babylon;
 @JS()
 @anonymous
 class MeshBuilderCreateBoxOptions {
-  external factory MeshBuilderCreateBoxOptions({num size, num width, num height, num depth, List<Vector4> faceUV, List<Color4> faceColors, num sideOrientation, Vector4 frontUVs, Vector4 backUVs, bool updatable});
+  external factory MeshBuilderCreateBoxOptions({num size, num width, num height, num depth, List<Vector4> faceUV, List<Color4> faceColors, num sideOrientation, Vector4 frontUVs, Vector4 backUVs, bool wrap, num topBaseAt, num bottomBaseAt, bool updatable});
   external num get size;
   external num get width;
   external num get height;
@@ -13,6 +13,9 @@ class MeshBuilderCreateBoxOptions {
   external num get sideOrientation;
   external Vector4 get frontUVs;
   external Vector4 get backUVs;
+  external bool get wrap;
+  external num get topBaseAt;
+  external num get bottomBaseAt;
   external bool get updatable;
 }
 
@@ -346,7 +349,7 @@ class MeshBuilderCreatePolygonOptions {
 @JS()
 @anonymous
 class MeshBuilderExtrudePolygonOptions {
-  external factory MeshBuilderExtrudePolygonOptions({List<Vector3> shape, List<Vector3> holes, num depth, List<Vector4> faceUV, List<Color4> faceColors, bool updatable, num sideOrientation, Vector4 frontUVs, Vector4 backUVs});
+  external factory MeshBuilderExtrudePolygonOptions({List<Vector3> shape, List<Vector3> holes, num depth, List<Vector4> faceUV, List<Color4> faceColors, bool updatable, num sideOrientation, Vector4 frontUVs, Vector4 backUVs, bool wrap});
   external List<Vector3> get shape;
   external List<Vector3> get holes;
   external num get depth;
@@ -356,6 +359,7 @@ class MeshBuilderExtrudePolygonOptions {
   external num get sideOrientation;
   external Vector4 get frontUVs;
   external Vector4 get backUVs;
+  external bool get wrap;
 }
 
 @JS()
@@ -434,4 +438,5 @@ class MeshBuilder {
   external static Mesh CreateTube(String name, MeshBuilderCreateTubeOptions options, [Scene scene]);
   external static Mesh CreatePolyhedron(String name, MeshBuilderCreatePolyhedronOptions options, [Scene scene]);
   external static Mesh CreateDecal(String name, AbstractMesh sourceMesh, MeshBuilderCreateDecalOptions options);
+  external static Mesh CreateCapsule(String name, [ICreateCapsuleOptions options, Scene scene]);
 }

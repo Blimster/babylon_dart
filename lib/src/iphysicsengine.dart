@@ -4,20 +4,20 @@ part of babylon;
 @JS()
 abstract class IPhysicsEngine {
   Vector3 gravity;
-  external void setGravity(Vector3 gravity);
-  external void setTimeStep(num newTimeStep);
-  external num getTimeStep();
-  external void setSubTimeStep(num subTimeStep);
-  external num getSubTimeStep();
-  external void dispose();
-  external String getPhysicsPluginName();
-  external void addImpostor(PhysicsImpostor impostor);
-  external void removeImpostor(PhysicsImpostor impostor);
-  external void addJoint(PhysicsImpostor mainImpostor, PhysicsImpostor connectedImpostor, PhysicsJoint joint);
-  external void removeJoint(PhysicsImpostor mainImpostor, PhysicsImpostor connectedImpostor, PhysicsJoint joint);
-  external IPhysicsEnginePlugin getPhysicsPlugin();
-  external List<PhysicsImpostor> getImpostors();
-  external PhysicsImpostor getImpostorForPhysicsObject(IPhysicsEnabledObject object);
-  external PhysicsImpostor getImpostorWithPhysicsBody(dynamic body);
-  external PhysicsRaycastResult raycast(Vector3 from, Vector3 to);
+  void setGravity(Vector3 gravity);
+  void setTimeStep(num newTimeStep);
+  num getTimeStep();
+  void setSubTimeStep(num subTimeStep);
+  num getSubTimeStep();
+  void dispose();
+  String getPhysicsPluginName();
+  void addImpostor(PhysicsImpostor impostor);
+  void removeImpostor(PhysicsImpostor impostor);
+  void addJoint(PhysicsImpostor mainImpostor, PhysicsImpostor connectedImpostor, PhysicsJoint joint);
+  void removeJoint(PhysicsImpostor mainImpostor, PhysicsImpostor connectedImpostor, PhysicsJoint joint);
+  IPhysicsEnginePlugin getPhysicsPlugin();
+  List<PhysicsImpostor> getImpostors();
+  PhysicsImpostor getImpostorForPhysicsObject(IPhysicsEnabledObject object);
+  PhysicsImpostor getImpostorWithPhysicsBody(dynamic body);
+  PhysicsRaycastResult raycast(Vector3 from, Vector3 to);
 }

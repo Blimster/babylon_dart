@@ -5,6 +5,7 @@ part of babylon;
 class Material implements IAnimatable {
   external Material();
   external Material.args(String name, Scene scene, [bool doNotAdd]);
+  external bool get canRenderToMRT;
   external num get alpha;
   external bool get backFaceCulling;
   external bool get hasRenderTargetTextures;
@@ -17,6 +18,7 @@ class Material implements IAnimatable {
   external bool get pointsCloud;
   external num get fillMode;
   external bool get isFrozen;
+  external num get transparencyMode;
   external static num get TriangleFillMode;
   external static num get WireFrameFillMode;
   external static num get PointFillMode;
@@ -33,7 +35,17 @@ class Material implements IAnimatable {
   external static num get FresnelDirtyFlag;
   external static num get AttributesDirtyFlag;
   external static num get MiscDirtyFlag;
+  external static num get PrePassDirtyFlag;
   external static num get AllDirtyFlag;
+  external static num get MATERIAL_OPAQUE;
+  external static num get MATERIAL_ALPHATEST;
+  external static num get MATERIAL_ALPHABLEND;
+  external static num get MATERIAL_ALPHATESTANDBLEND;
+  external static num get MATERIAL_NORMALBLENDMETHOD_WHITEOUT;
+  external static num get MATERIAL_NORMALBLENDMETHOD_RNM;
+  external String Function(String shaderName, List<String> uniforms, List<String> uniformBuffers, List<String> samplers, dynamic defines, List<String> attributes, ICustomShaderNameResolveOptions options) get customShaderNameResolve;
+  external ShadowDepthWrapper get shadowDepthWrapper;
+  external bool get allowShaderHotSwapping;
   external String get id;
   external num get uniqueId;
   external String get name;
@@ -50,6 +62,7 @@ class Material implements IAnimatable {
   external List<Animation> get animations;
   external Observable<Material> get onDisposeObservable;
   external bool get disableDepthWrite;
+  external bool get disableColorWrite;
   external bool get forceDepthWrite;
   external num get depthFunction;
   external bool get separateCullingPass;
@@ -66,6 +79,10 @@ class Material implements IAnimatable {
   external set wireframe(bool value);
   external set pointsCloud(bool value);
   external set fillMode(num value);
+  external set transparencyMode(num value);
+  external set customShaderNameResolve(String Function(String shaderName, List<String> uniforms, List<String> uniformBuffers, List<String> samplers, dynamic defines, List<String> attributes, ICustomShaderNameResolveOptions options) customShaderNameResolve);
+  external set shadowDepthWrapper(ShadowDepthWrapper shadowDepthWrapper);
+  external set allowShaderHotSwapping(bool allowShaderHotSwapping);
   external set id(String id);
   external set uniqueId(num uniqueId);
   external set name(String name);
@@ -82,6 +99,7 @@ class Material implements IAnimatable {
   external set animations(List<Animation> animations);
   external set onDisposeObservable(Observable<Material> onDisposeObservable);
   external set disableDepthWrite(bool disableDepthWrite);
+  external set disableColorWrite(bool disableColorWrite);
   external set forceDepthWrite(bool forceDepthWrite);
   external set depthFunction(num depthFunction);
   external set separateCullingPass(bool separateCullingPass);
@@ -93,7 +111,7 @@ class Material implements IAnimatable {
   external void freeze();
   external void unfreeze();
   external bool isReady([AbstractMesh mesh, bool useInstances]);
-  external bool isReadyForSubMesh(AbstractMesh mesh, BaseSubMesh subMesh, [bool useInstances]);
+  external bool isReadyForSubMesh(AbstractMesh mesh, SubMesh subMesh, [bool useInstances]);
   external Effect getEffect();
   external Scene getScene();
   external bool needAlphaBlending();
@@ -112,6 +130,7 @@ class Material implements IAnimatable {
   external Material clone(String name);
   external List<AbstractMesh> getBindedMeshes();
   external void markAsDirty(num flag);
+  external bool setPrePassRenderer(PrePassRenderer prePassRenderer);
   external void dispose([bool forceDisposeEffect, bool forceDisposeTextures, bool notBoundToMesh]);
   external dynamic serialize();
   external static Material Parse(dynamic parsedMaterial, Scene scene, String rootUrl);

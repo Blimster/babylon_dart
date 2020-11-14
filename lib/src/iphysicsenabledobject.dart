@@ -8,15 +8,15 @@ abstract class IPhysicsEnabledObject {
   Vector3 scaling;
   Vector3 rotation;
   dynamic parent;
-  external BoundingInfo getBoundingInfo();
-  external Matrix computeWorldMatrix(bool force);
-  external Matrix getWorldMatrix();
-  external List<AbstractMesh> getChildMeshes([bool directDescendantsOnly]);
-  external dynamic getVerticesData(String kind);
-  external Int32List getIndices();
-  external Scene getScene();
-  external Vector3 getAbsolutePosition();
-  external Vector3 getAbsolutePivotPoint();
-  external TransformNode setAbsolutePosition(Vector3 absolutePosition);
-  external String getClassName();
+  BoundingInfo getBoundingInfo();
+  Matrix computeWorldMatrix(bool force);
+  Matrix getWorldMatrix();
+  List<AbstractMesh> getChildMeshes([bool directDescendantsOnly]);
+  dynamic getVerticesData(String kind);
+  Int32List getIndices();
+  Scene getScene();
+  Vector3 getAbsolutePosition();
+  Vector3 getAbsolutePivotPoint();
+  TransformNode setAbsolutePosition(Vector3 absolutePosition);
+  String getClassName();
 }

@@ -5,7 +5,7 @@ part of babylon;
 abstract class IAction {
   num trigger;
   dynamic triggerOptions;
-  external dynamic getTriggerParameter();
-  external dynamic serialize(dynamic parent);
-  external IAction then(IAction action);
+  dynamic getTriggerParameter();
+  dynamic serialize(dynamic parent);
+  IAction then(IAction action);
 }

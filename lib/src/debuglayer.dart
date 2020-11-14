@@ -9,8 +9,9 @@ class DebugLayer {
   external dynamic get BJSINSPECTOR;
   external static set InspectorURL(String InspectorURL);
   external set BJSINSPECTOR(dynamic BJSINSPECTOR);
-  external void select(dynamic entity, [String lineContainerTitle]);
+  external void select(dynamic entity, [dynamic lineContainerTitles]);
   external bool isVisible();
   external void hide();
+  external void setAsActiveScene();
   external Promise<DebugLayer> show([IInspectorOptions config]);
 }

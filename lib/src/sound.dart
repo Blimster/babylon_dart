@@ -4,6 +4,7 @@ part of babylon;
 @JS()
 class Sound {
   external Sound(String name, dynamic urlOrArrayBuffer, Scene scene, [void Function() readyToPlayCallback, ISoundOptions options]);
+  external num get currentTime;
   external num get directionalConeInnerAngle;
   external num get directionalConeOuterAngle;
   external String get name;
@@ -19,6 +20,7 @@ class Sound {
   external num get maxDistance;
   external String get distanceModel;
   external dynamic Function() get onended;
+  external dynamic get metadata;
   external Observable<Sound> get onEndedObservable;
   external set directionalConeInnerAngle(num value);
   external set directionalConeOuterAngle(num value);
@@ -35,6 +37,7 @@ class Sound {
   external set maxDistance(num maxDistance);
   external set distanceModel(String distanceModel);
   external set onended(dynamic Function() onended);
+  external set metadata(dynamic metadata);
   external set onEndedObservable(Observable<Sound> onEndedObservable);
   external void dispose();
   external bool isReady();
@@ -58,6 +61,8 @@ class Sound {
   external void detachFromMesh();
   external Sound clone();
   external AudioBuffer getAudioBuffer();
+  external AudioBufferSourceNode getSoundSource();
+  external GainNode getSoundGain();
   external dynamic serialize();
   external static Sound Parse(dynamic parsedSound, Scene scene, String rootUrl, [Sound sourceSound]);
 }

@@ -6,6 +6,7 @@ class Camera extends Node {
   external Camera();
   external Camera.args(String name, Vector3 position, Scene scene, [bool setActiveOnSceneIfNoneActive]);
   external Vector3 get position;
+  external Vector3 get upVector;
   external Vector3 get globalPosition;
   external List<Camera> get rigCameras;
   external PostProcess get rigPostProcess;
@@ -28,7 +29,6 @@ class Camera extends Node {
   external static num get RIG_MODE_WEBVR;
   external static num get RIG_MODE_CUSTOM;
   external static bool get ForceAttachControlToAlwaysPreventDefault;
-  external Vector3 get upVector;
   external num get orthoLeft;
   external num get orthoRight;
   external num get orthoBottom;
@@ -54,8 +54,8 @@ class Camera extends Node {
   external bool get isRigCamera;
   external Camera get rigParent;
   external set position(Vector3 newPosition);
+  external set upVector(Vector3 vec);
   external static set ForceAttachControlToAlwaysPreventDefault(bool ForceAttachControlToAlwaysPreventDefault);
-  external set upVector(Vector3 upVector);
   external set orthoLeft(num orthoLeft);
   external set orthoRight(num orthoRight);
   external set orthoBottom(num orthoBottom);
@@ -86,8 +86,8 @@ class Camera extends Node {
   external String toString([bool fullDetails]);
   external bool isActiveMesh(Mesh mesh);
   external bool isReady([bool completeCheck]);
-  external void attachControl(HtmlElement element, [bool noPreventDefault]);
-  external void detachControl(HtmlElement element);
+  external void attachControl([bool noPreventDefault]);
+  external void detachControl();
   external void update();
   external num attachPostProcess(PostProcess postProcess, [num insertAt]);
   external void detachPostProcess(PostProcess postProcess);
@@ -100,6 +100,7 @@ class Camera extends Node {
   external bool isInFrustum(ICullable target, [bool checkRigCameras]);
   external bool isCompletelyInFrustum(ICullable target);
   external Ray getForwardRay([num length, Matrix transform, Vector3 origin]);
+  external Ray getForwardRayToRef(Ray refRay, [num length, Matrix transform, Vector3 origin]);
   external void dispose([bool doNotRecurse, bool disposeMaterialAndTextures]);
   external Vector3 getLeftTarget();
   external Vector3 getRightTarget();

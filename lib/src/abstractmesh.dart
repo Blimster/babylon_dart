@@ -18,6 +18,7 @@ class AbstractMesh extends TransformNode implements IDisposable, ICullable, IGet
   external Vector3 get facetDepthSortFrom;
   external bool get isFacetDataEnabled;
   external num get visibility;
+  external num get renderingGroupId;
   external Material get material;
   external bool get receiveShadows;
   external bool get hasVertexAlpha;
@@ -27,7 +28,9 @@ class AbstractMesh extends TransformNode implements IDisposable, ICullable, IGet
   external bool get applyFog;
   external num get layerMask;
   external num get collisionMask;
+  external bool get collisionResponse;
   external num get collisionGroup;
+  external List<AbstractMesh> get surroundingMeshes;
   external List<Light> get lightSources;
   external Skeleton get skeleton;
   external Vector3 get scaling;
@@ -35,6 +38,7 @@ class AbstractMesh extends TransformNode implements IDisposable, ICullable, IGet
   external bool get useBones;
   external bool get isAnInstance;
   external bool get hasInstances;
+  external bool get hasThinInstances;
   external bool get checkCollisions;
   external static num get OCCLUSION_TYPE_NONE;
   external static num get OCCLUSION_TYPE_OPTIMISTIC;
@@ -56,7 +60,6 @@ class AbstractMesh extends TransformNode implements IDisposable, ICullable, IGet
   external bool get showSubMeshesBoundingBox;
   external bool get isBlocker;
   external bool get enablePointerMoveEvents;
-  external num get renderingGroupId;
   external Color3 get outlineColor;
   external num get outlineWidth;
   external Color3 get overlayColor;
@@ -80,6 +83,7 @@ class AbstractMesh extends TransformNode implements IDisposable, ICullable, IGet
   external set onCollide(void Function() callback);
   external set onCollisionPositionChange(void Function() callback);
   external set visibility(num value);
+  external set renderingGroupId(num value);
   external set material(Material value);
   external set receiveShadows(bool value);
   external set hasVertexAlpha(bool value);
@@ -89,7 +93,9 @@ class AbstractMesh extends TransformNode implements IDisposable, ICullable, IGet
   external set applyFog(bool value);
   external set layerMask(num value);
   external set collisionMask(num mask);
+  external set collisionResponse(bool response);
   external set collisionGroup(num mask);
+  external set surroundingMeshes(List<AbstractMesh> meshes);
   external set skeleton(Skeleton value);
   external set scaling(Vector3 newScaling);
   external set checkCollisions(bool collisionEnabled);
@@ -109,7 +115,6 @@ class AbstractMesh extends TransformNode implements IDisposable, ICullable, IGet
   external set showSubMeshesBoundingBox(bool showSubMeshesBoundingBox);
   external set isBlocker(bool isBlocker);
   external set enablePointerMoveEvents(bool enablePointerMoveEvents);
-  external set renderingGroupId(num renderingGroupId);
   external set outlineColor(Color3 outlineColor);
   external set outlineWidth(num outlineWidth);
   external set overlayColor(Color3 overlayColor);
@@ -172,7 +177,8 @@ class AbstractMesh extends TransformNode implements IDisposable, ICullable, IGet
   external AbstractMesh createNormals(bool updatable);
   external AbstractMesh alignWithNormal(Vector3 normal, [Vector3 upDirection]);
   external AbstractMesh disableEdgesRendering();
-  external AbstractMesh enableEdgesRendering([num epsilon, bool checkVerticesInsteadOfIndices]);
+  external AbstractMesh enableEdgesRendering([num epsilon, bool checkVerticesInsteadOfIndices, IEdgesRendererOptions options]);
+  external List<IParticleSystem> getConnectedParticleSystems();
   num occlusionRetryCount;
   num occlusionType;
   num occlusionQueryAlgorithmType;

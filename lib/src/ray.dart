@@ -7,7 +7,6 @@ class Ray {
   external Vector3 get origin;
   external Vector3 get direction;
   external num get length;
-  external static dynamic get TmpVector3;
   external static dynamic get smallnum;
   external static dynamic get rayl;
   external set origin(Vector3 origin);

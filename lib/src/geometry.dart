@@ -5,12 +5,14 @@ part of babylon;
 class Geometry implements IGetSetVerticesData {
   external Geometry(String id, Scene scene, [VertexData vertexData, bool updatable, Mesh mesh]);
   external Vector2 get boundingBias;
+  external List<Mesh> get meshes;
   external bool get doNotSerialize;
   external String get id;
   external num get uniqueId;
   external num get delayLoadState;
   external String get delayLoadingFile;
   external void Function(Geometry geometry, String kind) get onGeometryUpdated;
+  external bool get useBoundingInfoFromGeometry;
   external dynamic get notifyUpdate;
   external dynamic get toNumberArray;
   external set boundingBias(Vector2 value);
@@ -19,6 +21,7 @@ class Geometry implements IGetSetVerticesData {
   external set delayLoadState(num delayLoadState);
   external set delayLoadingFile(String delayLoadingFile);
   external set onGeometryUpdated(void Function(Geometry geometry, String kind) onGeometryUpdated);
+  external set useBoundingInfoFromGeometry(bool useBoundingInfoFromGeometry);
   external set notifyUpdate(dynamic notifyUpdate);
   external set toNumberArray(dynamic toNumberArray);
   external static Geometry CreateGeometryForMesh(Mesh mesh);

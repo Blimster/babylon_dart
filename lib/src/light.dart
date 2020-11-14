@@ -60,7 +60,7 @@ abstract class Light extends Node {
   external void dispose([bool doNotRecurse, bool disposeMaterialAndTextures]);
   external num getTypeID();
   external num getScaledIntensity();
-  external Light clone(String name);
+  external Light clone(String name, [Node newParent]);
   external dynamic serialize();
   external static Light Function() GetConstructorFromName(num type, String name, Scene scene);
   external static Light Parse(dynamic parsedLight, Scene scene);

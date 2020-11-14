@@ -13,6 +13,7 @@ class MaterialDefines {
   external void markAsTexturesDirty();
   external void markAsFresnelDirty();
   external void markAsMiscDirty();
+  external void markAsPrePassDirty();
   external void rebuild();
   external bool isEqual(MaterialDefines other);
   external void cloneTo(MaterialDefines other);

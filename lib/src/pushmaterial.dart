@@ -5,8 +5,6 @@ part of babylon;
 class PushMaterial extends Material {
   external PushMaterial();
   external PushMaterial.args(String name, Scene scene);
-  external bool get allowShaderHotSwapping;
-  external set allowShaderHotSwapping(bool allowShaderHotSwapping);
   external Effect getEffect();
   external bool isReady([AbstractMesh mesh, bool useInstances]);
   external void bindOnlyWorldMatrix(Matrix world);

@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.6.0
+
+- BREAKING CHANGE: BabylonJS 4.2
+
 ## v0.5.1
 
 - Added binding for DirectionalLight

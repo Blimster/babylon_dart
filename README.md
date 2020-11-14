@@ -20,7 +20,7 @@ In your `index.html` add links to the BabylonJS implementation:
 
 ```html
 <script src="/packages/babylon/assets/babylon.js"></script>
-<script src="/packages/babylon/assets/babylon.loaders.min.js"></script>
+<script src="/packages/babylon/assets/babylonjs.loaders.min.js"></script>
 <script src="/packages/babylon/assets/cannon.js"></script>
 ```
 

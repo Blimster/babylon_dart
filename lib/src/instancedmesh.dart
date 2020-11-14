@@ -16,6 +16,7 @@ class InstancedMesh extends AbstractMesh {
   external String getClassName();
   external num getTotalVertices();
   external num getTotalIndices();
+  external InstancedMesh createInstance(String name);
   external bool isReady([bool completeCheck]);
   external Float32List getVerticesData(String kind, [bool copyWhenShared, bool forceCopy]);
   external AbstractMesh setVerticesData(String kind, Float32List data, bool updatable);

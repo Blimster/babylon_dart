@@ -18,5 +18,4 @@ class LinesMesh extends Mesh {
   external bool isReady([bool completeCheck]);
   external String getClassName();
   external void dispose([bool doNotRecurse, bool disposeMaterialAndTextures]);
-  external AbstractMesh enableEdgesRendering([num epsilon, bool checkVerticesInsteadOfIndices]);
 }

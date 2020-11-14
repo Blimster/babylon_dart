@@ -13,5 +13,6 @@ class PostProcessRenderPipeline {
   external set inspectableCustomProperties(List<IInspectable> inspectableCustomProperties);
   external String getClassName();
   external void addEffect(PostProcessRenderEffect renderEffect);
+  external bool setPrePassRenderer(PrePassRenderer prePassRenderer);
   external void dispose();
 }
