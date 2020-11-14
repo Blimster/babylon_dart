@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.6.0+1
+
+- Little changes in README.md and added some comments to the examplle.
+
 ## v0.6.0
 
 - BREAKING CHANGE: BabylonJS 4.2

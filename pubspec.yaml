@@ -1,6 +1,6 @@
 name: babylon_dart
 description: Bindings for the BabylonJS 4.1 web rendering engine.
-version: 0.6.0
+version: 0.6.0+1
 homepage: https://www.github.com/blimster/babylon_dart
 
 environment:
