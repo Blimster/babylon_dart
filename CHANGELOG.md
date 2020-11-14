@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.7.0
+
+- BREAKING CHANGE: IInspectorOptions is now handled as object literal.
+
 ## v0.6.1
 
 - Added scripts to run BabylonJS inspector.

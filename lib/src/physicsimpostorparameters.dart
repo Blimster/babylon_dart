@@ -1,5 +1,6 @@
 part of babylon;
 
+/// interface PhysicsImpostorParameters
 @JS()
 @anonymous
 class PhysicsImpostorParameters {
