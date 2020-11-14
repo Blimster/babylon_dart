@@ -13,6 +13,7 @@ void main() {
   // create the scene andd configure it
   final scene = Scene(engine);
   scene.clearColor = Color4(0.2, 0.2, 0.2, 1);
+  scene.debugLayer.show();
 
   // create a camera that can be controlled by mouse or keyboard
   final camera = ArcRotateCamera('camera', 1, 1, 20, Vector3(0, 0, 0), scene);

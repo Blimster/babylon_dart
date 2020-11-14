@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.6.1
+
+- Added scripts to run BabylonJS inspector.
+
 ## v0.6.0+1
 
 - Little changes in README.md and added some comments to the examplle.
