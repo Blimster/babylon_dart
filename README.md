@@ -19,9 +19,12 @@ Currently, no docs are generated in the bindings. For help look at the official 
 In your `index.html` add links to the BabylonJS implementation:
 
 ```html
-<script src="/packages/babylon/assets/babylon.js"></script>
-<script src="/packages/babylon/assets/babylonjs.loaders.min.js"></script>
-<script src="/packages/babylon/assets/cannon.js"></script>
+<script src="/packages/babylon_dart/assets/babylon.js"></script>
+<script src="/packages/babylon_dart/assets/babylonjs.loaders.min.js"></script>
+<script src="/packages/babylon_dart/assets/babylonjs.gui.min.js"></script>
+<script src="/packages/babylon_dart/assets/babylonjs.serializers.min.js"></script>
+<script src="/packages/babylon_dart/assets/babylonjs.inspector.bundle.js"></script>
+<script src="/packages/babylon_dart/assets/cannon.js"></script>
 ```
 
 Here is a little example rendering 2 meshes with a little physics in it:
