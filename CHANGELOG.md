@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.7.1
+
+- Added basics for Solid Particle System (simple example with some animation works).
+
 ## v0.7.0
 
 - BREAKING CHANGE: IInspectorOptions is now handled as object literal.
