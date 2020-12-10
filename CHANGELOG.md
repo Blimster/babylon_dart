@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.7.2
+
+- Added class CSG.
+
 ## v0.7.1
 
 - Added basics for Solid Particle System (simple example with some animation works).
