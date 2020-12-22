@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.7.3
+
+- Added classes GLTF2Export, IExportOptions and GLTFData.
+
 ## v0.7.2
 
 - Added class CSG.

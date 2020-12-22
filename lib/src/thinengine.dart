@@ -9,8 +9,6 @@ class ThinEngineGetGlInfoResult {
   external String get version;
 }
 
-
-
 /// class ThinEngine
 @JS()
 class ThinEngine {

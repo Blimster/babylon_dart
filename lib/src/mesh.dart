@@ -32,7 +32,6 @@ class MeshCreateTiledGroundPrecision {
   external num get h;
 }
 
-
 @JS()
 @anonymous
 class MeshCreatePolyhedronOptions {

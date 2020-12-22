@@ -1,5 +1,13 @@
 part of babylon;
 
+@JS()
+@anonymous
+class GeometryExtend {
+  external factory GeometryExtend({Vector3 minimum, Vector3 maximum});
+  external Vector3 get minimum;
+  external Vector3 get maximum;
+}
+
 /// class Geometry
 @JS()
 class Geometry implements IGetSetVerticesData {

@@ -380,7 +380,6 @@ class MeshBuilderCreateTubeOptions {
   external bool get invertUV;
 }
 
-
 @JS()
 @anonymous
 class MeshBuilderCreatePolyhedronOptions {
