@@ -1,6 +1,6 @@
 name: babylon_dart
 description: Dart bindings for the BabylonJS 4.2 rendering engine for the web.
-version: 0.7.3
+version: 0.7.4
 homepage: https://www.github.com/blimster/babylon_dart
 
 environment:

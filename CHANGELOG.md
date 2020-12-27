@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.7.4
+
+- Added biindings for physically based rendering.
+
 ## v0.7.3
 
 - Added classes GLTF2Export, IExportOptions and GLTFData.
