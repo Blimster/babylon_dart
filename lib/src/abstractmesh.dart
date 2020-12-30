@@ -179,16 +179,16 @@ class AbstractMesh extends TransformNode implements IDisposable, ICullable, IGet
   external AbstractMesh disableEdgesRendering();
   external AbstractMesh enableEdgesRendering([num epsilon, bool checkVerticesInsteadOfIndices, IEdgesRendererOptions options]);
   external List<IParticleSystem> getConnectedParticleSystems();
-  num occlusionRetryCount;
-  num occlusionType;
-  num occlusionQueryAlgorithmType;
-  bool isOccluded;
-  bool isOcclusionQueryInProgress;
-  PhysicsImpostor physicsImpostor;
+  external num occlusionRetryCount;
+  external num occlusionType;
+  external num occlusionQueryAlgorithmType;
+  external bool isOccluded;
+  external bool isOcclusionQueryInProgress;
+  external PhysicsImpostor physicsImpostor;
   external PhysicsImpostor getPhysicsImpostor();
   external AbstractMesh applyImpulse(Vector3 force, Vector3 contactPoint);
   external AbstractMesh setPhysicsLinkWith(Mesh otherMesh, Vector3 pivot1, Vector3 pivot2, [dynamic options]);
-  bool showBoundingBox;
-  bool renderOutline;
-  bool renderOverlay;
+  external bool showBoundingBox;
+  external bool renderOutline;
+  external bool renderOverlay;
 }

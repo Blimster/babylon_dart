@@ -3,10 +3,10 @@ part of babylon;
 /// interface IActionEvent
 @JS()
 abstract class IActionEvent {
-  dynamic source;
-  num pointerX;
-  num pointerY;
-  AbstractMesh meshUnderPointer;
-  dynamic sourceEvent;
-  dynamic additionalData;
+  external dynamic source;
+  external num pointerX;
+  external num pointerY;
+  external AbstractMesh meshUnderPointer;
+  external dynamic sourceEvent;
+  external dynamic additionalData;
 }

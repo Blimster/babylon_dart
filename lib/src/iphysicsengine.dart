@@ -3,7 +3,7 @@ part of babylon;
 /// interface IPhysicsEngine
 @JS()
 abstract class IPhysicsEngine {
-  Vector3 gravity;
+  external Vector3 gravity;
   void setGravity(Vector3 gravity);
   void setTimeStep(num newTimeStep);
   num getTimeStep();

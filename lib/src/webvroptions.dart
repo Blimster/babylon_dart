@@ -3,14 +3,14 @@ part of babylon;
 /// interface WebVROptions
 @JS()
 abstract class WebVROptions {
-  bool trackPosition;
-  num positionScale;
-  String displayName;
-  bool controllerMeshes;
-  bool defaultLightingOnControllers;
-  bool useCustomVRButton;
-  ButtonElement customVRButton;
-  num rayLength;
-  num defaultHeight;
-  bool useMultiview;
+  external bool trackPosition;
+  external num positionScale;
+  external String displayName;
+  external bool controllerMeshes;
+  external bool defaultLightingOnControllers;
+  external bool useCustomVRButton;
+  external ButtonElement customVRButton;
+  external num rayLength;
+  external num defaultHeight;
+  external bool useMultiview;
 }

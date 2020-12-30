@@ -3,7 +3,7 @@ part of babylon;
 /// interface PhysicsImpostorJoint
 @JS()
 abstract class PhysicsImpostorJoint {
-  PhysicsImpostor mainImpostor;
-  PhysicsImpostor connectedImpostor;
-  PhysicsJoint joint;
+  external PhysicsImpostor mainImpostor;
+  external PhysicsImpostor connectedImpostor;
+  external PhysicsJoint joint;
 }

@@ -3,8 +3,8 @@ part of babylon;
 /// interface IMaterialBRDFDefines
 @JS()
 abstract class IMaterialBRDFDefines {
-  bool BRDF_V_HEIGHT_CORRELATED;
-  bool MS_BRDF_ENERGY_CONSERVATION;
-  bool SPHERICAL_HARMONICS;
-  bool SPECULAR_GLOSSINESS_ENERGY_CONSERVATION;
+  external bool BRDF_V_HEIGHT_CORRELATED;
+  external bool MS_BRDF_ENERGY_CONSERVATION;
+  external bool SPHERICAL_HARMONICS;
+  external bool SPECULAR_GLOSSINESS_ENERGY_CONSERVATION;
 }

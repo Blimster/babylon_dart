@@ -3,6 +3,6 @@ part of babylon;
 /// interface IIOptionShadowDepthMaterial
 @JS()
 abstract class IIOptionShadowDepthMaterial {
-  List<String> remappedVariables;
-  bool standalone;
+  external List<String> remappedVariables;
+  external bool standalone;
 }

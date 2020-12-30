@@ -3,6 +3,6 @@ part of babylon;
 /// interface ISize
 @JS()
 abstract class ISize {
-  num width;
-  num height;
+  external num width;
+  external num height;
 }

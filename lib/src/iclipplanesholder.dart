@@ -3,10 +3,10 @@ part of babylon;
 /// interface IClipPlanesHolder
 @JS()
 abstract class IClipPlanesHolder {
-  Plane clipPlane;
-  Plane clipPlane2;
-  Plane clipPlane3;
-  Plane clipPlane4;
-  Plane clipPlane5;
-  Plane clipPlane6;
+  external Plane clipPlane;
+  external Plane clipPlane2;
+  external Plane clipPlane3;
+  external Plane clipPlane4;
+  external Plane clipPlane5;
+  external Plane clipPlane6;
 }

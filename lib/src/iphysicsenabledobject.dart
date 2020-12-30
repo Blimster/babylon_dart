@@ -3,11 +3,11 @@ part of babylon;
 /// interface IPhysicsEnabledObject
 @JS()
 abstract class IPhysicsEnabledObject {
-  Vector3 position;
-  Quaternion rotationQuaternion;
-  Vector3 scaling;
-  Vector3 rotation;
-  dynamic parent;
+  external Vector3 position;
+  external Quaternion rotationQuaternion;
+  external Vector3 scaling;
+  external Vector3 rotation;
+  external dynamic parent;
   BoundingInfo getBoundingInfo();
   Matrix computeWorldMatrix(bool force);
   Matrix getWorldMatrix();

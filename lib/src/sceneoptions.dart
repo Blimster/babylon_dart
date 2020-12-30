@@ -3,8 +3,8 @@ part of babylon;
 /// interface SceneOptions
 @JS()
 abstract class SceneOptions {
-  bool useGeometryUniqueIdsMap;
-  bool useMaterialMeshMap;
-  bool useClonedMeshMap;
-  bool virtual;
+  external bool useGeometryUniqueIdsMap;
+  external bool useMaterialMeshMap;
+  external bool useClonedMeshMap;
+  external bool virtual;
 }

@@ -3,10 +3,10 @@ part of babylon;
 /// interface IInspectable
 @JS()
 abstract class IInspectable {
-  String label;
-  String propertyName;
-  InspectableType type;
-  num min;
-  num max;
-  num step;
+  external String label;
+  external String propertyName;
+  external InspectableType type;
+  external num min;
+  external num max;
+  external num step;
 }

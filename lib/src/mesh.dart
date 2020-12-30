@@ -210,10 +210,10 @@ class Mesh extends AbstractMesh implements IGetSetVerticesData {
   external static Mesh MergeMeshes(List<Mesh> meshes, [bool disposeSource, bool allow32BitsIndices, Mesh meshSubclass, bool subdivideWithSubMeshes, bool multiMultiMaterials]);
   external void addInstance(InstancedMesh instance);
   external void removeInstance(InstancedMesh instance);
-  bool edgesShareWithInstances;
+  external bool edgesShareWithInstances;
   external void registerInstancedBuffer(String kind, num stride);
-  bool thinInstanceEnablePicking;
-  num thinInstanceCount;
+  external bool thinInstanceEnablePicking;
+  external num thinInstanceCount;
   external num thinInstanceAdd(dynamic matrix, bool refresh);
   external num thinInstanceAddSelf(bool refresh);
   external void thinInstanceRegisterAttribute(String kind, num stride);

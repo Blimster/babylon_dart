@@ -3,6 +3,6 @@ part of babylon;
 /// interface IExplorerExtensibilityOption
 @JS()
 abstract class IExplorerExtensibilityOption {
-  String label;
-  void Function(dynamic entity) action;
+  external String label;
+  external void Function(dynamic entity) action;
 }

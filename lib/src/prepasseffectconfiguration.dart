@@ -3,10 +3,10 @@ part of babylon;
 /// interface PrePassEffectConfiguration
 @JS()
 abstract class PrePassEffectConfiguration {
-  String name;
-  PostProcess postProcess;
-  List<num> texturesRequired;
-  bool enabled;
+  external String name;
+  external PostProcess postProcess;
+  external List<num> texturesRequired;
+  external bool enabled;
   void dispose();
   PostProcess createPostProcess();
 }

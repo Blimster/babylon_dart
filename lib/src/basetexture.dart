@@ -81,5 +81,5 @@ class BaseTexture extends ThinTexture implements IAnimatable {
   external void dispose();
   external dynamic serialize();
   external static void WhenAllReady(List<BaseTexture> textures, void Function() callback);
-  SphericalPolynomial sphericalPolynomial;
+  external SphericalPolynomial sphericalPolynomial;
 }

@@ -3,7 +3,7 @@ part of babylon;
 /// interface IShadowGenerator
 @JS()
 abstract class IShadowGenerator {
-  String id;
+  external String id;
   RenderTargetTexture getShadowMap();
   bool isReady(SubMesh subMesh, bool useInstances, bool isTransparent);
   void prepareDefines(MaterialDefines defines, num lightIndex);

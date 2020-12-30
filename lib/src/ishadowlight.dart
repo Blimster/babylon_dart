@@ -3,15 +3,15 @@ part of babylon;
 /// interface IShadowLight
 @JS()
 abstract class IShadowLight extends Light {
-  String id;
-  Vector3 position;
-  Vector3 direction;
-  Vector3 transformedPosition;
-  Vector3 transformedDirection;
-  String name;
-  num shadowMinZ;
-  num shadowMaxZ;
-  void Function(Matrix viewMatrix, List<AbstractMesh> renderList, Matrix result) customProjectionMatrixBuilder;
+  external String id;
+  external Vector3 position;
+  external Vector3 direction;
+  external Vector3 transformedPosition;
+  external Vector3 transformedDirection;
+  external String name;
+  external num shadowMinZ;
+  external num shadowMaxZ;
+  external void Function(Matrix viewMatrix, List<AbstractMesh> renderList, Matrix result) customProjectionMatrixBuilder;
   bool computeTransformedInformation();
   Scene getScene();
   IShadowLight setShadowProjectionMatrix(Matrix matrix, Matrix viewMatrix, List<AbstractMesh> renderList);

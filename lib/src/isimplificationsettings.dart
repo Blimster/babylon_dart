@@ -3,7 +3,7 @@ part of babylon;
 /// interface ISimplificationSettings
 @JS()
 abstract class ISimplificationSettings {
-  num quality;
-  num distance;
-  bool optimizeMesh;
+  external num quality;
+  external num distance;
+  external bool optimizeMesh;
 }

@@ -3,7 +3,7 @@ part of babylon;
 /// interface IPlaneLike
 @JS()
 abstract class IPlaneLike {
-  IVector3Like normal;
-  num d;
+  external IVector3Like normal;
+  external num d;
   void normalize();
 }

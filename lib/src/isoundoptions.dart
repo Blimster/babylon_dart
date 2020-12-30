@@ -3,18 +3,18 @@ part of babylon;
 /// interface ISoundOptions
 @JS()
 abstract class ISoundOptions {
-  bool autoplay;
-  bool loop;
-  num volume;
-  bool spatialSound;
-  num maxDistance;
-  bool useCustomAttenuation;
-  num rolloffFactor;
-  num refDistance;
-  String distanceModel;
-  num playbackRate;
-  bool streaming;
-  num length;
-  num offset;
-  bool skipCodecCheck;
+  external bool autoplay;
+  external bool loop;
+  external num volume;
+  external bool spatialSound;
+  external num maxDistance;
+  external bool useCustomAttenuation;
+  external num rolloffFactor;
+  external num refDistance;
+  external String distanceModel;
+  external num playbackRate;
+  external bool streaming;
+  external num length;
+  external num offset;
+  external bool skipCodecCheck;
 }
