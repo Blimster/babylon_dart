@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.0-nullsafety.0
+
+- First null safe version.
+
 ## v0.7.4
 
 - Added biindings for physically based rendering.
