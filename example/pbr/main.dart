@@ -9,7 +9,7 @@ void main() {
   final canvas = querySelector('#render-canvas') as CanvasElement;
 
   // create the engine
-  final engine = Engine(canvas, true);
+  final engine = Engine.args(canvas, true);
 
   final scene = new Scene(engine);
   final camera = new ArcRotateCamera("camera1", 0, pi / 2, 5, Vector3.Zero(), scene);

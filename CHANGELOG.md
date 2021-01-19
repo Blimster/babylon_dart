@@ -1,8 +1,13 @@
 # Changelog
 
+## v0.8.0
+
+- BREAKING CHANGE: The constructor with parameters of class Engine is now a named constructor 'args'
+- Added bindings for NullEngine.
+
 ## v0.7.4
 
-- Added biindings for physically based rendering.
+- Added bindings for physically based rendering.
 
 ## v0.7.3
 

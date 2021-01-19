@@ -3,6 +3,7 @@ library babylon;
 
 import 'dart:html';
 import 'dart:web_audio';
+import 'dart:web_gl';
 import 'dart:typed_data';
 
 import 'package:js/js.dart';
@@ -11,6 +12,7 @@ part 'src/abstractactionmanager.dart';
 part 'src/abstractmesh.dart';
 part 'src/abstractscene.dart';
 part 'src/actionmanager.dart';
+part 'src/alphastate.dart';
 part 'src/analyser.dart';
 part 'src/animatable.dart';
 part 'src/animation.dart';
@@ -38,8 +40,10 @@ part 'src/cubetexture.dart';
 part 'src/databuffer.dart';
 part 'src/debuglayer.dart';
 part 'src/debuglayertab.dart';
+part 'src/depthcullingstate.dart';
 part 'src/depthrenderer.dart';
 part 'src/depthsortedparticle.dart';
+part 'src/depthtexturecreationoptions.dart';
 part 'src/detailmapconfiguration.dart';
 part 'src/directionallight.dart';
 part 'src/easingfunction.dart';
@@ -47,6 +51,8 @@ part 'src/effect.dart';
 part 'src/effectfallbacks.dart';
 part 'src/effectlayer.dart';
 part 'src/engine.dart';
+part 'src/enginecapabilities.dart';
+part 'src/engineview.dart';
 part 'src/environmenthelper.dart';
 part 'src/eventstate.dart';
 part 'src/exponentialease.dart';
@@ -62,16 +68,20 @@ part 'src/gltf2export.dart';
 part 'src/groundmesh.dart';
 part 'src/hemisphericlight.dart';
 part 'src/highlightlayer.dart';
+part 'src/hostinformation.dart';
 part 'src/iaction.dart';
 part 'src/iactionevent.dart';
 part 'src/ianimatable.dart';
+part 'src/iaudioengine.dart';
 part 'src/ibehavioraware.dart';
 part 'src/iclipplanesholder.dart';
 part 'src/icollisioncoordinator.dart';
 part 'src/icolor4like.dart';
 part 'src/icreatecapsuleoptions.dart';
 part 'src/icullable.dart';
+part 'src/icustomanimationframerequester.dart';
 part 'src/icustomshadernameresolveoptions.dart';
+part 'src/idisplaychangedeventargs.dart';
 part 'src/idisposable.dart';
 part 'src/ieasingfunction.dart';
 part 'src/iedgesrendereroptions.dart';
@@ -85,6 +95,7 @@ part 'src/iimageprocessingconfigurationdefines.dart';
 part 'src/iinspectable.dart';
 part 'src/iinspectoroptions.dart';
 part 'src/iioptionshadowdepthmaterial.dart';
+part 'src/iloadingscreen.dart';
 part 'src/imageprocessingconfiguration.dart';
 part 'src/imageprocessingpostprocess.dart';
 part 'src/imaterialanisotropicdefines.dart';
@@ -98,6 +109,7 @@ part 'src/imotorenabledjoint.dart';
 part 'src/imultirendertargetoptions.dart';
 part 'src/inspectabletype.dart';
 part 'src/instancedmesh.dart';
+part 'src/instancingattributeinfo.dart';
 part 'src/internaltexture.dart';
 part 'src/internaltexturesource.dart';
 part 'src/intersectioninfo.dart';
@@ -108,9 +120,11 @@ part 'src/irenderingmanagerautoclearsetup.dart';
 part 'src/iphysicsenabledobject.dart';
 part 'src/iphysicsengine.dart';
 part 'src/iphysicsengineplugin.dart';
+part 'src/ipipelinecontext.dart';
 part 'src/iplanelike.dart';
 part 'src/ishadowgenerator.dart';
 part 'src/iscenecomponent.dart';
+part 'src/iscenelike.dart';
 part 'src/ishadowlight.dart';
 part 'src/isimplificationsettings.dart';
 part 'src/isimplificationtask.dart';
@@ -120,6 +134,9 @@ part 'src/isoundtrackoptions.dart';
 part 'src/isoundoptions.dart';
 part 'src/ispritemanager.dart';
 part 'src/ivector3like.dart';
+part 'src/iviewportlike.dart';
+part 'src/iviewportownerlike.dart';
+part 'src/ivrpresentationattributes.dart';
 part 'src/keyboardinfo.dart';
 part 'src/keyboardinfopre.dart';
 part 'src/lensflare.dart';
@@ -139,6 +156,8 @@ part 'src/morphtargetmanager.dart';
 part 'src/multimaterial.dart';
 part 'src/multirendertarget.dart';
 part 'src/node.dart';
+part 'src/nullengine.dart';
+part 'src/nullengineoptions.dart';
 part 'src/observable.dart';
 part 'src/observer.dart';
 part 'src/octree.dart';
@@ -157,6 +176,7 @@ part 'src/pbrsheenconfiguration.dart';
 part 'src/pbrspecularglossinessmaterial.dart';
 part 'src/pbrsubsurfaceconfiguration.dart';
 part 'src/perfcounter.dart';
+part 'src/performancemonitor.dart';
 part 'src/physicsimpostor.dart';
 part 'src/physicsimpostorjoint.dart';
 part 'src/physicsimpostorparameters.dart';
@@ -207,6 +227,7 @@ part 'src/sphericalharmonics.dart';
 part 'src/sprite.dart';
 part 'src/standardmaterial.dart';
 part 'src/standardmaterialdefines.dart';
+part 'src/stencilstate.dart';
 part 'src/submesh.dart';
 part 'src/subsurfaceconfiguration.dart';
 part 'src/subsurfacescatteringpostprocess.dart';
@@ -229,3 +250,60 @@ part 'src/vrexperiencehelperoptions.dart';
 part 'src/webvroptions.dart';
 part 'src/webxrdefaultexperience.dart';
 part 'src/webxrdefaultexperienceoptions.dart';
+
+@JS()
+@anonymous
+class RenderTargetTextureSize {
+  external factory RenderTargetTextureSize({int width, int height, int layers});
+  external int get size;
+  external int get height;
+  external int get layers;
+}
+
+@JS()
+@anonymous
+class EngineOptions {
+  external factory EngineOptions(
+      {num limitDeviceRatio,
+      bool autoEnableWebVR,
+      bool disableWebGL2Support,
+      bool audioEngine,
+      bool deterministicLockstep,
+      num lockstepMaxSteps,
+      num timeStep,
+      bool doNotHandleContextLost,
+      bool doNotHandleTouchAction,
+      bool useHighPrecisionFloats,
+      bool xrCompatible,
+      bool useHighPrecisionMatrix,
+      bool failIfMajorPerformanceCaveat,
+      bool alpha,
+      bool antialias,
+      bool depth,
+      bool desynchronized,
+      String powerPreference,
+      bool premultipliedAlpha,
+      bool preserveDrawingBuffer,
+      bool stencil});
+  external num get limitDeviceRatio;
+  external bool get autoEnableWebVR;
+  external bool get disableWebGL2Support;
+  external bool get audioEngine;
+  external bool get deterministicLockstep;
+  external num get lockstepMaxSteps;
+  external num get timeStep;
+  external bool get doNotHandleContextLost;
+  external bool get doNotHandleTouchAction;
+  external bool get useHighPrecisionFloats;
+  external bool get xrCompatible;
+  external bool get useHighPrecisionMatrix;
+  external bool get failIfMajorPerformanceCaveat;
+  external bool get alpha;
+  external bool get antialias;
+  external bool get depth;
+  external bool get desynchronized;
+  external String get powerPreference;
+  external bool get premultipliedAlpha;
+  external bool get preserveDrawingBuffer;
+  external bool get stencil;
+}

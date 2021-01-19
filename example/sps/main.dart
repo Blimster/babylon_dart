@@ -9,7 +9,7 @@ void main() {
   final canvas = querySelector('#render-canvas') as CanvasElement;
 
   // create the engine
-  final engine = Engine(canvas, true);
+  final engine = Engine.args(canvas, true);
 
   // create the scene andd configure it
   final scene = Scene(engine);
