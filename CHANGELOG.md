@@ -1,8 +1,18 @@
 # Changelog
 
+## v1.0.0-nullsafety.1
+
+- BREAKING CHANGE: The constructor with parameters of class Engine is now a named constructor 'args'
+- Added bindings for NullEngine.
+
 ## v1.0.0-nullsafety.0
 
 - First null safe version.
+
+## v0.8.0
+
+- BREAKING CHANGE: The constructor with parameters of class Engine is now a named constructor 'args'
+- Added bindings for NullEngine.
 
 ## v0.7.4
 
