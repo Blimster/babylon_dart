@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.8.1
+
+- Added bindings for `RecastJSPlugin`.
+
 ## v0.8.0
 
 - BREAKING CHANGE: The constructor with parameters of class Engine is now a named constructor 'args'
