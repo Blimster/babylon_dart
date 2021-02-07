@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.0-nullsafety.2
+
+- Added bindings for `RecastJSPlugin`.
+
 ## v1.0.0-nullsafety.1
 
 - BREAKING CHANGE: The constructor with parameters of class Engine is now a named constructor 'args'
