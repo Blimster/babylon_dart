@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.1.0
+
+- BREAKING CHANGE: Requires Dart SDK 2.14.0
+- Added binding for Angle and Gizmos
+
 ## v1.0.0
 
 - Stable null safety release.
