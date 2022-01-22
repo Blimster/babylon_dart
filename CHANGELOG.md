@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.1
+
+- Updated to BabylonJS 4.2.1 (see https://forum.babylonjs.com/t/broken-shadows-after-recent-chrome-update-in-4-2/26479)
+
 ## v1.1.0
 
 - BREAKING CHANGE: Requires Dart SDK 2.14.0
