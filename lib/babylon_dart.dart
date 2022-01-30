@@ -8,6 +8,7 @@ import 'dart:typed_data';
 
 import 'package:js/js.dart';
 
+part 'src/type_aliases.dart';
 part 'src/abstractactionmanager.dart';
 part 'src/abstractmesh.dart';
 part 'src/abstractscene.dart';

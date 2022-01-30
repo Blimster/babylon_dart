@@ -442,7 +442,9 @@ class Scene extends AbstractScene implements IAnimatable, IClipPlanesHolder {
   external Scene createPickingRayToRef(num x, num y, Matrix world, Ray result, Camera camera, [bool cameraViewSpace]);
   external Ray createPickingRayInCameraSpace(num x, num y, [Camera camera]);
   external Scene createPickingRayInCameraSpaceToRef(num x, num y, Ray result, [Camera camera]);
+  external PickingInfo pick(num x, num y, [bool Function(AbstractMesh mesh) predicate, bool fastCheck, Camera camera, TrianglePickingPredicate trianglePredicate]);
   external PickingInfo pickWithBoundingInfo(num x, num y, [bool Function(AbstractMesh mesh) predicate, bool fastCheck, Camera camera]);
+  external PickingInfo pickWithRay(Ray ray, [bool Function(AbstractMesh mesh) predicate, bool fastCheck, TrianglePickingPredicate trianglePredicate]);
   external void setPointerOverMesh(AbstractMesh mesh, [num pointerId]);
   external AbstractMesh getPointerOverMesh();
   external List<Mesh> getMeshesByTags(String tagsQuery, [void Function(AbstractMesh mesh) forEach]);
