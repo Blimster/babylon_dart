@@ -1,0 +1,8 @@
+{
+    "compilerOptions": {
+        "rootDir": "src",
+        "outDir": "bin",
+        "inlineSourceMap": true
+    },
+    "files": ["src/main.ts"]
+}
