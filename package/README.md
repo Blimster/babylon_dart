@@ -4,11 +4,12 @@ Bindings for the [BabylonJS](https://www.babylonjs.com/) 4.2 web rendering engin
 
 ## Status Quo
 
-The bindings are created using a self-written generator ([babylon_dart_gen](https://github.com/blimster/babylon_dart_gen)). This is because the generator [js_facade_gen](https://github.com/dart-lang/js_facade_gen) from the Dart project runs into multiple exceptions when trying to generate bindings from the `babylon.d.ts` file.
+The bindings are created using a self-written generator. This is because the generator [js_facade_gen](https://github.com/dart-lang/js_facade_gen) from the Dart project runs into multiple exceptions when trying to generate bindings from the `babylon.d.ts` file.
 
-`babylon_dart_gen` has a configuration to define what should be included or excluded. At the moment, only a subset is included. The more features are implemented in the generator the more parts of the `babylon.d.ts` file can be converted.
+The generator has a configuration to define what should be included or excluded. At the moment, only a subset is included. The more features are implemented in the generator the more parts of the `babylon.d.ts` file can be converted.
 
-Work is in progress. Tell me what is important for you and I will try to include it in a new release of `babylon`. Or even better, create a pull request in the [babylon_dart_gen](https://github.com/blimster/babylon_dart_gen) project.
+Work is in progress. Currently, I added features required for a private project. But tell me what is important
+for you and I will try to include it in a new release of `babylon`. Or even better, create a pull request.
 
 ## Documentation
 

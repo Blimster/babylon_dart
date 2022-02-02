@@ -1,6 +1,6 @@
-# babylon_dart_gen
+# Generator
 
-Generates Dart source from `babylon.d.ts` for the [babylon_dart](https://github.com/blimster/babylon_dart) repository.
+Generates Dart source from `babylon.d.ts`.
 
 ## Start watcher
 
