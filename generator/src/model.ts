@@ -1,151 +1,169 @@
-export enum TypeKind {
-    type,
+export interface Configuration {
+    targetFolder: string;
+    libraryName: string;
+    javascriptName: string;
+    additionalImports: string[];
+    sourceFiles: string[];
+    nullSafe: boolean;
+    typeReplacements: { [key: string]: (typeReference: TypeReference) => Node };
+    include: (node: Scope) => boolean;
+}
+
+export interface Scope {
+    parent: Scope | null;
+    name: string;
+    node: any;
+}
+
+export enum NodeKind {
+    thisType,
+    typeReference,
     typeLiteral,
-    function
+    arrayType,
+    nullable,
+    parenthesized,
+    nullOrUndefined,
+    functionType,
+    typeParameter,
+    enm,
+    functionAlias,
+    union,
+    interfaze,
+    clazz,
+    func,
+    getter,
+    setter,
+    property,
+    unsupported
 }
 
-export interface Type {
-    kind: TypeKind;
+export interface Node {
+    kind: NodeKind;
 }
 
-export interface TypeType extends Type {
+export interface ThisType extends Node {
+    kind: NodeKind.thisType;
+}
+
+export interface TypeReference extends Node {
+    kind: NodeKind.typeReference;
     name: string;
-    isArray: boolean;
-    typeParameters: Type[];
+    typeParams: Node[];
 }
 
-// TODO type parameters
-export interface FunctionType extends Type {
-    returnType: Type;
-    parameters: Parameter[];
-}
-
-export interface Property {
-    isStatic: boolean;
-    isReadOnly: boolean;
-    name: string;
-    type: Type;
-    doc: string;
-}
-
-export interface TypeLiteralType extends Type {
+export interface TypeLiteral extends Node {
+    kind: NodeKind.typeLiteral;
     properties: Property[];
     callSignatures: FunctionType[];
-    indexSignature: boolean;
+}
+
+export interface ArrayType extends Node {
+    kind: NodeKind.arrayType;
+    elementType: Node;
+}
+
+export interface Nullable extends Node {
+    kind: NodeKind.nullable;
+    type: Node;
+}
+
+export interface Parenthesized extends Node {
+    kind: NodeKind.parenthesized;
+    type: Node;
+}
+
+export interface NullOrUndefined extends Node {
+    kind: NodeKind.nullOrUndefined;
+}
+
+export interface FunctionType extends Node {
+    kind: NodeKind.functionType;
+    typeParams: Node[];
+    returnType: Node;
+    params: Parameter[];
+}
+
+export interface TypeParameter extends Node {
+    kind: NodeKind.typeParameter;
+    name: string;
+}
+
+export interface UnsupportedType extends Node {
+    description: string;
 }
 
 export interface Parameter {
     name: string;
-    type: Type;
+    type: Node;
     optional: boolean;
-    doc: string;
 }
 
-// TODO parse isStatic
-export interface Getter {
-    name: string;
-    returnType: Type;
-    isStatic: boolean;
-    doc: string;
-}
-
-// TODO parse isStatic
-export interface Setter {
-    name: string;
-    parameter: Parameter;
-    isStatic: boolean;
-    doc: string;
-}
-
-// TODO type parameters
-export interface Method {
+export interface Func extends Node {
+    kind: NodeKind.func;
     name: string;
     modifiers: string[];
-    returnType: Type;
-    parameters: Parameter[];
-    doc: string;
+    type: FunctionType;
 }
 
-export interface Constructor {
+export interface Getter extends Node {
+    kind: NodeKind.getter;
     name: string;
-    parameters: Parameter[];
-    doc: string;
+    returnType: Node;
+    isStatic: boolean;
 }
 
-export interface ClassOrInterface {
+export interface Property extends Node {
+    kind: NodeKind.property;
+    isStatic: boolean;
+    isReadOnly: boolean;
     name: string;
-    typeParams: string[];
-    constructors: Constructor[];
-    properties: Property[];
-    methods: Method[];
-    getters: Getter[];
-    setters: Setter[];
+    type: Node;
 }
 
-export interface Class extends ClassOrInterface {
-    isAbstract: boolean;
-    superType: TypeType;
-    interfaces: TypeType[];
-}
-
-export interface Interface extends ClassOrInterface {
-    isExported: boolean;
-    superTypes: TypeType[];
-}
-
-export interface Enum {
+export interface Enum extends Node {
+    kind: NodeKind.enm;
     name: string;
     members: string[];
 }
 
-export interface Library {
-    classes: Class[];
-    interfaces: Interface[];
-    enums: Enum[];
-    functionAliases: Method[];
-}
-
-export enum ScopeKind {
-    library,
-    clazz,
-    function,
-    parameter,
-    typeLiteral,
-    property,
-    getter,
-    setter
-}
-
-export interface Scope {
-    parent?: Scope;
-    kind: ScopeKind;
+export interface FunctionAlias extends Node {
+    kind: NodeKind.functionAlias;
     name: string;
+    typeParams: Node[];
+    func: Func;
 }
 
-export interface FilterItem {
-    name?: string;
-    paramNames?: string[];
+export interface Union extends Node {
+    kind: NodeKind.union;
+    types: Node[];
 }
 
-export interface Overrides {
-    getter?: string;
-    setter?: string;
+export interface Interface extends Node {
+    kind: NodeKind.interfaze;
+    name: string;
+    typeParams: Node[];
+    properties: Property[];
+    functions: Func[];
+    superTypes: Node[];
 }
 
-export interface SecondLevelConfig {
-    forceExport?: boolean;
-    treatAsObjectLiteral?: boolean;
-    convertFunctionPropertiesToFunctions?: boolean;
-    overrides?: { [key: string]: Overrides };
-    include?: (string | FilterItem)[];
-    exclude?: (string | FilterItem)[];
+export interface Class extends Node {
+    kind: NodeKind.clazz;
+    isAbstract: boolean;
+    name: string;
+    typeParams: Node[];
+    superType: Node | null;
+    interfaces: Node[];
+    //constructors: Constructor[];
+    properties: Property[];
+    functions: Func[];
+    getters: Getter[];
+    //setters: Setter[];
 }
 
-export interface Config {
-    fileNames: string[];
-    libraryName: string;
-    outFolder: string;
-    typeReplacements: { [key: string]: string };
-    secondLevelConfigs: { [key: string]: SecondLevelConfig }
+export interface Program {
+    enums: Enum[];
+    functionAliases: FunctionAlias[];
+    interfaces: Interface[];
+    classes: Class[];
 }
-

@@ -1,4 +1,4 @@
-part of babylon;
+part of babylon_dart;
 
 /// enum Space
 @JS()
