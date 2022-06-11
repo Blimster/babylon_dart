@@ -10,12 +10,13 @@ export interface Configuration {
 }
 
 export interface Scope {
-    parent: Scope | null;
+    parent: Scope | undefined;
     name: string;
     node: any;
 }
 
 export enum NodeKind {
+    root,
     thisType,
     typeReference,
     typeLiteral,
@@ -30,6 +31,7 @@ export enum NodeKind {
     union,
     interfaze,
     clazz,
+    parameter,
     func,
     getter,
     setter,
@@ -39,6 +41,10 @@ export enum NodeKind {
 
 export interface Node {
     kind: NodeKind;
+}
+
+export interface Root extends Node {
+    kind: NodeKind.root;
 }
 
 export interface ThisType extends Node {
@@ -92,7 +98,8 @@ export interface UnsupportedType extends Node {
     description: string;
 }
 
-export interface Parameter {
+export interface Parameter extends Node {
+    kind: NodeKind.parameter;
     name: string;
     type: Node;
     optional: boolean;

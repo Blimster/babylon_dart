@@ -1,7 +1,7 @@
-import { Class, Configuration, Enum, FunctionAlias, Interface, Program } from "./model";
-import { existsSync, mkdirSync, writeFileSync } from "fs";
+import { Class, Configuration, Enum, FunctionAlias, Interface, Program, TypeLiteral } from "./model";
+import { existsSync, mkdirSync, write, writeFileSync } from "fs";
 import { snakeCase } from "snake-case";
-import { functionToString, getterToString, include, paramsToString, propertyToString, scopeFor, typeToString } from "./base";
+import { functionToString, getterToString, include, paramsToString, propertyToString, ROOT_SCOPE, scopeFor, typeToString } from "./base";
 
 class Writer {
     private lines: string[] = [];
@@ -72,14 +72,16 @@ function writeFunctionAliases(functionAliases: FunctionAlias[], config: Configur
 }
 
 function writeFunctionAlias(functionAlias: FunctionAlias, config: Configuration): string {
+    const typeLiteralsToWrite = new Map<string, TypeLiteral>();
+    const scope = scopeFor(functionAlias, functionAlias.name);
     var typeParamString = "";
     if (functionAlias.typeParams && functionAlias.typeParams.length > 0) {
-        typeParamString = "<" + functionAlias.typeParams.map(t => typeToString(t, config)).join(", ") + ">";
+        typeParamString = "<" + functionAlias.typeParams.map(t => typeToString(t, ROOT_SCOPE, typeLiteralsToWrite, config)).join(", ") + ">";
     }
     const writer = new Writer(config.targetFolder, "src/" + snakeCase(functionAlias.name) + ".dart");
     writer.writeLine("part of " + config.libraryName + ";");
     writer.writeLine();
-    writer.writeLine("typedef " + functionAlias.name + typeParamString + " = " + typeToString(functionAlias.func.type.returnType, config) + " Function" + paramsToString(functionAlias.func.type.params, config) + ";")
+    writer.writeLine("typedef " + functionAlias.name + typeParamString + " = " + typeToString(functionAlias.func.type.returnType, scope, typeLiteralsToWrite, config) + " Function" + paramsToString(functionAlias.func.type.params, scope, typeLiteralsToWrite, config) + ";")
     return writer.toFile();
 }
 
@@ -94,7 +96,8 @@ function writeInterfaces(interfaces: Interface[], config: Configuration): string
 }
 
 function writeInterface(interfaze: Interface, config: Configuration): string {
-    const interfaceScope = scopeFor(interfaze, interfaze.name);
+    const typeLiteralsToWrite = new Map<string, TypeLiteral>();
+    const scope = scopeFor(interfaze, interfaze.name);
     const writer = new Writer(config.targetFolder, "src/" + snakeCase(interfaze.name) + ".dart");
     writer.writeLine("part of " + config.libraryName + ";");
     writer.writeLine();
@@ -105,7 +108,7 @@ function writeInterface(interfaze: Interface, config: Configuration): string {
         writer.writeToken("<" + interfaze.typeParams.join(", ") + ">");
     }
     if (interfaze.superTypes.length > 0) {
-        writer.writeToken(" extends " + interfaze.superTypes.map(t => typeToString(t, interfaceScope, config)).join(", "));
+        writer.writeToken(" extends " + interfaze.superTypes.map(t => typeToString(t, scope, typeLiteralsToWrite, config)).join(", "));
     }
     writer.writeLine(" {");
 
@@ -115,19 +118,26 @@ function writeInterface(interfaze: Interface, config: Configuration): string {
     //     }
     // }
 
-    for(const prop of interfaze.properties) {
-        if (include(scopeFor(prop, prop.name, interfaceScope), config)) {
-            writer.writeLine("  external " + propertyToString(prop, interfaceScope, config) + ";");
+    const properties = interfaze.properties.filter(prop => include(scopeFor(prop, prop.name, scopeFor(interfaze, interfaze.name)), config));
+    if (properties.length > 0) {
+        writer.writeLine("  // properties");
+        for (const prop of properties) {
+            writer.writeLine("  external " + propertyToString(prop, scope, typeLiteralsToWrite, config) + ";");
         }
     }
 
-    for (const func of interfaze.functions) {
-        if (include(scopeFor(func, func.name, interfaceScope), config)) {
-            writer.writeLine("  " + functionToString(func, interfaceScope, config) + ";");
+    const functions = interfaze.functions.filter(func => include(scopeFor(func, func.name, scopeFor(interfaze, interfaze.name)), config));
+    if (interfaze.functions.length > 0) {
+        writer.writeLine("  // methods");
+        for (const func of functions) {
+            writer.writeLine("  " + functionToString(func, scope, typeLiteralsToWrite, config) + ";");
         }
     }
 
     writer.writeLine("}");
+
+    writeTypeLiterals(typeLiteralsToWrite, writer);
+
     return writer.toFile();
 }
 
@@ -142,21 +152,22 @@ function writeClasses(classes: Class[], config: Configuration): string[] {
 }
 
 function writeClass(clazz: Class, config: Configuration): string {
-    const classScope = scopeFor(clazz, clazz.name);
+    const typeLiteralsToWrite = new Map<string, TypeLiteral>();
+    const scope = scopeFor(clazz, clazz.name);
     const writer = new Writer(config.targetFolder, "src/" + snakeCase(clazz.name) + ".dart");
     writer.writeLine("part of " + config.libraryName + ";");
     writer.writeLine();
     writer.writeLine("/// class " + clazz.name);
     writer.writeLine("@JS()");
-    writer.writeToken(clazz.isAbstract ? "abstract " : "" + "class " + clazz.name);
+    writer.writeToken((clazz.isAbstract ? "abstract " : "") + "class " + clazz.name);
     if (clazz.typeParams.length > 0) {
-        writer.writeToken("<" + clazz.typeParams.join(", ") + ">");
+        writer.writeToken("<" + clazz.typeParams.map(t => typeToString(t, scope, typeLiteralsToWrite, config)).join(", ") + ">");
     }
     if (clazz.superType) {
-        writer.writeToken(" extends " + typeToString(clazz.superType, classScope, config));
+        writer.writeToken(" extends " + typeToString(clazz.superType, scope, typeLiteralsToWrite, config));
     }
     if (clazz.interfaces.length > 0) {
-        writer.writeToken(" implements " + clazz.interfaces.map(t => typeToString(t, config)).join(", "));
+        writer.writeToken(" implements " + clazz.interfaces.map(t => typeToString(t, scope, typeLiteralsToWrite, config)).join(", "));
     }
     writer.writeLine(" {");
 
@@ -166,22 +177,37 @@ function writeClass(clazz: Class, config: Configuration): string {
     //     }
     // }
 
-    writer.writeLine("  // properties");
-    for(const prop of clazz.properties) {
-        if (include(scopeFor(prop, prop.name, scopeFor(clazz, clazz.name)), config)) {
-            writer.writeLine("  external " + propertyToString(prop, config) + ";");
+    const properties = clazz.properties.filter(prop => include(scopeFor(prop, prop.name, scope), config));
+    if (properties.length > 0) {
+        writer.writeLine("  // properties");
+        for (const prop of properties) {
+            writer.writeLine("  external " + propertyToString(prop, scope, typeLiteralsToWrite, config) + ";");
         }
     }
 
-    writer.writeLine("  // methods");
-    for (const func of clazz.functions) {
-        if (include(scopeFor(func, func.name, scopeFor(clazz, clazz.name)), config)) {
-            writer.writeLine("  external " + functionToString(func, config) + ";");
+    const functions = clazz.functions.filter(func => include(scopeFor(func, func.name, scope), config));
+    if (functions.length > 0) {
+        writer.writeLine("  // methods");
+        for (const func of functions) {
+            writer.writeLine("  external " + functionToString(func, scope, typeLiteralsToWrite, config) + ";");
         }
     }
 
     writer.writeLine("}");
+
+    writeTypeLiterals(typeLiteralsToWrite, writer);
+
     return writer.toFile();
+}
+
+function writeTypeLiterals(typeLiterals: Map<string, TypeLiteral>, writer: Writer): void {
+    typeLiterals.forEach((typeLiteral, name) => {
+        writer.writeLine();
+        writer.writeLine("@JS()");
+        writer.writeLine("@anonymous");
+        writer.writeLine("class " + name + " {");
+        writer.writeLine("}");
+    });
 }
 
 function writeLibrary(parts: string[], config: Configuration): void {
@@ -196,14 +222,24 @@ function writeLibrary(parts: string[], config: Configuration): void {
     const writer = new Writer(config.targetFolder, snakeCase(config.libraryName) + ".dart");
     writer.writeLine("@JS('" + config.javascriptName + "')");
     writer.writeLine("library " + config.libraryName + ";");
+    
     writer.writeLine();
     for (const imprt of allImports) {
         writer.writeLine("import '" + imprt + "';");
     }
-    writer.writeLine();
-    for (const part of parts) {
-        writer.writeLine("part '" + part + "';");
+
+    if(parts.length > 0) {
+        writer.writeLine();
+        for (const part of parts) {
+            writer.writeLine("part '" + part + "';");
+        }
     }
+
+    writer.writeLine()
+    writer.writeLine("@JS()")
+    writer.writeLine("class Promise<T> {")
+    writer.writeLine("  external Promise then(void Function(T) onFulfilled, [void Function(dynamic) onRejected]);")
+    writer.writeLine("}")
+
     writer.toFile();
 }
-

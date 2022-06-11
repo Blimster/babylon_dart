@@ -2,8 +2,7 @@ part of babylon_dart;
 
 /// class Observable
 @JS()
-class Observable<[object Object]> {
-  // properties
+class Observable<T> {
   // methods
   external static Observable<T> FromPromise<T, E>(Promise<T> promise, [Observable<E> onErrorObservable]);
   external Observer<T>? add(void Function(T eventData, EventState eventState) callback, [num mask, bool insertFirst, Object scope, bool unregisterOnFirstCall]);

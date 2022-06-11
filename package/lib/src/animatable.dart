@@ -8,8 +8,8 @@ class Animatable {
   external num fromFrame;
   external num toFrame;
   external bool loopAnimation;
-  external void Function()?? onAnimationEnd;
-  external void Function()?? onAnimationLoop;
+  external void Function()? onAnimationEnd;
+  external void Function()? onAnimationLoop;
   external bool isAdditive;
   external bool disposeOnEnd;
   external bool animationStarted;

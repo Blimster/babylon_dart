@@ -267,7 +267,7 @@ class Scene extends AbstractScene implements IAnimatable, IClipPlanesHolder {
   external void dispose();
   external void clearCachedVertexData();
   external void cleanCachedTextureBuffer();
-  external TODO getWorldExtends([bool Function(AbstractMesh mesh) filterPredicate]);
+  external SceneGetWorldExtends getWorldExtends([bool Function(AbstractMesh mesh) filterPredicate]);
   external Ray createPickingRay(num x, num y, Matrix? world, Camera? camera, [bool cameraViewSpace]);
   external Scene createPickingRayToRef(num x, num y, Matrix? world, Ray result, Camera? camera, [bool cameraViewSpace, bool enableDistantPicking]);
   external Ray createPickingRayInCameraSpace(num x, num y, [Camera camera]);
@@ -289,4 +289,9 @@ class Scene extends AbstractScene implements IAnimatable, IClipPlanesHolder {
   external IRenderingManagerAutoClearSetup getAutoClearDepthStencilSetup(num index);
   external void markAllMaterialsAsDirty(num flag, [bool Function(Material mat) predicate]);
   external PerformanceViewerCollector getPerfCollector();
+}
+
+@JS()
+@anonymous
+class SceneGetWorldExtends {
 }

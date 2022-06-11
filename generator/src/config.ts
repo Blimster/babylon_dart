@@ -1,5 +1,4 @@
-import { isEmptyBindingPattern } from "typescript";
-import { isClass, isEnum, isFunction, isFunctionAlias, isFunctionType, isGetter, isInterface, isProperty } from "./base";
+import { isClass, isEnum, isFunction, isFunctionAlias, isGetter, isInterface, isProperty } from "./base";
 import { Configuration, NodeKind, Nullable, TypeReference } from "./model";
 
 export const config = <Configuration>{
@@ -32,7 +31,21 @@ export const config = <Configuration>{
                 typeParams: []
             }
         },
+        "Boolean": (_) => {
+            return <TypeReference> {
+                kind: NodeKind.typeReference,
+                name: "bool",
+                typeParams: []
+            }
+        },
         "number": (_) => {
+            return <TypeReference> {
+                kind: NodeKind.typeReference,
+                name: "num",
+                typeParams: []
+            }
+        },
+        "float": (_) => {
             return <TypeReference> {
                 kind: NodeKind.typeReference,
                 name: "num",
@@ -43,6 +56,27 @@ export const config = <Configuration>{
             return <TypeReference> {
                 kind: NodeKind.typeReference,
                 name: "String",
+                typeParams: []
+            }
+        },
+        "FloatArray": (_) => {
+            return <TypeReference> {
+                kind: NodeKind.typeReference,
+                name: "Float32List",
+                typeParams: []
+            }
+        },
+        "Float32Array": (_) => {
+            return <TypeReference> {
+                kind: NodeKind.typeReference,
+                name: "Float32List",
+                typeParams: []
+            }
+        },
+        "IndicesArray": (_) => {
+            return <TypeReference> {
+                kind: NodeKind.typeReference,
+                name: "Int32List",
                 typeParams: []
             }
         },
@@ -60,6 +94,16 @@ export const config = <Configuration>{
                 typeParams: [...type.typeParams]
             }
         },
+        "ArrayLike": (type) => {
+            return <TypeReference>{
+                kind: NodeKind.typeReference,
+                name: "List",
+                typeParams: [...type.typeParams]
+            }
+        },
+        "DeepImmutable": (type) => {
+            return type.typeParams[0] as TypeReference;
+        },
     },
     include: (scope) => {
         if(scope.name.startsWith("_")) {
@@ -76,10 +120,40 @@ export const config = <Configuration>{
 
         if (isInterface(scope.node) || isClass(scope.node)) {
             return [
+                "AbstractActionManager",
+                "AbstractMesh",
+                "AbstractScene",
                 "Animatable",
+                "AssetContainer",
+                "BoundingBox",
+                "BoundingInfo",
+                "BoundingSphere",
+                "Camera",
+                "Color3",
+                "Color4",
+                "IAction",
+                "IActionEvent",
+                "ICullable",
+                "IDisposable",
+                "IEdgesRendererOptions",
+                "IGetSetVerticesData",
+                "IParticleSystem",
+                "Light",
+                "Material",
+                "Matrix",
+                "Node",
                 "Observable",
+                "PickingInfo",
+                "Plane",
+                "Quaternion",
+                "RuntimeAnimation",
                 "Scene",
+                "Skeleton",
+                "SubMesh",
+                "TransformNode",
+                "UniformBuffer",
                 "Vector3",
+                "Viewport",
             ].indexOf(scope.node.name) !== -1;
         }
 

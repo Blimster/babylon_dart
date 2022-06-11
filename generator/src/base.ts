@@ -1,10 +1,23 @@
-import { ArrayType, Configuration, Enum, Func, FunctionAlias, FunctionType, Interface, Parameter, Property, Scope, Node, NodeKind, TypeParameter, TypeReference, UnsupportedType, Getter, Class, Nullable, Union, NullOrUndefined, Parenthesized, ThisType, TypeLiteral } from "./model";
+import { ArrayType, Configuration, Enum, Func, FunctionAlias, FunctionType, Interface, Parameter, Property, Scope, Node, NodeKind, TypeParameter, TypeReference, UnsupportedType, Getter, Class, Nullable, Union, NullOrUndefined, Parenthesized, ThisType, TypeLiteral, Root } from "./model";
 
-export function scopeFor(node: any, name: string, parent?: Scope): Scope {
+export function capitalize(text: string): string {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+export const ROOT_NODE = <Root>{
+    kind: NodeKind.root,
+}
+
+export const ROOT_SCOPE = <Scope>{
+    name: "",
+    node: ROOT_NODE
+}
+
+export function scopeFor(node: Node, name: string, parent?: Scope): Scope {
     return <Scope>{
-        parent,
+        node,
         name,
-        node
+        parent
     }
 }
 
@@ -89,43 +102,51 @@ export function replaceType(type: Node, config: Configuration): Node {
     if (isTypeReference(type)) {
         const replacement = config.typeReplacements[type.name];
         if (replacement) {
-            return replacement(type);
+            return replaceType(replacement(type), config);
         }
     }
     return type;
 }
 
-export function typeToString(type: Node, scope: Scope, config: Configuration): string {
+export function typeToString(type: Node, scope: Scope, typeLiteralsToWrite: Map<string, TypeLiteral>, config: Configuration): string {
     type = replaceType(type, config);
     if (isTypeReference(type)) {
         let result = "";
         result += type.name;
         if (type.typeParams && type.typeParams.length > 0) {
             result += "<";
-            result += type.typeParams.map(t => typeToString(t, scope, config)).join(", ");
+            result += type.typeParams.map(t => typeToString(t, scope, typeLiteralsToWrite, config)).join(", ");
             result += ">";
         }
         return result;
     } else if (isThisType(type)) {
-        return "TODO: ThisType";
+        return "THIS";
     } else if (isArrayType(type)) {
-        return "List<" + typeToString(type.elementType, scope, config) + ">";
+        return "List<" + typeToString(type.elementType, scope, typeLiteralsToWrite, config) + ">";
     } else if (isNullable(type)) {
-        return typeToString(type.type, scope, config) + "?";
+        return typeToString(type.type, scope, typeLiteralsToWrite, config) + "?";
     } else if (isParenthesized(type)) {
-        return typeToString(type.type, scope, config);
+        return typeToString(type.type, scope, typeLiteralsToWrite, config);
     } else if (isNullOrUndefined(type)) {
         return "Null";
     } else if (isFunctionType(type)) {
-        return typeToString(type.returnType, scope, config) + " Function" + typeParamsToString(type.typeParams, scope, config) + paramsToString(type.params, scope, config);
+        return typeToString(type.returnType, scope, typeLiteralsToWrite, config) + " Function" + typeParamsToString(type.typeParams, scope, typeLiteralsToWrite, config) + paramsToString(type.params, scope, typeLiteralsToWrite, config);
     } else if (isTypeParameter(type)) {
         return type.name;
     } else if (isUnion(type)) {
         const nullTypes = type.types.filter(t => isNullOrUndefined(t));
-        const notNullTypes = type.types.filter(t => !isNullOrUndefined(t)).map(t => typeToString(t, scope, config));
-        return (notNullTypes.length - nullTypes.length > 1 ? "Object" : notNullTypes[0]) + (nullTypes.length > 0 ? "?": "");
+        const notNullTypes = type.types.filter(t => !isNullOrUndefined(t)).map(t => typeToString(t, scope, typeLiteralsToWrite, config));
+        const result = (notNullTypes.length - nullTypes.length > 1 ? "Object" : notNullTypes[0]);
+        return result + (nullTypes.length > 0 && !result.endsWith("?") ? "?": "");
     } else if (isTypeLiteral(type)) {
-        return "TODO: TypeLiteral";
+        let typeName = "";
+        let s: Scope | undefined = scope;
+        while(s !== undefined) {
+            typeName = capitalize(s.name) + typeName;
+            s = s.parent;
+        }
+        typeLiteralsToWrite.set(typeName, type);
+        return typeName;
     } else if (isUnsupportedType(type)) {
         console.log("WARNING! Unsupported type: " + type.description);
         return "UNSUPPORTED" + type.description;
@@ -146,7 +167,7 @@ export function isLastOptionalParam(params: Parameter[], index: number): boolean
     return params.length === index + 1 && params[index].optional;
 }
 
-export function paramsToString(parameters: Parameter[], scope: Scope, config: Configuration): string {
+export function paramsToString(parameters: Parameter[], scope: Scope, typeLiteralsToWrite: Map<string, TypeLiteral>, config: Configuration): string {
     const params: string[] = [];
     for (let i = 0; i < parameters.length; i++) {
         const p = parameters[i];
@@ -154,7 +175,7 @@ export function paramsToString(parameters: Parameter[], scope: Scope, config: Co
         if (isFirstOptionalParam(parameters, i)) {
             paramString += "[";
         }
-        paramString += paramToString(p, scope, config);
+        paramString += paramToString(p, scope, typeLiteralsToWrite, config);
         if (isLastOptionalParam(parameters, i)) {
             paramString += "]";
         }
@@ -163,31 +184,40 @@ export function paramsToString(parameters: Parameter[], scope: Scope, config: Co
     return "(" + params.join(", ") + ")";
 }
 
-export function paramToString(param: Parameter, scope: Scope, config: Configuration): string {
-    return typeToString(param.type, scope, config) + " " + param.name;
+export function paramToString(param: Parameter, scope: Scope, typeLiteralsToWrite: Map<string, TypeLiteral>, config: Configuration): string {
+    return typeToString(param.type, scopeFor(param, param.name, scope), typeLiteralsToWrite, config) + " " + param.name;
 }
 
-export function typeParamsToString(typeParams: Node[], scope: Scope, config: Configuration) {
+export function typeParamsToString(typeParams: Node[], scope: Scope, typeLiteralsToWrite: Map<string, TypeLiteral>, config: Configuration) {
     let result = "";
     if (typeParams.length > 0) {
         result += "<";
     }
-    result += typeParams.map(t => typeToString(t, scope, config)).join(", ");
+    result += typeParams.map(t => typeToString(t, scope, typeLiteralsToWrite, config)).join(", ");
     if (typeParams.length > 0) {
         result += ">";
     }
     return result;
 }
 
-export function functionToString(func: Func, scope: Scope, config: Configuration): string {
+export function functionToString(func: Func, scope: Scope, typeLiteralsToWrite: Map<string, TypeLiteral>, config: Configuration): string {
+    const functionScope = scopeFor(func, func.name, scope);
+    let typeParams = func.type.typeParams;
+    if(isThisType(func.type.returnType)) {
+        typeParams = [...typeParams, <TypeReference>{
+            kind: NodeKind.typeReference,
+            name: "THIS extends " + scope.name,
+            typeParams: []
+        }];
+    }
     const modifierString = func.modifiers.length > 0 ? func.modifiers.join(" ") + " " : "";
-    return modifierString + typeToString(func.type.returnType, scope, config) + " " + func.name + typeParamsToString(func.type.typeParams, scope, config) + paramsToString(func.type.params, scope, config);
+    return modifierString + typeToString(func.type.returnType, functionScope, typeLiteralsToWrite, config) + " " + func.name + typeParamsToString(typeParams, functionScope, typeLiteralsToWrite, config) + paramsToString(func.type.params, functionScope, typeLiteralsToWrite, config);
 }
 
-export function getterToString(getter: Getter, scope: Scope, config: Configuration): string {
-    return typeToString(getter.returnType, scope, config) + " get " + getter.name;
+export function getterToString(getter: Getter, scope: Scope, typeLiteralsToWrite: Map<string, TypeLiteral>, config: Configuration): string {
+    return typeToString(getter.returnType, scope, typeLiteralsToWrite, config) + " get " + getter.name;
 }
 
-export function propertyToString(prop: Property, scope: Scope, config: Configuration): string {
-    return (prop.isReadOnly ? "static " : "") + (prop.isReadOnly ? "final " : "") + typeToString(prop.type, scope, config) + " " + prop.name;
+export function propertyToString(prop: Property, scope: Scope, typeLiteralsToWrite: Map<string, TypeLiteral>, config: Configuration): string {
+    return (prop.isReadOnly ? "static " : "") + (prop.isReadOnly ? "final " : "") + typeToString(prop.type, scopeFor(prop, prop.name, scope), typeLiteralsToWrite, config) + " " + prop.name;
 }
