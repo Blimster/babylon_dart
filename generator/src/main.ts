@@ -5,8 +5,9 @@
 // writeLibrary(sanitizeLibrary(parseLibraries()));
 
 import { readProgram } from "./reader";
+import { sanitizeProgram } from "./sanitizer";
 import { writeProgram } from "./writer";
 import { config } from "./config";
 
 const program = readProgram(config);
-writeProgram(program, config);
+writeProgram(sanitizeProgram(program, config), config);

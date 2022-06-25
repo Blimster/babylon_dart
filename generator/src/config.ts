@@ -146,6 +146,7 @@ export const config = <Configuration>{
                 "PickingInfo",
                 "Plane",
                 "Quaternion",
+                "Ray",
                 "RuntimeAnimation",
                 "Scene",
                 "Skeleton",

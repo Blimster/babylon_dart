@@ -109,6 +109,7 @@ part 'src/primitive_topology.dart';
 part 'src/property_type_for_edition.dart';
 part 'src/quaternion.dart';
 part 'src/query_type.dart';
+part 'src/ray.dart';
 part 'src/render_pass_timestamp_location.dart';
 part 'src/render_target_stage_action.dart';
 part 'src/render_targets_stage_action.dart';

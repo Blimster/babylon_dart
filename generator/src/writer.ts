@@ -1,7 +1,7 @@
 import { Class, Configuration, Enum, FunctionAlias, Interface, Program, TypeLiteral } from "./model";
 import { existsSync, mkdirSync, write, writeFileSync } from "fs";
 import { snakeCase } from "snake-case";
-import { functionToString, getterToString, include, paramsToString, propertyToString, ROOT_SCOPE, scopeFor, typeToString } from "./base";
+import { functionToString, include, paramsToString, propertyToString, ROOT_SCOPE, scopeFor, typeToString } from "./base";
 
 class Writer {
     private lines: string[] = [];
