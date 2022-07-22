@@ -1,0 +1,12 @@
+{
+    "build": {
+        "dockerfile": "Dockerfile" 
+    },
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "Dart-Code.dart-code", 
+          "ms-azuretools.vscode-docker"]
+      }
+    }
+  }
