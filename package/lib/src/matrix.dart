@@ -50,8 +50,8 @@ class Matrix {
   external Matrix getRotationMatrixToRef(Matrix result);
   external void toggleModelMatrixHandInPlace();
   external void toggleProjectionMatrixHandInPlace();
-  external static Matrix FromArray(List<num> array, [num offset]);
-  external static void FromArrayToRef(List<num> array, num offset, Matrix result);
+  external static Matrix FromArray(ArrayLike<num> array, [num offset]);
+  external static void FromArrayToRef(ArrayLike<num> array, num offset, Matrix result);
   external static void FromFloat32ArrayToRefScaled(Object array, num offset, num scale, Matrix result);
   external static void FromValuesToRef(num initialM11, num initialM12, num initialM13, num initialM14, num initialM21, num initialM22, num initialM23, num initialM24, num initialM31, num initialM32, num initialM33, num initialM34, num initialM41, num initialM42, num initialM43, num initialM44, Matrix result);
   external static Matrix FromValues(num initialM11, num initialM12, num initialM13, num initialM14, num initialM21, num initialM22, num initialM23, num initialM24, num initialM31, num initialM32, num initialM33, num initialM34, num initialM41, num initialM42, num initialM43, num initialM44);

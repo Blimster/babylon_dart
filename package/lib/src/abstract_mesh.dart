@@ -54,11 +54,11 @@ class AbstractMesh extends TransformNode implements IDisposable, ICullable, IGet
   external AbstractMesh? getLOD(Camera camera);
   external num getTotalVertices();
   external num getTotalIndices();
-  external Int32List? getIndices();
-  external Float32List? getVerticesData(String kind);
+  external Int32List? getIndices([bool copyWhenShared, bool forceCopy]);
+  external Float32List? getVerticesData(String kind, [bool copyWhenShared, bool forceCopy]);
   external AbstractMesh setVerticesData(String kind, Float32List data, [bool updatable, num stride]);
   external AbstractMesh updateVerticesData(String kind, Float32List data, [bool updateExtends, bool makeItUnique]);
-  external AbstractMesh setIndices(Int32List indices, num? totalVertices);
+  external AbstractMesh setIndices(Int32List indices, num? totalVertices, [bool updatable]);
   external bool isVerticesDataPresent(String kind);
   external BoundingInfo getBoundingInfo();
   external AbstractMesh setBoundingInfo(BoundingInfo boundingInfo);

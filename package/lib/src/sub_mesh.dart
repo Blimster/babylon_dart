@@ -19,7 +19,7 @@ class SubMesh implements ICullable {
   external Mesh getRenderingMesh();
   external AbstractMesh? getReplacementMesh();
   external AbstractMesh getEffectiveMesh();
-  external Material? getMaterial();
+  external Material? getMaterial([bool getDefaultMaterial]);
   external SubMesh refreshBoundingInfo([Float32List? data]);
   external SubMesh updateBoundingInfo(Matrix world);
   external bool isInFrustum(List<Plane> frustumPlanes);

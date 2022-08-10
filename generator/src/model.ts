@@ -5,7 +5,7 @@ export interface Configuration {
     additionalImports: string[];
     sourceFiles: string[];
     nullSafe: boolean;
-    typeReplacements: { [key: string]: (typeReference: TypeReference) => Node };
+    typeCustomizer: (node: Node) => Node | null;
     include: (node: Scope) => boolean;
 }
 

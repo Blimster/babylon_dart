@@ -84,6 +84,7 @@ class Scene extends AbstractScene implements IAnimatable, IClipPlanesHolder {
   external bool Function(AbstractMesh Mesh) pointerMovePredicate;
   external bool skipPointerMovePicking;
   external bool skipPointerDownPicking;
+  external bool skipPointerUpPicking;
   external void Function(IPointerEvent evt, PickingInfo pickInfo, PointerEventTypes type) onPointerMove;
   external void Function(IPointerEvent evt, PickingInfo pickInfo, PointerEventTypes type) onPointerDown;
   external void Function(IPointerEvent evt, PickingInfo? pickInfo, PointerEventTypes type) onPointerUp;
@@ -164,6 +165,8 @@ class Scene extends AbstractScene implements IAnimatable, IClipPlanesHolder {
   external void registerAfterRender(void Function() func);
   external void unregisterAfterRender(void Function() func);
   external void executeOnceBeforeRender(void Function() func, [num timeout]);
+  external void addPendingData(Object data);
+  external void removePendingData(Object data);
   external num getWaitingItemsCount();
   external void executeWhenReady(void Function() func, [bool checkRenderTargets]);
   external Promise<void> whenReadyAsync([bool checkRenderTargets]);

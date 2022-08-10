@@ -9,7 +9,7 @@ class Skeleton implements IAnimatable {
   external List<Bone> bones;
   external Vector3 dimensionsAtRest;
   external bool needInitialSkinMatrix;
-  external List<Animation> animations;
+  external List<Animation>? animations;
   external bool doNotSerialize;
   external List<IInspectable> inspectableCustomProperties;
   external Observable<Skeleton> onBeforeComputeObservable;

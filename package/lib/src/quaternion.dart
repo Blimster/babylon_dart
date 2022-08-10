@@ -8,6 +8,7 @@ class Quaternion {
   external String getClassName();
   external num getHashCode();
   external List<num> asArray();
+  external Quaternion toArray(Float32List array, [num index]);
   external bool equals(Quaternion otherQuaternion);
   external bool equalsWithEpsilon(Quaternion otherQuaternion, [num epsilon]);
   external Quaternion clone();
@@ -17,6 +18,7 @@ class Quaternion {
   external Quaternion add(Quaternion other);
   external Quaternion addInPlace(Quaternion other);
   external Quaternion subtract(Quaternion other);
+  external Quaternion subtractInPlace(Quaternion other);
   external Quaternion scale(num value);
   external Quaternion scaleToRef(num scale, Quaternion result);
   external Quaternion scaleInPlace(num value);
@@ -27,8 +29,12 @@ class Quaternion {
   external Quaternion conjugateToRef(Quaternion ref);
   external Quaternion conjugateInPlace();
   external Quaternion conjugate();
+  external Quaternion invert();
+  external Quaternion invertInPlace();
+  external num lengthSquared();
   external num length();
   external Quaternion normalize();
+  external Quaternion normalizeToNew();
   external Vector3 toEulerAngles();
   external Quaternion toEulerAnglesToRef(Vector3 result);
   external Quaternion toRotationMatrix(Matrix result);
@@ -45,8 +51,8 @@ class Quaternion {
   external static bool IsIdentity(Quaternion quaternion);
   external static Quaternion RotationAxis(Vector3 axis, num angle);
   external static Quaternion RotationAxisToRef(Vector3 axis, num angle, Quaternion result);
-  external static Quaternion FromArray(List<num> array, [num offset]);
-  external static void FromArrayToRef(List<num> array, num offset, Quaternion result);
+  external static Quaternion FromArray(ArrayLike<num> array, [num offset]);
+  external static void FromArrayToRef(ArrayLike<num> array, num offset, Quaternion result);
   external static Quaternion FromEulerAngles(num x, num y, num z);
   external static Quaternion FromEulerAnglesToRef(num x, num y, num z, Quaternion result);
   external static Quaternion FromEulerVector(Vector3 vec);

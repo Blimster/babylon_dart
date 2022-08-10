@@ -1,56 +1,81 @@
-import { Class, Configuration, Interface, Program } from "./model";
+import { isTypeReference } from "./base";
+import { Class, Configuration, Func, Interface, Program, Property } from "./model";
 
 export function sanitizeProgram(program: Program, config: Configuration): Program {
     fixInvalidOverrides(program);
     return program;
 }
 
-function implementedInterfaces(program: Program
-    , clazz: Class, interfaces: Map<string, Interface>): Interface[] {
-    if (clazz) {
-        for (const interfaze of clazz.interfaces) {
-            interfaces.set(interfaze.name, interfaceByName(interfaze.name, library));
+function fixInvalidOverrides(program: Program): void {
+    for (const clazz of program.classes) {
+        const interfaces = implementedInterfaces(program, clazz, new Map());
+        for (const classMethod of clazz.functions) {
+            for (const interfaze of interfaces) {
+                for (const interfaceMethod of interfaze.functions) {
+                    if (classMethod.name === interfaceMethod.name) {
+                        fixMissingParameters(classMethod, interfaceMethod);
+                    }
+                }
+            }
         }
-        if (clazz.superType) {
-            implementedInterfaces(library, classByName(clazz.superType.name, library), interfaces);
+        for(const classProperty of clazz.properties) {
+            for (const interfaze of interfaces) {
+                for (const interfaceProperty of interfaze.properties) {
+                    if (classProperty.name === interfaceProperty.name) {
+                        fixPropertyType(classProperty, interfaceProperty);
+                    }
+                }
+            }
+        }
+    }
+}
+
+function implementedInterfaces(program: Program, clazz: Class, interfaces: Map<string, Interface>): Interface[] {
+    for (const interfaze of clazz.interfaces) {
+        if (isTypeReference(interfaze)) {
+            const interfaceType = interfaceByName(interfaze.name, program);
+            if (interfaceType !== null) {
+                interfaces.set(interfaze.name, interfaceType);
+            }
+        }
+    }
+    if (clazz.superType && isTypeReference(clazz.superType)) {
+        const superClassType = classByName(clazz.superType.name, program);
+        if (superClassType !== null) {
+            implementedInterfaces(program, superClassType, interfaces);
         }
     }
     return Array.from(interfaces.values());
 }
 
+function interfaceByName(name: String, program: Program): Interface | null {
+    for (const interfaze of program.interfaces) {
+        if (interfaze.name === name) {
+            return interfaze;
+        }
+    }
+    return null;
+}
 
-function fixInvalidOverrides(program: Program): void {
+function classByName(name: String, program: Program): Class | null {
     for (const clazz of program.classes) {
-        const interfaces = implementedInterfaces(library, clazz, new Map());
-        for (const clazzMethod of clazz.functions) {
-            for (const interfaze of interfaces) {
-                for (const interfazeMethod of interfaze.methods) {
-                    if (clazzMethod.name === interfazeMethod.name) {
-                        clazzMethod.type.params = [];
-                        for (const param of interfazeMethod.parameters) {
-                            // clazzMethod.parameters.push(Object.assign({}, param));
-                            clazzMethod.type.params.push({ ...param });
-                        }
-                        for (const param of clazzMethod.type.params) {
-                            fixParamTypesOfFixedInvalidOverrides(clazzMethod.type.params, clazz, program);
-                        }
-                    }
-                }
-            }
+        if (clazz.name === name) {
+            return clazz;
         }
-        let superClazz = clazz.superType ? classByName(clazz.superType.name, program) : null;
-        while (superClazz) {
-            for (const clazzMethod of clazz.functions) {
-                for (const superClazzMethod of superClazz.methods) {
-                    if (clazzMethod.name === superClazzMethod.name) {
-                        clazzMethod.type.params = [];
-                        for (const param of superClazzMethod.parameters) {
-                            clazzMethod.type.params.push(Object.assign({}, param));
-                        }
-                    }
-                }
-            }
-            superClazz = superClazz.superType ? classByName(superClazz.superType.name, program) : null;
+    }
+    return null;
+}
+
+function fixMissingParameters(classMethod: Func, parentMethod: Func): void {
+    if (classMethod.type.params.length < parentMethod.type.params.length) {
+        for (let i = classMethod.type.params.length; i < parentMethod.type.params.length; i++) {
+            classMethod.type.params.push(Object.assign({}, parentMethod.type.params[i]));
         }
+    }
+}
+
+function fixPropertyType(classProperty: Property, parentProperty: Property): void {
+    if (classProperty.type !== parentProperty.type) {
+        classProperty.type = Object.assign({}, parentProperty.type);
     }
 }

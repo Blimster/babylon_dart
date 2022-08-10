@@ -26,6 +26,9 @@ class Vector3 {
   external Vector3 scaleInPlace(num scale);
   external Vector3 scale(num scale);
   external Vector3 scaleToRef(num scale, Vector3 result);
+  external Vector3 applyRotationQuaternionToRef(Quaternion q, Vector3 result);
+  external Vector3 applyRotationQuaternionInPlace(Quaternion q);
+  external Vector3 applyRotationQuaternion(Quaternion q);
   external Vector3 scaleAndAddToRef(num scale, Vector3 result);
   external Vector3 projectOnPlane(Plane plane, Vector3 origin);
   external void projectOnPlaneToRef(Plane plane, Vector3 origin, Vector3 result);
@@ -66,10 +69,10 @@ class Vector3 {
   external static num GetAngleBetweenVectorsOnPlane(Vector3 vector0, Vector3 vector1, Vector3 normal);
   external static void SlerpToRef(Vector3 vector0, Vector3 vector1, num slerp, Vector3 result);
   external static void SmoothToRef(Vector3 source, Vector3 goal, num deltaTime, num lerpTime, Vector3 result);
-  external static Vector3 FromArray(List<num> array, [num offset]);
-  external static Vector3 FromFloatArray(Float32List array, [num offset]);
-  external static void FromArrayToRef(List<num> array, num offset, Vector3 result);
-  external static void FromFloatArrayToRef(Float32List array, num offset, Vector3 result);
+  external static Vector3 FromArray(ArrayLike<num> array, [num offset]);
+  external static Vector3 FromFloatArray(Float32Array array, [num offset]);
+  external static void FromArrayToRef(ArrayLike<num> array, num offset, Vector3 result);
+  external static void FromFloatArrayToRef(Float32Array array, num offset, Vector3 result);
   external static void FromFloatsToRef(num x, num y, num z, Vector3 result);
   external static Vector3 Zero();
   external static Vector3 One();

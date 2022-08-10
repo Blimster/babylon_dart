@@ -1,30 +1,6 @@
 import { Class, Configuration, Enum, FunctionAlias, Interface, Program, TypeLiteral } from "./model";
-import { existsSync, mkdirSync, write, writeFileSync } from "fs";
 import { snakeCase } from "snake-case";
-import { functionToString, include, paramsToString, propertyToString, ROOT_SCOPE, scopeFor, typeToString } from "./base";
-
-class Writer {
-    private lines: string[] = [];
-
-    constructor(private targetFolder: string, private fileName: string) { }
-
-    writeToken(token: string): void {
-        this.lines.push(token);
-    }
-
-    writeLine(line?: string): void {
-        this.writeToken((line ? line : "") + "\n");
-    }
-
-    toFile(): string {
-        if (!existsSync(this.targetFolder)) {
-            mkdirSync(this.targetFolder);
-        }
-        const content = this.lines.join("");
-        writeFileSync(this.targetFolder + "/" + this.fileName, content);
-        return this.fileName;
-    }
-}
+import { functionToString, include, paramsToString, propertyToString, ROOT_SCOPE, scopeFor, typeToString, Writer } from "./base";
 
 export function writeProgram(program: Program, config: Configuration): void {
     const parts: string[] = [];
@@ -96,48 +72,9 @@ function writeInterfaces(interfaces: Interface[], config: Configuration): string
 }
 
 function writeInterface(interfaze: Interface, config: Configuration): string {
-    const typeLiteralsToWrite = new Map<string, TypeLiteral>();
-    const scope = scopeFor(interfaze, interfaze.name);
+    const content = typeToString(interfaze, ROOT_SCOPE, new Map<string, TypeLiteral>(), config);
     const writer = new Writer(config.targetFolder, "src/" + snakeCase(interfaze.name) + ".dart");
-    writer.writeLine("part of " + config.libraryName + ";");
-    writer.writeLine();
-    writer.writeLine("/// interface " + interfaze.name);
-    writer.writeLine("@JS()");
-    writer.writeToken("abstract class " + interfaze.name);
-    if (interfaze.typeParams.length > 0) {
-        writer.writeToken("<" + interfaze.typeParams.join(", ") + ">");
-    }
-    if (interfaze.superTypes.length > 0) {
-        writer.writeToken(" extends " + interfaze.superTypes.map(t => typeToString(t, scope, typeLiteralsToWrite, config)).join(", "));
-    }
-    writer.writeLine(" {");
-
-    // for(const getter of interfaze.getters) {
-    //     if (include(scopeFor(getter, getter.name, interfaceScope), config)) {
-    //         writer.writeLine("  external " + getterToString(getter, config) + ";");
-    //     }
-    // }
-
-    const properties = interfaze.properties.filter(prop => include(scopeFor(prop, prop.name, scopeFor(interfaze, interfaze.name)), config));
-    if (properties.length > 0) {
-        writer.writeLine("  // properties");
-        for (const prop of properties) {
-            writer.writeLine("  external " + propertyToString(prop, scope, typeLiteralsToWrite, config) + ";");
-        }
-    }
-
-    const functions = interfaze.functions.filter(func => include(scopeFor(func, func.name, scopeFor(interfaze, interfaze.name)), config));
-    if (interfaze.functions.length > 0) {
-        writer.writeLine("  // methods");
-        for (const func of functions) {
-            writer.writeLine("  " + functionToString(func, scope, typeLiteralsToWrite, config) + ";");
-        }
-    }
-
-    writer.writeLine("}");
-
-    writeTypeLiterals(typeLiteralsToWrite, writer);
-
+    writer.writeToken(content);
     return writer.toFile();
 }
 
@@ -152,62 +89,10 @@ function writeClasses(classes: Class[], config: Configuration): string[] {
 }
 
 function writeClass(clazz: Class, config: Configuration): string {
-    const typeLiteralsToWrite = new Map<string, TypeLiteral>();
-    const scope = scopeFor(clazz, clazz.name);
+    const content = typeToString(clazz, ROOT_SCOPE, new Map<string, TypeLiteral>(), config);
     const writer = new Writer(config.targetFolder, "src/" + snakeCase(clazz.name) + ".dart");
-    writer.writeLine("part of " + config.libraryName + ";");
-    writer.writeLine();
-    writer.writeLine("/// class " + clazz.name);
-    writer.writeLine("@JS()");
-    writer.writeToken((clazz.isAbstract ? "abstract " : "") + "class " + clazz.name);
-    if (clazz.typeParams.length > 0) {
-        writer.writeToken("<" + clazz.typeParams.map(t => typeToString(t, scope, typeLiteralsToWrite, config)).join(", ") + ">");
-    }
-    if (clazz.superType) {
-        writer.writeToken(" extends " + typeToString(clazz.superType, scope, typeLiteralsToWrite, config));
-    }
-    if (clazz.interfaces.length > 0) {
-        writer.writeToken(" implements " + clazz.interfaces.map(t => typeToString(t, scope, typeLiteralsToWrite, config)).join(", "));
-    }
-    writer.writeLine(" {");
-
-    // for(const getter of interfaze.getters) {
-    //     if (include(scopeFor(getter, getter.name, scopeFor(interfaze, interfaze.name)), config)) {
-    //         writer.writeLine("  external " + getterToString(getter, config) + ";");
-    //     }
-    // }
-
-    const properties = clazz.properties.filter(prop => include(scopeFor(prop, prop.name, scope), config));
-    if (properties.length > 0) {
-        writer.writeLine("  // properties");
-        for (const prop of properties) {
-            writer.writeLine("  external " + propertyToString(prop, scope, typeLiteralsToWrite, config) + ";");
-        }
-    }
-
-    const functions = clazz.functions.filter(func => include(scopeFor(func, func.name, scope), config));
-    if (functions.length > 0) {
-        writer.writeLine("  // methods");
-        for (const func of functions) {
-            writer.writeLine("  external " + functionToString(func, scope, typeLiteralsToWrite, config) + ";");
-        }
-    }
-
-    writer.writeLine("}");
-
-    writeTypeLiterals(typeLiteralsToWrite, writer);
-
+    writer.writeToken(content);
     return writer.toFile();
-}
-
-function writeTypeLiterals(typeLiterals: Map<string, TypeLiteral>, writer: Writer): void {
-    typeLiterals.forEach((typeLiteral, name) => {
-        writer.writeLine();
-        writer.writeLine("@JS()");
-        writer.writeLine("@anonymous");
-        writer.writeLine("class " + name + " {");
-        writer.writeLine("}");
-    });
 }
 
 function writeLibrary(parts: string[], config: Configuration): void {
