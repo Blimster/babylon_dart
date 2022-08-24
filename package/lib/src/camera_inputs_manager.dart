@@ -2,7 +2,7 @@ part of babylon_dart;
 
 /// class CameraInputsManager
 @JS()
-class CameraInputsManager<TCamera> {
+class CameraInputsManager<TCamera extends Camera> {
   // properties
   external CameraInputsMap<TCamera> attached;
   external bool attachedToElement;

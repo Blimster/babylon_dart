@@ -12,7 +12,7 @@ class UniformBuffer {
   external void Function(String name, num x, num y, num z, num w, [String suffix]) updateFloat4;
   external void Function(String name, Float32List array) updateFloatArray;
   external void Function(String name, List<num> array) updateArray;
-  external void Function(String name, Int32Array array) updateIntArray;
+  external void Function(String name, Int32List array) updateIntArray;
   external void Function(String name, IMatrixLike mat) updateMatrix;
   external void Function(String name, Float32List mat) updateMatrices;
   external void Function(String name, IVector3Like vector) updateVector3;

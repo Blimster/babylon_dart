@@ -9,6 +9,7 @@ export function sanitizeProgram(program: Program, config: Configuration): Progra
 function fixInvalidOverrides(program: Program): void {
     for (const clazz of program.classes) {
         const interfaces = implementedInterfaces(program, clazz, new Map());
+        const superClasses = extendedClasses(program, clazz, new Map());
         for (const classMethod of clazz.functions) {
             for (const interfaze of interfaces) {
                 for (const interfaceMethod of interfaze.functions) {
@@ -17,8 +18,15 @@ function fixInvalidOverrides(program: Program): void {
                     }
                 }
             }
+            for (const superClass of superClasses) {
+                for (const superClassMethod of superClass.functions) {
+                    if (classMethod.name === superClassMethod.name) {
+                        fixMissingParameters(classMethod, superClassMethod);
+                    }
+                }
+            }
         }
-        for(const classProperty of clazz.properties) {
+        for (const classProperty of clazz.properties) {
             for (const interfaze of interfaces) {
                 for (const interfaceProperty of interfaze.properties) {
                     if (classProperty.name === interfaceProperty.name) {
@@ -46,6 +54,17 @@ function implementedInterfaces(program: Program, clazz: Class, interfaces: Map<s
         }
     }
     return Array.from(interfaces.values());
+}
+
+function extendedClasses(program: Program, clazz: Class, classes: Map<string, Class>): Class[] {
+    if (clazz.superType && isTypeReference(clazz.superType)) {
+        const superClassType = classByName(clazz.superType.name, program);
+        if (superClassType !== null) {
+            classes.set(clazz.superType.name, superClassType);
+            extendedClasses(program, superClassType, classes);
+        }
+    }
+    return Array.from(classes.values());
 }
 
 function interfaceByName(name: String, program: Program): Interface | null {

@@ -79,7 +79,7 @@ class Mesh extends AbstractMesh implements IGetSetVerticesData {
   external Mesh clone([String name, Node? newParent, bool doNotCloneChildren, bool clonePhysicsImpostor]);
   external void dispose([bool doNotRecurse, bool disposeMaterialAndTextures]);
   external Mesh applyDisplacementMap(String url, num minHeight, num maxHeight, [void Function(Mesh mesh) onSuccess, Vector2 uvOffset, Vector2 uvScale, bool forceUpdate]);
-  external Mesh applyDisplacementMapFromBuffer(Uint8Array buffer, num heightMapWidth, num heightMapHeight, num minHeight, num maxHeight, [Vector2 uvOffset, Vector2 uvScale, bool forceUpdate]);
+  external Mesh applyDisplacementMapFromBuffer(Uint8List buffer, num heightMapWidth, num heightMapHeight, num minHeight, num maxHeight, [Vector2 uvOffset, Vector2 uvScale, bool forceUpdate]);
   external Mesh convertToFlatShadedMesh();
   external Mesh convertToUnIndexedMesh();
   external Mesh flipFaces([bool flipNormals]);

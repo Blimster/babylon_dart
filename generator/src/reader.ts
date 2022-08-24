@@ -1,5 +1,6 @@
 import { NodeMaterialBlockConnectionPointTypes } from "babylonjs";
 import * as ts from "typescript";
+import { ROOT_SCOPE, scopeFor } from "./base";
 import { ArrayType, Configuration, Enum, Func, FunctionAlias, FunctionType, Interface, Parameter, Program, Property, Node, NodeKind, TypeParameter, TypeReference, UnsupportedType, Getter, Class, Union, NullOrUndefined, Parenthesized, TypeLiteral, ThisType } from "./model";
 
 function isNodeExported(node: ts.Node): boolean {
@@ -67,7 +68,8 @@ function readType(typeNode: ts.Node | undefined, checker: ts.TypeChecker): Node 
     } else if (ts.isTypeParameterDeclaration(typeNode)) {
         return <TypeParameter>{
             kind: NodeKind.typeParameter,
-            name: typeNode.name.getText()
+            name: typeNode.name.getText(),
+            constraint: typeNode.constraint ? readType(typeNode.constraint, checker) : null
         }
     } else if (ts.isFunctionTypeNode(typeNode)) {
         return <FunctionType>{
@@ -275,8 +277,7 @@ function readClass(node: ts.ClassDeclaration, checker: ts.TypeChecker): Class {
     }
 }
 
-
-function readNode(node: ts.Node, checker: ts.TypeChecker, program: Program): void {
+function readNode(node: ts.Node, checker: ts.TypeChecker, program: Program, config: Configuration): void {
     if (ts.isEnumDeclaration(node)) {
         const enm = readEnum(node, checker);
         if (!program.enums.find(e => e.name === enm.name)) {
@@ -291,18 +292,22 @@ function readNode(node: ts.Node, checker: ts.TypeChecker, program: Program): voi
                 program.functionAliases.push(functionAlias);
             }
         }
-    } else if (isNodeExported(node) && ts.isInterfaceDeclaration(node)) {
+    } else if (ts.isInterfaceDeclaration(node)) {
         const interfaze = readInterface(node, checker);
-        if (!program.interfaces.find(f => f.name === interfaze.name)) {
-            program.interfaces.push(interfaze);
+        if (isNodeExported(node) || config.include(scopeFor(interfaze, interfaze.name, ROOT_SCOPE), false)) {
+            if (!program.interfaces.find(f => f.name === interfaze.name)) {
+                program.interfaces.push(interfaze);
+            }
         }
-    } else if (isNodeExported(node) && ts.isClassDeclaration(node)) {
+    } else if (ts.isClassDeclaration(node)) {
         const clazz = readClass(node, checker);
-        if (!program.classes.find(f => f.name === clazz.name)) {
-            program.classes.push(clazz);
+        if (isNodeExported(node) || config.include(scopeFor(clazz, clazz.name, ROOT_SCOPE), false)) {
+            if (!program.classes.find(f => f.name === clazz.name)) {
+                program.classes.push(clazz);
+            }
         }
     } else {
-        ts.forEachChild(node, (n) => readNode(n, checker, program));
+        ts.forEachChild(node, (n) => readNode(n, checker, program, config));
     }
 };
 
@@ -324,7 +329,7 @@ export function readProgram(config: Configuration): Program {
 
     for (const sourceFile of sourceFiles) {
         if (config.sourceFiles.filter(f => sourceFile.fileName.indexOf(f) !== -1).length > 0) {
-            readNode(sourceFile, checker, result);
+            readNode(sourceFile, checker, result, config);
         }
     }
 

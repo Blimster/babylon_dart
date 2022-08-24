@@ -62,7 +62,7 @@ export function scopeFor(node: Node, name: string, parent?: Scope): Scope {
 }
 
 export function include(scope: Scope, config: Configuration): boolean {
-    return config.include(scope);
+    return config.include(scope, true);
 }
 
 export function isThisType(node: Node): node is ThisType {
@@ -139,8 +139,13 @@ export function isClass(node: Node): node is Class {
 }
 
 export function customizeType(type: Node, config: Configuration): Node {
-    const replacement = config.typeCustomizer(type);
-    return replacement ? replacement : type;
+    let result = type;
+    let replacement = config.typeCustomizer(result);
+    while (replacement && replacement !== result) {
+        result = replacement;
+        replacement = config.typeCustomizer(replacement);
+    }
+    return result;
 }
 
 export function typeToString(type: Node, scope: Scope, typeLiteralsToWrite: Map<string, TypeLiteral>, config: Configuration): string {
@@ -167,7 +172,11 @@ export function typeToString(type: Node, scope: Scope, typeLiteralsToWrite: Map<
     } else if (isFunctionType(type)) {
         return typeToString(type.returnType, scope, typeLiteralsToWrite, config) + " Function" + typeParamsToString(type.typeParams, scope, typeLiteralsToWrite, config) + paramsToString(type.params, scope, typeLiteralsToWrite, config);
     } else if (isTypeParameter(type)) {
-        return type.name;
+        let result = type.name;
+        if (type.constraint) {
+            result += (' extends ' + typeToString(type.constraint, scope, typeLiteralsToWrite, config));
+        }
+        return result;
     } else if (isUnion(type)) {
         const nullTypes = type.types.filter(t => isNullOrUndefined(t));
         const notNullTypes = type.types.filter(t => !isNullOrUndefined(t)).map(t => typeToString(t, scope, typeLiteralsToWrite, config));
@@ -249,7 +258,8 @@ export function functionToString(func: Func, scope: Scope, typeLiteralsToWrite: 
             typeParams: []
         }];
     }
-    const modifierString = func.modifiers.length > 0 ? func.modifiers.join(" ") + " " : "";
+    const filteredModifiers = func.modifiers.filter(m => m != "protected");
+    const modifierString = filteredModifiers.length > 0 ? filteredModifiers.join(" ") + " " : "";
     return modifierString + typeToString(func.type.returnType, functionScope, typeLiteralsToWrite, config) + " " + func.name + typeParamsToString(typeParams, functionScope, typeLiteralsToWrite, config) + paramsToString(func.type.params, functionScope, typeLiteralsToWrite, config);
 }
 
@@ -320,7 +330,7 @@ function interfaceToString(interfaze: Interface, config: Configuration): string 
     writer.writeLine("@JS()");
     writer.writeToken("abstract class " + interfaze.name);
     if (interfaze.typeParams.length > 0) {
-        writer.writeToken("<" + interfaze.typeParams.join(", ") + ">");
+        writer.writeToken("<" + interfaze.typeParams.map(t => typeToString(t, scope, typeLiteralsToWrite, config)).join(", ") + ">");
     }
     if (interfaze.superTypes.length > 0) {
         writer.writeToken(" extends " + interfaze.superTypes.map(t => typeToString(t, scope, typeLiteralsToWrite, config)).join(", "));

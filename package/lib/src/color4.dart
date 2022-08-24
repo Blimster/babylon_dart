@@ -12,7 +12,7 @@ class Color4 {
   external Color4 addInPlace(Color4 right);
   external List<num> asArray();
   external Color4 toArray(Float32List array, [num index]);
-  external Color4 fromArray(ArrayLike<num> array, [num offset]);
+  external Color4 fromArray(List<num> array, [num offset]);
   external bool equals(Color4 otherColor);
   external Color4 add(Color4 right);
   external Color4 subtract(Color4 right);
@@ -43,8 +43,8 @@ class Color4 {
   external static Color4 Hermite1stDerivative(Color4 value1, Color4 tangent1, Color4 value2, Color4 tangent2, num time);
   external static void Hermite1stDerivativeToRef(Color4 value1, Color4 tangent1, Color4 value2, Color4 tangent2, num time, Color4 result);
   external static Color4 FromColor3(Color3 color3, [num alpha]);
-  external static Color4 FromArray(ArrayLike<num> array, [num offset]);
-  external static void FromArrayToRef(ArrayLike<num> array, num? offset, Color4 result);
+  external static Color4 FromArray(List<num> array, [num offset]);
+  external static void FromArrayToRef(List<num> array, num? offset, Color4 result);
   external static Color4 FromInts(num r, num g, num b, num a);
   external static List<num> CheckColors4(List<num> colors, num count);
 }

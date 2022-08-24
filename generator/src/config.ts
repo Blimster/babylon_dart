@@ -63,21 +63,52 @@ export const config = <Configuration>{
                     return createTypeReference("num");
                 case "string":
                     return createTypeReference("String");
+                case "Uint8Array":
+                    return createTypeReference("Uint8List");
                 case "FloatArray":
                 case "Float32Array":
                     return createTypeReference("Float32List");
                 case "IndicesArray":
+                case "Int32Array":
                     return createTypeReference("Int32List");
                 case "Array":
                 case "ArrayLike":
                     return createTypeReference("List", [...node.typeParams]);
                 case "ArrayBufferView":
                     return createTypeReference("ByteBuffer");
+                case "ClientRect":
+                    return createTypeReference("Rectangle", [createTypeReference("num")]);
+                case "WebGLRenderingContext":
+                    return createTypeReference("RenderingContext");
+                case "WebGLProgram":
+                    return createTypeReference("Program");
+                case "WebGLBuffer":
+                    return createTypeReference("Buffer");
+                case "WebGLTexture":
+                    return createTypeReference("Texture");
+                case "WebGLUniformLocation":
+                    return createTypeReference("UniformLocation");
+                case "WebGLVertexArrayObject":
+                    return createTypeReference("VertexArrayObject");
+                case "WebGLContextEvent":
+                    return createTypeReference("ContextEvent");
+                case "MediaTrackConstraints":
+                    return createTypeReference("Map", [createTypeReference("String"), createTypeReference("Object")]);
+                case "HTMLElement":
+                    return createTypeReference("HtmlElement");
+                case "HTMLCanvasElement":
+                    return createTypeReference("CanvasElement");
+                case "HTMLImageElement":
+                    return createTypeReference("ImageElement");
+                case "ImageBitmapSource":
+                    return createTypeReference("Object");
                 case "Nullable":
                     return <Nullable>{
                         kind: NodeKind.nullable,
                         type: node.typeParams[0] as TypeReference
                     };
+                case "Partial":
+                    return node.typeParams[0] as TypeReference;
                 case "DeepImmutable":
                     return node.typeParams[0] as TypeReference;
             }
@@ -88,7 +119,14 @@ export const config = <Configuration>{
         }
         return null;
     },
-    include: (scope) => {
+    include: (scope, exported) => {
+        if (!exported) {
+            if (["IViewportOwnerLike"].indexOf(scope.name) !== -1) {
+                return true;
+            }
+            return false;
+        }
+
         if (scope.name.startsWith("_")) {
             return false;
         }
@@ -108,52 +146,144 @@ export const config = <Configuration>{
                 "AbstractScene",
                 "Animatable",
                 "AnimationGroup",
+                "AnimationRange",
                 "AssetContainer",
+                "AsyncCoroutine",
                 "BaseTexture",
+                "Behavior",
+                "Bone",
                 "BoundingBox",
                 "BoundingInfo",
                 "BoundingSphere",
+                "BoxParticleEmitter",
                 "Camera",
+                "ColorGradient",
                 "CameraInputsManager",
                 "CameraInputsMap",
+                "Collider",
                 "Color3",
+                "Color3Gradient",
                 "Color4",
+                "ConeParticleEmitter",
+                "CylinderParticleEmitter",
+                "DataBuffer",
+                "Effect",
+                "Engine",
+                "EventState",
+                "FactorGradient",
                 "Geometry",
+                "HemisphericParticleEmitter",
                 "IAction",
                 "IActionEvent",
                 "IAnimatable",
+                "IAudioEngine",
+                "IBehaviorAware",
                 "ICameraInput",
+                "ICanvas",
+                "ICanvasGradient",
+                "ICanvasRenderingContext",
+                "IClipPlanesHolder",
+                "ICollisionCoordinator",
+                "IColor3Like",
+                "IColor4Like",
+                "IComputePressureData",
                 "ICullable",
+                "ICustomAnimationFrameRequester",
+                "ICustomShaderNameResolveOptions",
+                "IDisplayChangedEventArgs",
                 "IDisposable",
+                "IDrawContext",
                 "IEdgesRendererOptions",
+                "IEffectFallbacks",
                 "IGetSetVerticesData",
+                "IImage",
+                "IInspectable",
+                "IInspectableOptions",
+                "ILoadingScreen",
+                "ImageBitmapOptions",
+                "IMaterialCompilationOptions",
+                "IMaterialContext",
+                "IMatrixLike",
+                "IPointerEvent",
                 "InstantiatedEntries",
+                "InstancedMesh",
+                "InstancingAttributeInfo",
+                "InternalTexture",
+                "IntersectionInfo",
+                "IOfflineProvider",
+                "IParticleEmitterType",
                 "IParticleSystem",
+                "IPipelineContext",
+                "IPlaneLike",
+                "IQuaternionLike",
+                "IRenderingManagerAutoClearSetup",
+                "ISceneLike",
+                "IShadowGenerator",
+                "ISmartArrayLike",
+                "ISortableLight",
+                "IStencilState",
+                "ITextMetrics",
+                "IValueGradient",
+                "IVector2Like",
+                "IVector3Like",
+                "IVector4Like",
+                "IViewportLike",
+                "IViewportOwnerLike",
                 "KeepAssets",
+                "KeyboardInfo",
+                "KeyboardInfoPre",
                 "Light",
                 "Material",
+                "MaterialDefines",
+                "MaterialStencilState",
                 "Matrix",
                 "Mesh",
+                "MeshLODLevel",
+                "MorphTarget",
                 "MorphTargetManager",
                 "MultiMaterial",
                 "Node",
                 "Observable",
+                "Observer",
+                "Particle",
+                "PerformanceViewerCollector",
                 "PickingInfo",
                 "Plane",
+                "PointerEventTypes",
+                "PointerInfo",
+                "PointerInfoPre",
+                "PointParticleEmitter",
                 "PostProcess",
+                "PostProcessManager",
+                "PrePassEffectConfiguration",
+                "PrePassRenderer",
+                "PrePassRenderTarget",
                 "Quaternion",
                 "Ray",
+                "RenderingGroupInfo",
                 "RenderTargetTexture",
+                "RenderTargetWrapper",
                 "RuntimeAnimation",
                 "Scene",
+                "ShadowDepthWrapper",
+                "ShaderProcessingContext",
                 "Skeleton",
                 "SmartArray",
+                "SphereDirectedParticleEmitter",
+                "SphereParticleEmitter",
+                "Sprite",
                 "SubMesh",
                 "TargetedAnimation",
+                "TextureSampler",
+                "ThinEngine",
                 "ThinTexture",
                 "TransformNode",
                 "UniformBuffer",
+                "UniformBufferEffectCommonAccessor",
+                "Vector2",
                 "Vector3",
+                "Vector4",
+                "VertexBuffer",
                 "Viewport",
             ].indexOf(scope.node.name) !== -1;
         }

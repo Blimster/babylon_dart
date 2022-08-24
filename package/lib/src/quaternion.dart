@@ -51,8 +51,8 @@ class Quaternion {
   external static bool IsIdentity(Quaternion quaternion);
   external static Quaternion RotationAxis(Vector3 axis, num angle);
   external static Quaternion RotationAxisToRef(Vector3 axis, num angle, Quaternion result);
-  external static Quaternion FromArray(ArrayLike<num> array, [num offset]);
-  external static void FromArrayToRef(ArrayLike<num> array, num offset, Quaternion result);
+  external static Quaternion FromArray(List<num> array, [num offset]);
+  external static void FromArrayToRef(List<num> array, num offset, Quaternion result);
   external static Quaternion FromEulerAngles(num x, num y, num z);
   external static Quaternion FromEulerAnglesToRef(num x, num y, num z, Quaternion result);
   external static Quaternion FromEulerVector(Vector3 vec);

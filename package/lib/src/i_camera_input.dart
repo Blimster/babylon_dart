@@ -2,7 +2,7 @@ part of babylon_dart;
 
 /// interface ICameraInput
 @JS()
-abstract class ICameraInput<[object Object]> {
+abstract class ICameraInput<TCamera extends Camera> {
   // properties
   external TCamera? camera;
   external void Function() checkInputs;

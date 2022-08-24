@@ -5,8 +5,9 @@ export interface Configuration {
     additionalImports: string[];
     sourceFiles: string[];
     nullSafe: boolean;
+    additionalTypes?: Node[];
     typeCustomizer: (node: Node) => Node | null;
-    include: (node: Scope) => boolean;
+    include: (node: Scope, exported: boolean) => boolean;
 }
 
 export interface Scope {
@@ -92,6 +93,7 @@ export interface FunctionType extends Node {
 export interface TypeParameter extends Node {
     kind: NodeKind.typeParameter;
     name: string;
+    constraint: Node;
 }
 
 export interface UnsupportedType extends Node {

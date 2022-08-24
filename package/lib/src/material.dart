@@ -86,8 +86,8 @@ class Material implements IAnimatable {
   external bool hasTexture(BaseTexture texture);
   external Material? clone(String name);
   external List<AbstractMesh> getBindedMeshes();
-  external void forceCompilation(AbstractMesh mesh, [void Function(Material material) onCompiled, Partial<IMaterialCompilationOptions> options, void Function(String reason) onError]);
-  external Promise<void> forceCompilationAsync(AbstractMesh mesh, [Partial<IMaterialCompilationOptions> options]);
+  external void forceCompilation(AbstractMesh mesh, [void Function(Material material) onCompiled, IMaterialCompilationOptions options, void Function(String reason) onError]);
+  external Promise<void> forceCompilationAsync(AbstractMesh mesh, [IMaterialCompilationOptions options]);
   external void markAsDirty(num flag);
   external void resetDrawCache();
   external bool setPrePassRenderer(PrePassRenderer prePassRenderer);

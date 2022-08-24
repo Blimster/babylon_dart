@@ -75,6 +75,6 @@ class Camera extends Node {
   external Vector3 getDirection(Vector3 localAxis);
   external void getDirectionToRef(Vector3 localAxis, Vector3 result);
   external static Camera Function() GetConstructorFromName(String type, String name, Scene scene, [num interaxial_distance, bool isStereoscopicSideBySide]);
-  external Matrix computeWorldMatrix();
+  external Matrix computeWorldMatrix([bool force]);
   external static Camera Parse(Object parsedCamera, Scene scene);
 }
