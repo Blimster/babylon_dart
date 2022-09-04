@@ -1,4 +1,4 @@
-import { Class, Configuration, Enum, FunctionAlias, Interface, Program, TypeLiteral } from "./model";
+import { Class, Configuration, Enum, TypeAlias, Interface, Program, TypeLiteral } from "./model";
 import { snakeCase } from "snake-case";
 import { functionToString, include, paramsToString, propertyToString, ROOT_SCOPE, scopeFor, typeToString, Writer } from "./base";
 
@@ -6,7 +6,7 @@ export function writeProgram(program: Program, config: Configuration): void {
     const parts: string[] = [];
 
     parts.push(...writeEnums(program.enums, config));
-    parts.push(...writeFunctionAliases(program.functionAliases, config));
+    parts.push(...writeFunctionAliases(program.typeAliases, config));
     parts.push(...writeInterfaces(program.interfaces, config));
     parts.push(...writeClasses(program.classes, config));
 
@@ -37,27 +37,27 @@ function writeEnum(enm: Enum, config: Configuration): string {
     return writer.toFile();
 }
 
-function writeFunctionAliases(functionAliases: FunctionAlias[], config: Configuration): string[] {
+function writeFunctionAliases(functionAliases: TypeAlias[], config: Configuration): string[] {
     const result: string[] = [];
     for (const functionAlias of functionAliases) {
         if (include(scopeFor(functionAlias, functionAlias.name), config)) {
-            result.push(writeFunctionAlias(functionAlias, config));
+            result.push(writeTypeAlias(functionAlias, config));
         }
     }
     return result;
 }
 
-function writeFunctionAlias(functionAlias: FunctionAlias, config: Configuration): string {
+function writeTypeAlias(typeAlias: TypeAlias, config: Configuration): string {
     const typeLiteralsToWrite = new Map<string, TypeLiteral>();
-    const scope = scopeFor(functionAlias, functionAlias.name);
+    const scope = scopeFor(typeAlias, typeAlias.name);
     var typeParamString = "";
-    if (functionAlias.typeParams && functionAlias.typeParams.length > 0) {
-        typeParamString = "<" + functionAlias.typeParams.map(t => typeToString(t, ROOT_SCOPE, typeLiteralsToWrite, config)).join(", ") + ">";
+    if (typeAlias.typeParams && typeAlias.typeParams.length > 0) {
+        typeParamString = "<" + typeAlias.typeParams.map(t => typeToString(t, ROOT_SCOPE, typeLiteralsToWrite, config)).join(", ") + ">";
     }
-    const writer = new Writer(config.targetFolder, "src/" + snakeCase(functionAlias.name) + ".dart");
+    const writer = new Writer(config.targetFolder, "src/" + snakeCase(typeAlias.name) + ".dart");
     writer.writeLine("part of " + config.libraryName + ";");
-    writer.writeLine();
-    writer.writeLine("typedef " + functionAlias.name + typeParamString + " = " + typeToString(functionAlias.func.type.returnType, scope, typeLiteralsToWrite, config) + " Function" + paramsToString(functionAlias.func.type.params, scope, typeLiteralsToWrite, config) + ";")
+    writer.writeLine();    
+    writer.writeLine("typedef " + typeAlias.name + typeParamString + " = " + typeToString(typeAlias.type, scope, typeLiteralsToWrite, config) + ";")
     return writer.toFile();
 }
 

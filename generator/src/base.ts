@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { snakeCase } from "snake-case";
-import { ArrayType, Configuration, Enum, Func, FunctionAlias, FunctionType, Interface, Parameter, Property, Scope, Node, NodeKind, TypeParameter, TypeReference, UnsupportedType, Getter, Class, Nullable, Union, NullOrUndefined, Parenthesized, ThisType, TypeLiteral, Root } from "./model";
+import { ArrayType, Configuration, Enum, Func, TypeAlias, FunctionType, Interface, Parameter, Property, Scope, Node, NodeKind, TypeParameter, TypeReference, UnsupportedType, Getter, Class, Nullable, Union, NullOrUndefined, Parenthesized, ThisType, TypeLiteral, Root } from "./model";
 
 export class Writer {
     private lines: string[] = [];
@@ -102,6 +102,10 @@ export const isTypeParameter = (node: Node): node is TypeParameter => {
     return node.kind === NodeKind.typeParameter;
 }
 
+export const isTypePredicate = (node: Node): node is TypeParameter => {
+    return node.kind === NodeKind.typePredicate;
+}
+
 export function isUnsupportedType(node: Node): node is UnsupportedType {
     return node.kind === NodeKind.unsupported;
 }
@@ -110,8 +114,8 @@ export function isEnum(node: Node): node is Enum {
     return node?.kind == NodeKind.enm;
 }
 
-export function isFunctionAlias(node: Node): node is FunctionAlias {
-    return node?.kind == NodeKind.functionAlias;
+export function isFunctionAlias(node: Node): node is TypeAlias {
+    return node?.kind == NodeKind.typeAlias;
 }
 
 export function isUnion(node: Node): node is Union {
@@ -169,6 +173,8 @@ export function typeToString(type: Node, scope: Scope, typeLiteralsToWrite: Map<
         return typeToString(type.type, scope, typeLiteralsToWrite, config);
     } else if (isNullOrUndefined(type)) {
         return "Null";
+    } else if (isFunction(type)) {
+        return typeToString(type.type, scope, typeLiteralsToWrite, config);
     } else if (isFunctionType(type)) {
         return typeToString(type.returnType, scope, typeLiteralsToWrite, config) + " Function" + typeParamsToString(type.typeParams, scope, typeLiteralsToWrite, config) + paramsToString(type.params, scope, typeLiteralsToWrite, config);
     } else if (isTypeParameter(type)) {
@@ -191,6 +197,8 @@ export function typeToString(type: Node, scope: Scope, typeLiteralsToWrite: Map<
         }
         typeLiteralsToWrite.set(typeName, type);
         return typeName;
+    } else if (isTypePredicate(type)) {
+        return "bool";
     } else if (isClass(type)) {
         return classToString(type, config);
     } else if (isInterface(type)) {

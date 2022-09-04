@@ -1,7 +1,7 @@
 import { NodeMaterialBlockConnectionPointTypes } from "babylonjs";
 import * as ts from "typescript";
 import { ROOT_SCOPE, scopeFor } from "./base";
-import { ArrayType, Configuration, Enum, Func, FunctionAlias, FunctionType, Interface, Parameter, Program, Property, Node, NodeKind, TypeParameter, TypeReference, UnsupportedType, Getter, Class, Union, NullOrUndefined, Parenthesized, TypeLiteral, ThisType } from "./model";
+import { ArrayType, Configuration, Enum, Func, TypeAlias, FunctionType, Interface, Parameter, Program, Property, Node, NodeKind, TypeParameter, TypeReference, UnsupportedType, Getter, Class, Union, NullOrUndefined, Parenthesized, TypeLiteral, ThisType, TypePredicate } from "./model";
 
 function isNodeExported(node: ts.Node): boolean {
     return (
@@ -94,6 +94,10 @@ function readType(typeNode: ts.Node | undefined, checker: ts.TypeChecker): Node 
             kind: NodeKind.parenthesized,
             type: readType(typeNode.type, checker)
         };
+    } else if (ts.isTypePredicateNode(typeNode)) {
+        return <TypePredicate>{
+            kind: NodeKind.typePredicate,
+        };
     }
 
     return <UnsupportedType>{
@@ -132,12 +136,12 @@ function readFunction(node: ts.MethodDeclaration | ts.MethodSignature | ts.Signa
     }
 }
 
-function readFunctionAlias(typeAlias: ts.TypeAliasDeclaration, functionType: ts.FunctionTypeNode, checker: ts.TypeChecker): FunctionAlias {
-    return <FunctionAlias>{
-        kind: NodeKind.functionAlias,
+function readFunctionAlias(typeAlias: ts.TypeAliasDeclaration, functionType: ts.FunctionTypeNode, checker: ts.TypeChecker): TypeAlias {
+    return <TypeAlias>{
+        kind: NodeKind.typeAlias,
         name: typeAlias.name.getText(),
         typeParams: typeAlias.typeParameters ? typeAlias.typeParameters.map(ta => readType(ta, checker)) : [],
-        func: readFunction(functionType, checker)
+        type: readFunction(functionType, checker)
     };
 }
 
@@ -284,12 +288,11 @@ function readNode(node: ts.Node, checker: ts.TypeChecker, program: Program, conf
             program.enums.push(enm);
         }
     } else if (ts.isTypeAliasDeclaration(node)) {
-        const name = node.name.getText();
         const type = node.type;
         if (ts.isFunctionTypeNode(type)) {
             const functionAlias = readFunctionAlias(node, type, checker);
-            if (!program.functionAliases.find(f => f.name === functionAlias.name)) {
-                program.functionAliases.push(functionAlias);
+            if (!program.typeAliases.find(f => f.name === functionAlias.name)) {
+                program.typeAliases.push(functionAlias);
             }
         }
     } else if (ts.isInterfaceDeclaration(node)) {
@@ -322,7 +325,7 @@ export function readProgram(config: Configuration): Program {
 
     const result: Program = {
         enums: [],
-        functionAliases: [],
+        typeAliases: [],
         interfaces: [],
         classes: []
     };

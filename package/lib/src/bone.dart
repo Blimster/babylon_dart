@@ -12,7 +12,7 @@ class Bone extends Node {
   external String getClassName();
   external Skeleton getSkeleton();
   external Bone? getParent();
-  external List<Bone> getChildren([UNSUPPORTED[FirstTypeNode|node is T] Function(Node node) predicate, bool directDescendantsOnly]);
+  external List<Bone> getChildren([bool Function(Node node) predicate, bool directDescendantsOnly]);
   external num getIndex();
   external void setParent(Bone? parent, [bool updateDifferenceMatrix]);
   external Matrix getLocalMatrix();

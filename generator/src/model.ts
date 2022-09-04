@@ -27,8 +27,9 @@ export enum NodeKind {
     nullOrUndefined,
     functionType,
     typeParameter,
+    typePredicate,
     enm,
-    functionAlias,
+    typeAlias,
     union,
     interfaze,
     clazz,
@@ -96,6 +97,10 @@ export interface TypeParameter extends Node {
     constraint: Node;
 }
 
+export interface TypePredicate extends Node {
+    kind: NodeKind.typePredicate;
+}
+
 export interface UnsupportedType extends Node {
     description: string;
 }
@@ -135,11 +140,11 @@ export interface Enum extends Node {
     members: string[];
 }
 
-export interface FunctionAlias extends Node {
-    kind: NodeKind.functionAlias;
+export interface TypeAlias extends Node {
+    kind: NodeKind.typeAlias;
     name: string;
     typeParams: Node[];
-    func: Func;
+    type: Node;
 }
 
 export interface Union extends Node {
@@ -172,7 +177,7 @@ export interface Class extends Node {
 
 export interface Program {
     enums: Enum[];
-    functionAliases: FunctionAlias[];
+    typeAliases: TypeAlias[];
     interfaces: Interface[];
     classes: Class[];
 }
