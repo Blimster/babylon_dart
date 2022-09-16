@@ -6,7 +6,7 @@ export function writeProgram(program: Program, config: Configuration): void {
     const parts: string[] = [];
 
     parts.push(...writeEnums(program.enums, config));
-    parts.push(...writeFunctionAliases(program.typeAliases, config));
+    parts.push(...writeTypeAliases(program.typeAliases, config));
     parts.push(...writeInterfaces(program.interfaces, config));
     parts.push(...writeClasses(program.classes, config));
 
@@ -37,11 +37,11 @@ function writeEnum(enm: Enum, config: Configuration): string {
     return writer.toFile();
 }
 
-function writeFunctionAliases(functionAliases: TypeAlias[], config: Configuration): string[] {
+function writeTypeAliases(typeAliases: TypeAlias[], config: Configuration): string[] {
     const result: string[] = [];
-    for (const functionAlias of functionAliases) {
-        if (include(scopeFor(functionAlias, functionAlias.name), config)) {
-            result.push(writeTypeAlias(functionAlias, config));
+    for (const typeAlias of typeAliases) {
+        if (include(scopeFor(typeAlias, typeAlias.name), config)) {
+            result.push(writeTypeAlias(typeAlias, config));
         }
     }
     return result;

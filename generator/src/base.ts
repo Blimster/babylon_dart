@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { snakeCase } from "snake-case";
-import { ArrayType, Configuration, Enum, Func, TypeAlias, FunctionType, Interface, Parameter, Property, Scope, Node, NodeKind, TypeParameter, TypeReference, UnsupportedType, Getter, Class, Nullable, Union, NullOrUndefined, Parenthesized, ThisType, TypeLiteral, Root } from "./model";
+import { ArrayType, Configuration, Enum, Func, TypeAlias, FunctionType, Interface, Parameter, Property, Scope, Node, NodeKind, TypeParameter, TypeReference, Unsupported, Getter, Class, Nullable, Union, NullOrUndefined, Parenthesized, ThisType, TypeLiteral, Root, Literal } from "./model";
 
 export class Writer {
     private lines: string[] = [];
@@ -73,6 +73,10 @@ export function isTypeReference(node: Node): node is TypeReference {
     return node?.kind === NodeKind.typeReference;
 }
 
+export function isLiteral(node: Node): node is Literal {
+    return node?.kind === NodeKind.literal;
+}
+
 export function isTypeLiteral(node: Node): node is TypeLiteral {
     return node?.kind === NodeKind.typeLiteral;
 }
@@ -106,7 +110,11 @@ export const isTypePredicate = (node: Node): node is TypeParameter => {
     return node.kind === NodeKind.typePredicate;
 }
 
-export function isUnsupportedType(node: Node): node is UnsupportedType {
+export function isUnmappable(type: Node): boolean {
+    return type.kind === NodeKind.unmappable;
+}
+
+export function isUnsupported(node: Node): node is Unsupported {
     return node.kind === NodeKind.unsupported;
 }
 
@@ -114,7 +122,7 @@ export function isEnum(node: Node): node is Enum {
     return node?.kind == NodeKind.enm;
 }
 
-export function isFunctionAlias(node: Node): node is TypeAlias {
+export function isTypeAlias(node: Node): node is TypeAlias {
     return node?.kind == NodeKind.typeAlias;
 }
 
@@ -188,6 +196,8 @@ export function typeToString(type: Node, scope: Scope, typeLiteralsToWrite: Map<
         const notNullTypes = type.types.filter(t => !isNullOrUndefined(t)).map(t => typeToString(t, scope, typeLiteralsToWrite, config));
         const result = (notNullTypes.length - nullTypes.length > 1 ? "Object" : notNullTypes[0]);
         return result + (nullTypes.length > 0 && !result.endsWith("?") ? "?" : "");
+    } else if(isLiteral(type)) {
+        return type.literal;
     } else if (isTypeLiteral(type)) {
         let typeName = "";
         let s: Scope | undefined = scope;
@@ -203,7 +213,9 @@ export function typeToString(type: Node, scope: Scope, typeLiteralsToWrite: Map<
         return classToString(type, config);
     } else if (isInterface(type)) {
         return interfaceToString(type, config);
-    } else if (isUnsupportedType(type)) {
+    }  else if(isUnmappable(type)) {
+        return "Object";
+    } else if (isUnsupported(type)) {
         console.log("WARNING! Unsupported type: " + type.description);
         return "UNSUPPORTED" + type.description;
     }

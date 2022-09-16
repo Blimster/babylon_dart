@@ -20,6 +20,7 @@ export enum NodeKind {
     root,
     thisType,
     typeReference,
+    literal,
     typeLiteral,
     arrayType,
     nullable,
@@ -38,6 +39,7 @@ export enum NodeKind {
     getter,
     setter,
     property,
+    unmappable,
     unsupported
 }
 
@@ -57,6 +59,11 @@ export interface TypeReference extends Node {
     kind: NodeKind.typeReference;
     name: string;
     typeParams: Node[];
+}
+
+export interface Literal extends Node {
+    kind: NodeKind.literal;
+    literal: string;
 }
 
 export interface TypeLiteral extends Node {
@@ -101,7 +108,13 @@ export interface TypePredicate extends Node {
     kind: NodeKind.typePredicate;
 }
 
-export interface UnsupportedType extends Node {
+export interface Unmappable extends Node {
+    kind: NodeKind.unmappable;
+    description: string;
+}
+
+export interface Unsupported extends Node {
+    kind: NodeKind.unsupported,
     description: string;
 }
 

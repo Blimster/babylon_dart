@@ -1,7 +1,7 @@
 import { NodeMaterialBlockConnectionPointTypes } from "babylonjs";
 import * as ts from "typescript";
 import { ROOT_SCOPE, scopeFor } from "./base";
-import { ArrayType, Configuration, Enum, Func, TypeAlias, FunctionType, Interface, Parameter, Program, Property, Node, NodeKind, TypeParameter, TypeReference, UnsupportedType, Getter, Class, Union, NullOrUndefined, Parenthesized, TypeLiteral, ThisType, TypePredicate } from "./model";
+import { ArrayType, Configuration, Enum, Func, TypeAlias, FunctionType, Interface, Parameter, Program, Property, Node, NodeKind, TypeParameter, TypeReference, Unsupported, Getter, Class, Union, NullOrUndefined, Parenthesized, TypeLiteral, ThisType, TypePredicate, Literal, Unmappable } from "./model";
 
 function isNodeExported(node: ts.Node): boolean {
     return (
@@ -39,6 +39,11 @@ function readType(typeNode: ts.Node | undefined, checker: ts.TypeChecker): Node 
             typeParams: [],
             isArray: false
         }
+    } else if (ts.isLiteralTypeNode(typeNode)) {
+        return <Literal>{
+            kind: NodeKind.literal,
+            literal: typeNode.getText()
+        };
     } else if (ts.isTypeLiteralNode(typeNode)) {
         const properties: Property[] = [];
         const callSignatures: FunctionType[] = [];
@@ -98,9 +103,20 @@ function readType(typeNode: ts.Node | undefined, checker: ts.TypeChecker): Node 
         return <TypePredicate>{
             kind: NodeKind.typePredicate,
         };
+    } else if ([
+        ts.SyntaxKind.ConditionalType,
+        ts.SyntaxKind.MappedType,
+        ts.SyntaxKind.IndexedAccessType,
+        ts.SyntaxKind.IntersectionType,
+        ts.SyntaxKind.TupleType,
+    ].indexOf(typeNode.kind) !== -1) {
+        return <Unmappable>{
+            kind: NodeKind.unmappable,
+            description: typeNode.getText()
+        }
     }
 
-    return <UnsupportedType>{
+    return <Unsupported>{
         kind: NodeKind.unsupported,
         description: "[" + ts.SyntaxKind[typeNode.kind] + "|" + typeNode.getText() + "]"
     }
@@ -136,12 +152,12 @@ function readFunction(node: ts.MethodDeclaration | ts.MethodSignature | ts.Signa
     }
 }
 
-function readFunctionAlias(typeAlias: ts.TypeAliasDeclaration, functionType: ts.FunctionTypeNode, checker: ts.TypeChecker): TypeAlias {
+function readTypeAlias(typeAlias: ts.TypeAliasDeclaration, checker: ts.TypeChecker): TypeAlias {
     return <TypeAlias>{
         kind: NodeKind.typeAlias,
         name: typeAlias.name.getText(),
         typeParams: typeAlias.typeParameters ? typeAlias.typeParameters.map(ta => readType(ta, checker)) : [],
-        type: readFunction(functionType, checker)
+        type: readType(typeAlias.type, checker)
     };
 }
 
@@ -288,11 +304,10 @@ function readNode(node: ts.Node, checker: ts.TypeChecker, program: Program, conf
             program.enums.push(enm);
         }
     } else if (ts.isTypeAliasDeclaration(node)) {
-        const type = node.type;
-        if (ts.isFunctionTypeNode(type)) {
-            const functionAlias = readFunctionAlias(node, type, checker);
-            if (!program.typeAliases.find(f => f.name === functionAlias.name)) {
-                program.typeAliases.push(functionAlias);
+        const typeAlias = readTypeAlias(node, checker);
+        if (isNodeExported(node) || config.include(scopeFor(typeAlias, typeAlias.name, ROOT_SCOPE), false)) {
+            if (!program.typeAliases.find(f => f.name === typeAlias.name)) {
+                program.typeAliases.push(typeAlias);
             }
         }
     } else if (ts.isInterfaceDeclaration(node)) {
@@ -309,6 +324,8 @@ function readNode(node: ts.Node, checker: ts.TypeChecker, program: Program, conf
                 program.classes.push(clazz);
             }
         }
+    } else if (ts.isModuleDeclaration(node)) {
+        console.log(node.name.getText());
     } else {
         ts.forEachChild(node, (n) => readNode(n, checker, program, config));
     }

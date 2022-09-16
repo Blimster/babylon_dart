@@ -1,0 +1,3 @@
+part of babylon_dart;
+
+typedef MaterialPluginHasRenderTargetTextures = MaterialPluginHasRenderTargetTextures;

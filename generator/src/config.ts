@@ -1,4 +1,4 @@
-import { isClass, isEnum, isFunction, isFunctionAlias, isGetter, isInterface, isProperty, isTypeReference } from "./base";
+import { isClass, isEnum, isFunction, isTypeAlias, isGetter, isInterface, isProperty, isTypeReference } from "./base";
 import { Class, Configuration, Func, Interface, Node, NodeKind, Nullable, TypeReference } from "./model";
 
 function createTypeReference(newName: string, typeParams?: Node[]): Node {
@@ -47,7 +47,7 @@ export const config = <Configuration>{
     ],
     sourceFiles: [
         "node_modules/babylonjs/babylon.d.ts",
-        "node_modules/babylonjs-serializers/babylonjs.serializers.module.d.ts"
+        "node_modules/babylonjs-serializers/babylonjs.serializers.d.ts"
     ],
     nullSafe: true,
     typeCustomizer: (node) => {
@@ -65,6 +65,8 @@ export const config = <Configuration>{
                     return createTypeReference("String");
                 case "Uint8Array":
                     return createTypeReference("Uint8List");
+                case "Uint32Array":
+                    return createTypeReference("Uint32List");
                 case "FloatArray":
                 case "Float32Array":
                     return createTypeReference("Float32List");
@@ -139,9 +141,11 @@ export const config = <Configuration>{
             return false;
         }
 
-        if (isEnum(scope.node) || isFunctionAlias(scope.node)) {
+        if (isEnum(scope.node) || isTypeAlias(scope.node)) {
             return true;
         }
+
+        return false;
 
         if (isFunction(scope.node) || isProperty(scope.node) || isGetter(scope.node)) {
             return true;
@@ -168,6 +172,7 @@ export const config = <Configuration>{
                 "BoxParticleEmitter",
                 "Camera",
                 "ColorGradient",
+                "CoroutineBase",
                 "CameraInputsManager",
                 "CameraInputsMap",
                 "Collider",
