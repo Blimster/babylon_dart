@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.2.0
+
+- BREAKING CHANGE: New signature for `onSuccess` parameter of `SceneLoader.ImportMesh()`.
+
 ## v1.1.2
 
 - Added `Scene.pick()` and `Scene.pickWithRay()`
